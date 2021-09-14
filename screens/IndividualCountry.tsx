@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const IndividualCountry = (props: any) => {
   const nav = props.navigation;
   return (
-    <SafeAreaProvider>
+    <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.logo}> logo</View>
         <View style={styles.countryTitle}>
@@ -20,11 +20,12 @@ const IndividualCountry = (props: any) => {
           <Text style={styles.info}>info 3</Text>
           <Text style={styles.info}>info 4</Text>
         </View>
-        <Button title='Add to trips' onPress={() => nav.navigate('Trips')}>
-          {' '}
-        </Button>
+        <Button
+          title='Add to trips'
+          onPress={() => nav.navigate('Trips')}
+        ></Button>
       </View>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
 
