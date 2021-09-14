@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Button } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MyTabs from '../navigation/MyTabs';
 
 const Tabs = createBottomTabNavigator();
 
@@ -10,13 +11,14 @@ const Home = (props: any) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <br />
-        <br />
         <Text>The Covid-19 Travel App Name</Text>
-        <br />
         <Button title="My Trips" onPress={() => nav.navigate('Trips')} />
-        <br />
+        <Button
+          title="Choose Country"
+          onPress={() => nav.navigate('IndividualCountry')}
+        />
         <Text>country searcher thing here</Text>
+        <MyTabs />
       </View>
     </SafeAreaView>
   );
@@ -26,8 +28,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });
 
 export default Home;
