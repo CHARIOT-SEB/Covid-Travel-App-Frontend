@@ -1,11 +1,12 @@
+// react imports
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Button } from 'react-native';
+// file imports
 import Dropdown from '../navigation/Dropdown';
 
 const Home = ({ navigation }) => {
-
 	return (
-		<SafeAreaView style={styles.container}>
+		<SafeAreaView>
 			<View style={styles.container}>
 				<Text>The Covid-19 Travel App Name</Text>
 				<Button

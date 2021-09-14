@@ -1,16 +1,21 @@
+// react imports
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+// library imports
 import Ionicons from '@expo/vector-icons/Ionicons';
+// file imports
 import Home from '../screens/Home';
 import Account from '../screens/Account';
 import Trips from '../screens/Trips';
 import SignUpForm from '../screens/SignUpForm';
 import IndividualCountry from '../screens/IndividualCountry';
-import { NavigationContainer } from '@react-navigation/native';
 
+// to access TabNavigator properties
 const Tabs = createBottomTabNavigator();
 
+// this function changes tab-navigation colour and icon on press
 const handleIcons = ({ route }) => ({
 	tabBarIcon: ({ focused, color, size }) => {
 		let iconName;
@@ -30,14 +35,14 @@ const handleIcons = ({ route }) => ({
 		// You can return any component that you like here!
 		return <Ionicons name={iconName} size={size} color={color} />;
 	},
-	tabBarActiveTintColor: 'blue',
+	tabBarActiveTintColor: '#4d94ff',
 	tabBarInactiveTintColor: 'gray',
 });
 
-function MyTabs() {
+const MyTabs = () => {
 	return (
 		<NavigationContainer>
-			<Tabs.Navigator screenOptions={handleIcons}>
+			<Tabs.Navigator initialRouteName='Home' screenOptions={handleIcons}>
 				<Tabs.Screen name='Home' component={Home} />
 				<Tabs.Screen name='Account' component={Account} />
 				<Tabs.Screen name='Trips' component={Trips} />
@@ -46,12 +51,12 @@ function MyTabs() {
 			</Tabs.Navigator>
 		</NavigationContainer>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	tabs: {
 		flex: 1,
-		alignItems: 'stretch',
+		alignItems: 'center',
 		justifyContent: 'space-evenly',
 	},
 	tab: {},

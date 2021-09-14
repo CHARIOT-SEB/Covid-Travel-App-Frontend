@@ -1,12 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
+// react imports
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
-import Home from './screens/Home';
-import IndividualCountry from './screens/IndividualCountry';
-import Trips from './screens/Trips';
-import MyTabs from './navigation/MyTabs';
+import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+// file imports
+import MyTabs from './navigation/MyTabs';
 import MyStack from './navigation/MyStack';
 
 const App = () => {
@@ -31,8 +29,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	tabs: {
-		position: 'absolute',
-		bottom: 0,
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'space-evenly',
 	},
 });
 
