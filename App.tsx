@@ -1,13 +1,37 @@
+
+
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
+
+import Home from './screens/Home';
+import IndividualCountry from './screens/IndividualCountry';
+import Trips from './screens/Trips';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <View>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen
+            name="IndividualCountry"
+            component={IndividualCountry}
+            options={{ title: 'Country' }}
+          />
+          <Stack.Screen
+            name="Trips"
+            component={Trips}
+            options={{ title: 'Trips' }}
+          />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </View>
+    </NavigationContainer>
   );
 }
 
