@@ -4,8 +4,11 @@ import {
   View,
   StyleSheet,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput,
+  Button
 } from 'react-native';
+import FormComponent from '../components/formComponent';
 
 const SignUpForm = (props: any) => {
   const nav = props.navigation;
@@ -19,9 +22,7 @@ const SignUpForm = (props: any) => {
         >
           Back
         </TouchableOpacity>
-        <View style={styles.formContainer}>
-          <Text> This is a form </Text>
-        </View>
+        <FormComponent />
       </View>
     </SafeAreaView>
   );
@@ -29,12 +30,11 @@ const SignUpForm = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    flex: 1,
     alignItems: 'center'
   },
   logo: {
-    flex: 1,
-    height: 20,
+    height: 10,
     padding: 20,
     margin: 10,
     borderRadius: 80,
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#5f9ea0'
   },
   button: {
-    flex: 1,
     backgroundColor: '#00ced1',
     height: 5,
     alignSelf: 'center',
@@ -51,16 +50,6 @@ const styles = StyleSheet.create({
     padding: 15,
     textAlign: 'center',
     borderRadius: 15
-  },
-  formContainer: {
-    flex: 5,
-    marginHorizontal: 10,
-    marginVertical: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 50,
-    alignSelf: 'stretch',
-
-    backgroundColor: '#f0e68c'
   }
 });
 
