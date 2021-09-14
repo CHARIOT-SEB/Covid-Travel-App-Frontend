@@ -8,13 +8,14 @@ import Home from './screens/Home';
 import IndividualCountry from './screens/IndividualCountry';
 import Trips from './screens/Trips';
 import MyTabs from './navigation/MyTabs';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <View>
+    <SafeAreaProvider>
+      <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Trips" component={Trips} />
@@ -24,8 +25,8 @@ export default function App() {
           />
         </Stack.Navigator>
         <StatusBar style="auto" />
-      </View>
-    </NavigationContainer>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
