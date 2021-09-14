@@ -1,5 +1,12 @@
 import React from 'react';
-import { SafeAreaView, Text, View, StyleSheet, Button } from 'react-native';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  TouchableOpacity
+} from 'react-native';
 
 const Trips = (props: any) => {
   const nav = props.navigation;
@@ -7,14 +14,24 @@ const Trips = (props: any) => {
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.logo}> logo</View>
-        <Button
-          title='Check Country'
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => nav.navigate('IndividualCountry')}
-        ></Button>
+        >
+          {' '}
+          Check Country
+        </TouchableOpacity>
         <View style={styles.myTripsContainer}>
           <Text style={styles.myTripsTitle}>My Trips</Text>
           <View style={styles.singleTripContainer}>
             <Text style={styles.info}>Trip 1</Text>
+            <Text style={styles.info}>info 1</Text>
+            <Text style={styles.info}>info 2</Text>
+            <Text style={styles.info}>info 3</Text>
+          </View>
+
+          <View style={styles.singleTripContainer}>
+            <Text style={styles.info}>Trip 2</Text>
             <Text style={styles.info}>info 1</Text>
             <Text style={styles.info}>info 2</Text>
             <Text style={styles.info}>info 3</Text>
@@ -43,7 +60,7 @@ const styles = StyleSheet.create({
   },
   myTripsContainer: {
     backgroundColor: '#fff8dc',
-    flex: 2,
+    flex: 4,
     flexDirection: 'column',
     alignSelf: 'stretch',
     margin: 25,
@@ -58,12 +75,22 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignSelf: 'stretch',
     margin: 5,
-    height: 80,
+    height: 100,
     padding: 20
   },
   info: {
     margin: 2,
-    alignSelf: 'center'
+    alignSelf: 'stretch'
+  },
+  button: {
+    flex: 1,
+    backgroundColor: '#00ced1',
+    height: 5,
+    alignSelf: 'center',
+    margin: 5,
+    padding: 15,
+    textAlign: 'center',
+    borderRadius: 15
   }
 });
 
