@@ -1,40 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
+// react imports
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
-
-import Home from './screens/Home';
-import IndividualCountry from './screens/IndividualCountry';
-import Trips from './screens/Trips';
-import MyTabs from './navigation/MyTabs';
+import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+// file imports
+import MyTabs from './navigation/MyTabs';
+import MyStack from './navigation/MyStack';
 
-const Stack = createNativeStackNavigator();
-
-export default function App() {
-  return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Trips" component={Trips} />
-          <Stack.Screen
-            name="IndividualCountry"
-            component={IndividualCountry}
-          />
-        </Stack.Navigator>
-        <StatusBar style="auto" />
-      </NavigationContainer>
-    </SafeAreaProvider>
-  );
-}
+const App = () => {
+	return (
+		<SafeAreaProvider>
+			<View>
+				<MyStack />
+			</View>
+			<View style={styles.container}>
+				<MyTabs />
+			</View>
+			<StatusBar style='auto' />
+		</SafeAreaProvider>
+	);
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	tabs: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'space-evenly',
+	},
 });
+
+export default App;
