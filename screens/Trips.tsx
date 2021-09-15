@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+
 const Trips = (props: any) => {
   const nav = props.navigation;
   return (
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 15
   }
+
 });
 
 export default Trips;

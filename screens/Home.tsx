@@ -1,33 +1,30 @@
-import React from 'react';
+// react imports
+import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Button } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// file imports
+import Dropdown from '../navigation/Dropdown';
 
-const Tabs = createBottomTabNavigator();
-
-const Home = (props: any) => {
-  const nav = props.navigation;
-
-  return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <br />
-        <br />
-        <Text>The Covid-19 Travel App Name</Text>
-        <br />
-        <Button title="My Trips" onPress={() => nav.navigate('Trips')} />
-        <br />
-        <Text>country searcher thing here</Text>
-      </View>
-    </SafeAreaView>
-  );
+const Home = ({ navigation }) => {
+	return (
+		<SafeAreaView>
+			<View style={styles.container}>
+				<Text>The Covid-19 Travel App Name</Text>
+				<Button
+					title='My Trips'
+					onPress={() => navigation.navigate('Trips')}
+				/>
+				<Dropdown />
+			</View>
+		</SafeAreaView>
+	);
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });
 
 export default Home;
