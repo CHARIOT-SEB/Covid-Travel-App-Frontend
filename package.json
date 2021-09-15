@@ -18,7 +18,7 @@
     "formik": "^2.2.9",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "~0.63.4",
+    "react-native": "^0.63.4",
     "react-native-dropdown-picker": "^5.1.25",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-maps": "^0.29.3",
