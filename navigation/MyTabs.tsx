@@ -11,6 +11,7 @@ import Account from '../screens/Account';
 import Trips from '../screens/Trips';
 import SignUpForm from '../screens/SignUpForm';
 import IndividualCountry from '../screens/IndividualCountry';
+import LandingPage from '../screens/LandingPage';
 
 // to access TabNavigator properties
 const Tabs = createBottomTabNavigator();
@@ -30,6 +31,8 @@ const handleIcons = ({ route }) => ({
 			iconName = focused ? 'map' : 'map-outline';
 		} else if (route.name === 'SignUpForm') {
 			iconName = focused ? 'laptop' : 'laptop-outline';
+		} else if (route.name === 'LandingPage') {
+			iconName = focused ? 'ios-egg' : 'ios-egg-outline';
 		}
 
 		// You can return any component that you like here!
@@ -48,6 +51,7 @@ const MyTabs = () => {
 				<Tabs.Screen name='Trips' component={Trips} />
 				<Tabs.Screen name='Country' component={IndividualCountry} />
 				<Tabs.Screen name='SignUpForm' component={SignUpForm} />
+				<Tabs.Screen name='LandingPage' component={LandingPage} />
 			</Tabs.Navigator>
 		</NavigationContainer>
 	);
