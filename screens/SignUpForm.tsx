@@ -15,9 +15,7 @@ const SignUpForm = (props: any) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <View style={styles.logo}>
-          <Text> logo</Text>
-        </View>
+        <Text style={styles.logo}> logo</Text>
         <TouchableOpacity
           style={styles.button}
           onPress={() => nav.navigate('Home')}
@@ -33,7 +31,7 @@ const SignUpForm = (props: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'stretch'
   },
   logo: {
     height: 10,
