@@ -15,12 +15,14 @@ const SignUpForm = (props: any) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <View style={styles.logo}> logo</View>
+        <View style={styles.logo}>
+          <Text> logo</Text>
+        </View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => nav.navigate('Home')}
         >
-          Back
+          <Text> Back </Text>
         </TouchableOpacity>
         <FormComponent />
       </View>
