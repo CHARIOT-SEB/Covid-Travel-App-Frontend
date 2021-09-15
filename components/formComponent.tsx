@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   input: {
     height: 30,
     alignItems: 'stretch',
-    backgroundColor: '#dcdcdc',
+    backgroundColor: 'white',
     borderWidth: 3,
     borderColor: '#ddd',
     padding: 10,
