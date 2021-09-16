@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -8,9 +8,37 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { uuid } from 'uuidv4';
 
 const Trips = (props: any) => {
   const nav = props.navigation;
+
+  // array of country names, names added to array when countries are added to my trips'
+  const [trips, setTrips] = useState(['Portugal', 'France']);
+
+  // will we need to fetch the data for each country in the array and set a state
+  // get individual country?
+  const [countries, setCountriesData] = useState([
+    {
+      country: 'portugal',
+      colorList: 'amber',
+      vaccinationRequired: true,
+      quarantine: 0,
+      documents: ['vaccination status proof', 'covid recovery certificate'],
+      masksRequired: true,
+      moreInfo: 'face masks required in all inclosed public spaces'
+    },
+    {
+      country: 'france',
+      colorList: 'amber',
+      vaccinationRequired: true,
+      quarantine: 0,
+      documents: ['vaccination status proof', 'covid recovery certificate'],
+      masksRequired: true,
+      moreInfo: 'face masks required in all inclosed public spaces'
+    }
+  ]);
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -22,21 +50,16 @@ const Trips = (props: any) => {
           {' '}
           Check Country
         </TouchableOpacity>
+
         <View style={styles.myTripsContainer}>
           <Text style={styles.myTripsTitle}>My Trips</Text>
-          <View style={styles.singleTripContainer}>
-            <Text style={styles.info}>Trip 1</Text>
-            <Text style={styles.info}>info 1</Text>
-            <Text style={styles.info}>info 2</Text>
-            <Text style={styles.info}>info 3</Text>
-          </View>
-
-          <View style={styles.singleTripContainer}>
-            <Text style={styles.info}>Trip 2</Text>
-            <Text style={styles.info}>info 1</Text>
-            <Text style={styles.info}>info 2</Text>
-            <Text style={styles.info}>info 3</Text>
-          </View>
+          {countries.map((country) => {
+            return (
+              <View key={uuid()}>
+                <Text>{country.country}</Text>
+              </View>
+            );
+          })}
         </View>
       </View>
     </SafeAreaView>
@@ -93,7 +116,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 15
   }
-
 });
 
 export default Trips;
