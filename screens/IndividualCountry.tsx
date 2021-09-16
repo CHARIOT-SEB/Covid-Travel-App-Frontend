@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
-import MapView from "react-native-maps";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import MapView from 'react-native-maps';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const IndividualCountry = (props: any) => {
+const IndividualCountry = () => {
   //initial region currently set to france, will use google api to fetch country locations onChange
-  const [region, setRegion] = useState({
-    initialRegion: {
-      latitude: 47.4256,
-      longitude: 2.6054,
-      latitudeDelta: 10,
-      longitudeDelta: 0.25,
-    },
-  });
 
-  const nav = props.navigation;
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <MapView
           style={styles.map}
-          region={region.initialRegion}
           showsUserLocation={true}
           // user location will be available to see, if location services are enabled
         />
@@ -32,17 +22,17 @@ const IndividualCountry = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "flex-end",
-    alignItems: "center",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   map: {
-    alignSelf: "center",
+    alignSelf: 'center',
     width: 370,
     height: 500,
 
-    alignItems: "center",
+    alignItems: 'center',
     borderWidth: 3,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 6,
   },
   logo: {
@@ -51,49 +41,49 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 10,
     borderRadius: 80,
-    alignItems: "stretch",
-    backgroundColor: "#5f9ea0",
+    alignItems: 'stretch',
+    backgroundColor: '#5f9ea0',
   },
   countryTitle: {
     height: 5,
     margin: 20,
     padding: 20,
     width: 70,
-    backgroundColor: "#ff7f50",
+    backgroundColor: '#ff7f50',
     borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   heatMapContainer: {
     flex: 3,
-    flexDirection: "row",
+    flexDirection: 'row',
     margin: 25,
     height: 20,
-    alignItems: "stretch",
-    alignSelf: "stretch",
+    alignItems: 'stretch',
+    alignSelf: 'stretch',
     padding: 50,
-    backgroundColor: "#fff8dc",
-    justifyContent: "center",
+    backgroundColor: '#fff8dc',
+    justifyContent: 'center',
   },
   heatMap: {
-    flexDirection: "row",
+    flexDirection: 'row',
     margin: 10,
-    color: "#000000",
-    alignItems: "center",
-    justifyContent: "center",
+    color: '#000000',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   countryInfoContainer: {
-    backgroundColor: "#fff8dc",
+    backgroundColor: '#fff8dc',
     flex: 4,
-    flexDirection: "column",
-    alignSelf: "stretch",
+    flexDirection: 'column',
+    alignSelf: 'stretch',
     margin: 25,
     height: 20,
     padding: 50,
   },
   info: {
     margin: 2,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   text: {},
 });
