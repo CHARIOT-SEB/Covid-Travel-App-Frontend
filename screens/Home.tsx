@@ -6,7 +6,7 @@ import CountryPicker from '../navigation/CountryPicker';
 
 const Home = ({ navigation }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <Text>The Covid-19 Travel App Name</Text>
         <Button title="My Trips" onPress={() => navigation.navigate('Trips')} />
