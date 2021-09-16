@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Button, Alert } from "react-native";
 import MapView from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as Location from "expo-location";
 
 const IndividualCountry = (props: any) => {
-  // will figure out a way to display the user's location if enabled
-  const [locationServiceEnabled, setLocationServiceEnabled] = useState(false);
-  //initial region currently set to france
+  //initial region currently set to france, will use google api to fetch country locations onChange
   const [region, setRegion] = useState({
     initialRegion: {
       latitude: 47.4256,
@@ -25,6 +22,7 @@ const IndividualCountry = (props: any) => {
           style={styles.map}
           region={region.initialRegion}
           showsUserLocation={true}
+          // user location will be available to see, if location services are enabled
         />
         <View style={styles.container}></View>
       </View>

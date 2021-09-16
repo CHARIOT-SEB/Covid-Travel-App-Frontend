@@ -1,22 +1,27 @@
 // See https://www.npmjs.com/package/@react-native-picker/picker for more information
 
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
 
-import { Picker } from '@react-native-picker/picker';
+import { Picker } from "@react-native-picker/picker";
 
-function CountryPicker() {
-  const [country, setCountry] = useState('');
+function CountryPicker(props: { location: {} }) {
+  const { location } = props;
+  const [country, setCountry] = useState("");
   const [countries, setCountries] = useState([
-    'France',
-    'Spain',
-    'Italy',
-    'Poland',
-    'Germany',
-    'Norway',
-    'Ireland'
+    "Austria",
+    "Belgium",
+    "Bulgaria",
+    "Croatia",
+    "Croatia",
+    "Cyprus",
+    "czechRepublic",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
   ]);
 
   console.log(country);
@@ -27,11 +32,11 @@ function CountryPicker() {
       <Picker
         selectedValue={country}
         onValueChange={(value, index) => setCountry(value)}
-        mode="dropdown" // Android only
+        mode='dropdown' // Android only
         style={styles.picker}
       >
-        <Picker.Item label="Please choose a country" value="Unknown" />
-        {countries.map((country) => {
+        <Picker.Item label='Please choose a country' value='Unknown' />
+        {countries.map(country => {
           return <Picker.Item key={country} label={country} value={country} />;
         })}
       </Picker>
@@ -45,18 +50,18 @@ export default CountryPicker;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'lightblue'
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "lightblue",
   },
   text: {
-    fontSize: 24
+    fontSize: 24,
   },
   picker: {
     marginVertical: 30,
     width: 300,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#666'
-  }
+    borderColor: "#666",
+  },
 });
