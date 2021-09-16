@@ -10,7 +10,7 @@ const LandingPage = () => {
 
   return (
     <View style={styles.formContainer}>
-      <Modal visible={signUp}>
+      <Modal visible={signUp} animationType="slide">
         <SignUpForm />
         <Button title="Return to Login Page" onPress={() => setSignUp(false)} />
       </Modal>
