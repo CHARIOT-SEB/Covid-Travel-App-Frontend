@@ -9,6 +9,15 @@ import { Picker } from '@react-native-picker/picker';
 
 function CountryPicker() {
   const [country, setCountry] = useState('');
+  const [countries, setCountries] = useState([
+    'France',
+    'Spain',
+    'Italy',
+    'Poland',
+    'Germany',
+    'Norway',
+    'Ireland'
+  ]);
 
   console.log(country);
 
@@ -22,11 +31,9 @@ function CountryPicker() {
         style={styles.picker}
       >
         <Picker.Item label="Please choose a country" value="Unknown" />
-        <Picker.Item label="France" value="France" />
-        <Picker.Item label="Germany" value="Germany" />
-        <Picker.Item label="Italy" value="Italy" />
-        <Picker.Item label="Spain" value="Spain" />
-        <Picker.Item label="Poland" value="Poland" />
+        {countries.map((country) => {
+          return <Picker.Item key={country} label={country} value={country} />;
+        })}
       </Picker>
     </View>
   );
