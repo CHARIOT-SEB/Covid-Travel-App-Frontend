@@ -46,12 +46,16 @@ const MyTabs = () => {
 	return (
 		<NavigationContainer>
 			<Tabs.Navigator initialRouteName='Home' screenOptions={handleIcons}>
-				<Tabs.Screen name='Home' component={Home} />
-				<Tabs.Screen name='Account' component={Account} />
-				<Tabs.Screen name='Trips' component={Trips} />
-				<Tabs.Screen name='Country' component={IndividualCountry} />
-				<Tabs.Screen name='SignUpForm' component={SignUpForm} />
-				<Tabs.Screen name='LandingPage' component={LandingPage} />
+				<Tabs.Screen name='Home' component={Home} options={{ headerShown: false }} />
+				<Tabs.Screen name='Account' component={Account} options={{ headerShown: false }} />
+				<Tabs.Screen name='Trips' component={Trips} options={{ headerShown: false }} />
+				<Tabs.Screen
+					name='Country'
+					component={IndividualCountry}
+					options={{ headerShown: false }}
+				/>
+				<Tabs.Screen name='SignUpForm' component={SignUpForm} options={{ headerShown: false }} />
+				<Tabs.Screen name='LandingPage' component={LandingPage} options={{ headerShown: false }} />
 			</Tabs.Navigator>
 		</NavigationContainer>
 	);
