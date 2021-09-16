@@ -1,26 +1,33 @@
-import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Button, Alert } from "react-native";
 import MapView from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Location from "expo-location";
 
 const IndividualCountry = (props: any) => {
-  const region = {
+  // will figure out a way to display the user's location if enabled
+  const [locationServiceEnabled, setLocationServiceEnabled] = useState(false);
+  //initial region currently set to france
+  const [region, setRegion] = useState({
     initialRegion: {
-      latitude: 42.882004,
-      longitude: 74.582748,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
+      latitude: 47.4256,
+      longitude: 2.6054,
+      latitudeDelta: 10,
+      longitudeDelta: 0.25,
     },
-  };
+  });
+
   const nav = props.navigation;
   return (
     <SafeAreaView>
-      <MapView
-        style={styles.map}
-        region={region.initialRegion}
-        showsUserLocation={true}
-      />
-      <View style={styles.container}></View>
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          region={region.initialRegion}
+          showsUserLocation={true}
+        />
+        <View style={styles.container}></View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -90,6 +97,7 @@ const styles = StyleSheet.create({
     margin: 2,
     alignSelf: "center",
   },
+  text: {},
 });
 
 export default IndividualCountry;

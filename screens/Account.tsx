@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Account = (props: any) => {
   const nav = props.navigation;
@@ -22,17 +22,17 @@ const Account = (props: any) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => nav.navigate('LandingPage')}
+          onPress={() => nav.navigate("LandingPage")}
         >
-          {' '}
+          {" "}
           LogOut
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => nav.navigate('LandingPage')}
+          onPress={() => nav.navigate("LandingPage")}
         >
-          {' '}
+          {" "}
           Delete Account
         </TouchableOpacity>
       </View>
@@ -43,8 +43,8 @@ const Account = (props: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   logo: {
     flex: 1,
@@ -52,47 +52,47 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 10,
     borderRadius: 80,
-    alignItems: 'stretch',
-    backgroundColor: '#5f9ea0'
+    alignItems: "stretch",
+    backgroundColor: "#5f9ea0",
   },
   accountInfoContainer: {
     margin: 20,
     flex: 1,
-    backgroundColor: '#ffd700',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20
+    backgroundColor: "#ffd700",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
   },
   accountName: {
-    alignSelf: 'flex-start'
+    alignSelf: "flex-start",
   },
   accountEmail: {
-    alignSelf: 'flex-start'
+    alignSelf: "flex-start",
   },
   info: {
     margin: 2,
-    alignSelf: 'center',
-    padding: 10
+    alignSelf: "center",
+    padding: 10,
   },
   pastTripsContainer: {
     flex: 6,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
     margin: 10,
     marginTop: 15,
     padding: 5,
-    backgroundColor: '#dcdcdc'
+    backgroundColor: "#dcdcdc",
   },
   button: {
     flex: 1,
-    backgroundColor: '#00ced1',
+    backgroundColor: "#00ced1",
     height: 5,
-    alignSelf: 'center',
+    alignSelf: "center",
     margin: 5,
     marginTop: 25,
     padding: 15,
-    textAlign: 'center',
-    borderRadius: 15
-  }
+    textAlign: "center",
+    borderRadius: 15,
+  },
 });
 
 export default Account;
