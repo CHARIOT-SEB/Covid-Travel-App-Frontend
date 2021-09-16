@@ -3,24 +3,14 @@ import { View, Text, StyleSheet, Button, Alert } from "react-native";
 import MapView from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const IndividualCountry = (props: any) => {
+const IndividualCountry = () => {
   //initial region currently set to france, will use google api to fetch country locations onChange
-  const [region, setRegion] = useState({
-    initialRegion: {
-      latitude: 47.4256,
-      longitude: 2.6054,
-      latitudeDelta: 10,
-      longitudeDelta: 0.25,
-    },
-  });
 
-  const nav = props.navigation;
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <MapView
           style={styles.map}
-          region={region.initialRegion}
           showsUserLocation={true}
           // user location will be available to see, if location services are enabled
         />

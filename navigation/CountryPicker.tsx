@@ -7,14 +7,12 @@ import { View, Text, StyleSheet, Button } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
 
-function CountryPicker(props: { location: {} }) {
-  const { location } = props;
+function CountryPicker() {
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState([
     "Austria",
     "Belgium",
     "Bulgaria",
-    "Croatia",
     "Croatia",
     "Cyprus",
     "czechRepublic",

@@ -4,24 +4,16 @@ import { SafeAreaView, StyleSheet, View, Text, Button } from "react-native";
 // file imports
 import CountryPicker from "../navigation/CountryPicker";
 
-interface State {
-  location: {
-    latitude: number;
-    longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
-  };
-}
-
-const Home: React.FC<State> = (navigation: any) => {
-  const [location, setLocation] = useState({});
+const Homeå = (props: { location: {} }) => {
+  const { location } = props;
+  console.log(location);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <Text>The Covid-19 Travel App Name</Text>
-        <Button title='My Trips' onPress={() => navigation.navigate("Trips")} />
-        <CountryPicker location={location} />
+        {/* <Button title='My Trips' onPress={() => navigation.navigate("Trips")} /> */}
+        <CountryPicker />
       </View>
     </SafeAreaView>
   );
