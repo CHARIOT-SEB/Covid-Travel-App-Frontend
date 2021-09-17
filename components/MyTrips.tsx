@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const MyTrips = () => {
 	return (
 		<View style={styles.container}>
-			<Text style={{ textAlign: 'center', margin: 10, }}>Past Trips</Text>
+			<Text style={{ textAlign: 'center', margin: 10 }}>Past Trips</Text>
 			<View style={styles.info}>
 				<Text>France</Text>
 			</View>
