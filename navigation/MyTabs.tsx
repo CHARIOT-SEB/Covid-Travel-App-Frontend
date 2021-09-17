@@ -42,12 +42,15 @@ const handleIcons = ({ route }) => ({
 	tabBarInactiveTintColor: 'gray',
 });
 
+
 const MyTabs = () => {
+
 	return (
 		<NavigationContainer>
 			<Tabs.Navigator initialRouteName='Home' screenOptions={handleIcons}>
 				<Tabs.Screen
 					name='Home'
+
 					component={Home}
 					options={{ headerShown: false }}
 				/>

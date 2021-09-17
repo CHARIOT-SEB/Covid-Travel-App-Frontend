@@ -8,7 +8,6 @@ import Home from '../screens/Home';
 import Trips from '../screens/Trips';
 
 const MyStack = () => {
-	
 	// to access to StackNavigator properties
 	const Stack = createNativeStackNavigator();
 

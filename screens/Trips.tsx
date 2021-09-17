@@ -5,11 +5,14 @@ import {
   View,
   StyleSheet,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList
 } from 'react-native';
 
 import uuid from 'react-uuid';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import Logo from '../components/Logo';
 
 const Trips = (props: any) => {
   const nav = props.navigation;
@@ -28,7 +31,7 @@ const Trips = (props: any) => {
         trafficLight: 'amber',
         dateGoing: '2022.01.12',
         dateReturning: '2022.01.24',
-        acceptingTourists: true,
+        acceptingTourists: false,
         vaccineRequired: true,
         testRequired: true,
         extraDocsRequired: true,
@@ -36,11 +39,22 @@ const Trips = (props: any) => {
       },
       {
         country: 'greece',
-        trafficLight: 'amber',
+        trafficLight: 'green',
         dateGoing: '2022.05.03',
         dateReturning: '2022.05.10',
         acceptingTourists: true,
         vaccineRequired: true,
+        testRequired: true,
+        extraDocsRequired: true,
+        newInfo: true
+      },
+      {
+        country: 'portugal',
+        trafficLight: 'red',
+        dateGoing: '2022.05.03',
+        dateReturning: '2022.05.10',
+        acceptingTourists: true,
+        vaccineRequired: false,
         testRequired: true,
         extraDocsRequired: true,
         newInfo: true
@@ -57,39 +71,128 @@ const Trips = (props: any) => {
   const trips: any = userData.trips;
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <View style={styles.logo}></View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => nav.navigate('IndividualCountry')}
-        >
-          <Text>Check Country</Text>
-        </TouchableOpacity>
+    <SafeAreaView style={styles.container}>
+      <Logo />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => nav.navigate('IndividualCountry')}
+      >
+        <Text>Check Country</Text>
+      </TouchableOpacity>
 
-        <View style={styles.myTripsContainer}>
-          <Text style={styles.myTripsTitle}>My Trips</Text>
-          {trips.map((country: any) => {
-            return (
-              <View key={uuid()}>
-                <Text style={styles.countryName}>{country.country}</Text>
-                <Text style={styles.countryColor}>{country.trafficLight}</Text>
-                <Text style={styles.travelDate}> {country.dateGoing}</Text>
-                <Text style={styles.travelDate}> {country.dateReturning}</Text>
-                <Text style={styles.acceptingTourists ? 'checkmark' : 'close'}>
-                  {' '}
-                  {country.acceptingTourists}
+      <View style={styles.myTripsContainer}>
+        <Text style={styles.myTripsTitle}>My Trips</Text>
+
+        <FlatList
+          keyExtractor={(item) => item.country}
+          data={trips}
+          renderItem={({ item }) => (
+            <View style={styles.singleTrip}>
+              {/* country name and traffic light color behind  */}
+
+              <View
+                style={[
+                  item.trafficLight === 'green'
+                    ? { backgroundColor: 'green' }
+                    : { backgroundColor: 'gray' },
+                  item.trafficLight === 'amber'
+                    ? { backgroundColor: 'orange' }
+                    : { backgroundColor: 'gray' },
+                  // item.trafficLight === 'red'
+                  //   ? { backgroundColor: 'crimson' }
+                  //   : { backgroundColor: 'gray' },
+                  styles.countryNameContainer
+                ]}
+              >
+                <Text style={[styles.listItem, styles.countryName]}>
+                  {item.country}
                 </Text>
-                <Text style={styles.testRequired}> {country.testRequired}</Text>
-                <Text style={styles.vaccineRequired}>
-                  {' '}
-                  {country.vaccineRequired}
-                </Text>
-                <Text style={styles.docsRequired}> {country.docsRequired}</Text>
               </View>
-            );
-          })}
-        </View>
+
+              {/* date going and returning */}
+              <View style={styles.dateContainer}>
+                <AntDesign name='calendar' size={30} color='grey' />
+                <Text style={[styles.listItem, styles.itemText]}>
+                  Date Going: {item.dateGoing}
+                </Text>
+              </View>
+              <View style={styles.dateContainer}>
+                <AntDesign name='calendar' size={30} color='grey' />
+                <Text style={[styles.listItem, styles.itemText]}>
+                  {' '}
+                  Date Returning: {item.dateReturning}
+                </Text>
+              </View>
+              {/* Accepting Tourists */}
+              <View style={styles.listItem}>
+                <Ionicons name={'person-sharp'} size={30} color={'grey'} />
+                <Text style={styles.itemText}> Accepting Tourists </Text>
+                <Ionicons
+                  name={
+                    item.acceptingTourists
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={25}
+                  color={item.acceptingTourists ? 'green' : 'crimson'}
+                />
+              </View>
+              {/* test required? */}
+              <View style={styles.listItem}>
+                <MaterialCommunityIcons
+                  name='test-tube'
+                  size={30}
+                  color='grey'
+                />
+                <Text style={styles.itemText}> Test Required </Text>
+                <Ionicons
+                  name={
+                    item.testRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={25}
+                  color={item.testRequired ? 'green' : 'crimson'}
+                />
+              </View>
+
+              {/* Vaccine Required */}
+              <View style={styles.listItem}>
+                <MaterialCommunityIcons
+                  name={'needle'}
+                  size={30}
+                  color={'grey'}
+                />
+                <Text style={styles.itemText}> Vaccine Required </Text>
+
+                <Ionicons
+                  name={
+                    item.vaccineRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={25}
+                  color={item.vaccineRequired ? 'green' : 'crimson'}
+                />
+              </View>
+
+              {/* Docs required? */}
+              <View style={styles.listItem}>
+                <AntDesign name='filetext1' size={30} color='grey' />
+                <Text style={styles.itemText}> Docs Required </Text>
+                <Ionicons
+                  name={
+                    item.docsRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={25}
+                  color={item.docsRequired ? 'green' : 'crimson'}
+                />
+              </View>
+            </View>
+          )}
+        ></FlatList>
       </View>
     </SafeAreaView>
   );
@@ -101,68 +204,65 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  logo: {
-    flex: 1,
-    height: 20,
-    padding: 20,
-    margin: 10,
-    borderRadius: 80,
-    alignItems: 'stretch',
-    backgroundColor: '#5f9ea0'
-  },
   myTripsContainer: {
-    backgroundColor: '#fff8dc',
-    flex: 2,
-    flexDirection: 'column',
-    alignSelf: 'stretch',
-    margin: 25,
-    padding: 50
+    flex: 1,
+    alignItems: 'center',
+    borderColor: 'lightgray',
+    borderWidth: 2,
+    borderRadius: 15,
+    padding: 5,
+    paddingHorizontal: 25
   },
   myTripsTitle: {
-    alignSelf: 'center',
-    margin: 5
-  },
-  singleTripContainer: {
-    backgroundColor: 'yellow',
-    flexDirection: 'column',
-    alignSelf: 'stretch',
+    textTransform: 'uppercase',
+    padding: 5,
     margin: 5,
-    height: 100,
-    padding: 20
+    fontWeight: 'bold'
+  },
+  singleTrip: {
+    flex: 1,
+    backgroundColor: 'lightgray',
+    flexDirection: 'column',
+    padding: 15,
+    margin: 10,
+    borderRadius: 10
+  },
+  countryNameContainer: {
+    transform: [{ scaleX: 2 }],
+    borderRadius: 120,
+    margin: 20,
+    width: 70,
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
   countryName: {
-    color: 'blue'
+    fontSize: 16,
+    textTransform: 'uppercase',
+    color: 'black',
+    transform: [{ scaleX: 0.5 }]
   },
-  countryColor: {
-    color: 'blue'
+  itemText: {
+    paddingHorizontal: 15,
+    color: 'black'
   },
-  travelDate: {
-    color: 'blue'
+  listItem: {
+    flexDirection: 'row',
+    paddingVertical: 5,
+    justifyContent: 'space-between'
   },
-  testRequired: {
-    color: 'blue'
-  },
-  vaccineRequired: {
-    color: 'blue'
-  },
-  acceptingTourists: {
-    color: 'blue'
-  },
-  docsRequired: {
-    color: 'blue'
-  },
-  info: {
-    margin: 2,
-    alignSelf: 'stretch'
+  dateContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 5
   },
   button: {
-    flex: 1,
-    backgroundColor: '#00ced1',
+    backgroundColor: '#4d94ff',
     height: 5,
-    alignSelf: 'center',
     margin: 5,
     padding: 15,
-    textAlign: 'center',
+    alignItems: 'stretch',
     borderRadius: 15
   }
 });
