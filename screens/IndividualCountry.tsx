@@ -4,11 +4,10 @@ import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface State {
-		latitude: number;
-		longitude: number;
-		latitudeDelta: number;
-		longitudeDelta: number;
-	};
+	latitude: number;
+	longitude: number;
+	latitudeDelta: number;
+	longitudeDelta: number;
 }
 
 const IndividualCountry: React.FC<State> = () => {
@@ -16,10 +15,10 @@ const IndividualCountry: React.FC<State> = () => {
 	in the countryPicker, so that the region prop can be set */
 
 	const [region, setRegion] = useState({
-			latitude: 47.4256,
-			longitude: 2.6054,
-			latitudeDelta: 10,
-			longitudeDelta: 0.25,
+		latitude: 47.4256,
+		longitude: 2.6054,
+		latitudeDelta: 10,
+		longitudeDelta: 0.25,
 	});
 
 	return (

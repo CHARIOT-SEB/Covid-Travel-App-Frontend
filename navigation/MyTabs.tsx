@@ -63,7 +63,7 @@ const MyTabs = () => {
 				/>
 				<Tabs.Screen
 					name='Country'
-					component={Home}
+					component={IndividualCountry}
 					options={{ headerShown: false }}
 				/>
 				<Tabs.Screen
