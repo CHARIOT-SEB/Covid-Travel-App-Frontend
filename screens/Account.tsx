@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MyTrips from '../components/MyTrips';
 import Logo from '../components/Logo';
@@ -10,7 +10,7 @@ const Account = (props) => {
 
 	return (
 		<SafeAreaView>
-			<View>
+			<ScrollView>
 				<Logo />
 				<View style={styles.background}>
 					<AccountInfo />
@@ -25,7 +25,7 @@ const Account = (props) => {
 						<Text>Delete Account</Text>
 					</TouchableOpacity>
 				</View>
-			</View>
+			</ScrollView>
 		</SafeAreaView>
 	);
 };
