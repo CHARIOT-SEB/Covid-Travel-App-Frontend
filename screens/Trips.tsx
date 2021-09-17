@@ -58,108 +58,104 @@ const Trips = (props: any) => {
   const trips: any = userData.trips;
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <View style={styles.logo}></View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => nav.navigate('IndividualCountry')}
-        >
-          <Text>Check Country</Text>
-        </TouchableOpacity>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.logo}></View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => nav.navigate('IndividualCountry')}
+      >
+        <Text>Check Country</Text>
+      </TouchableOpacity>
 
-        <View style={styles.myTripsContainer}>
-          <Text style={styles.myTripsTitle}>My Trips</Text>
+      <View style={styles.myTripsContainer}>
+        <Text style={styles.myTripsTitle}>My Trips</Text>
 
-          <FlatList
-            keyExtractor={(item) => item.country}
-            data={trips}
-            renderItem={({ item }) => (
-              <View style={styles.singleTrip}>
-                {/* country name and traffic light color behind */}
-                <View
-                  style={{
-                    backgroundColor: item.trafficLight,
-                    padding: 10,
-                    height: 5,
-                    width: 10
-                  }}
-                >
-                  <Text style={[styles.listItem, styles.countryName]}>
-                    {item.country}
-                  </Text>
-                </View>
-
-                {/* date going and returning */}
-                <Text style={[styles.listItem, styles.travelDate]}>
-                  {' '}
-                  Date Going: {item.dateGoing}
+        <FlatList
+          keyExtractor={(item) => item.country}
+          data={trips}
+          renderItem={({ item }) => (
+            <View style={styles.singleTrip}>
+              {/* country name and traffic light color behind */}
+              <View
+                style={{
+                  backgroundColor: item.trafficLight,
+                  padding: 10,
+                  height: 5,
+                  width: 10
+                }}
+              >
+                <Text style={[styles.listItem, styles.countryName]}>
+                  {item.country}
                 </Text>
-                <Text style={[styles.listItem, styles.travelDate]}>
-                  {' '}
-                  Date Returning: {item.dateReturning}
-                </Text>
-
-                {/* Accepting Tourists */}
-                <View style={styles.listItem}>
-                  <Text> Accepting Tourists </Text>
-                  <Ionicons
-                    name={
-                      item.acceptingTourists
-                        ? 'md-checkmark-circle'
-                        : 'md-close-circle'
-                    }
-                    size={20}
-                    color={item.acceptingTourists ? 'green' : 'red'}
-                  />
-                </View>
-                {/* test required? */}
-                <View style={styles.listItem}>
-                  <Text> Test Required </Text>
-                  <Ionicons
-                    name={
-                      item.testRequired
-                        ? 'md-checkmark-circle'
-                        : 'md-close-circle'
-                    }
-                    size={20}
-                    color={item.testRequired ? 'green' : 'red'}
-                  />
-                </View>
-
-                {/* Vaccine Required */}
-                <View style={styles.listItem}>
-                  <Text> Vaccine Required </Text>
-
-                  <Ionicons
-                    name={
-                      item.vaccineRequired
-                        ? 'md-checkmark-circle'
-                        : 'md-close-circle'
-                    }
-                    size={20}
-                    color={item.vaccineRequired ? 'green' : 'red'}
-                  />
-                </View>
-
-                {/* Docs required? */}
-                <View style={styles.listItem}>
-                  <Text> Docs Required </Text>
-
-                  <Ionicons
-                    name={
-                      item.docsRequired
-                        ? 'md-checkmark-circle'
-                        : 'md-close-circle'
-                    }
-                    size={20}
-                    color={item.docsRequired ? 'green' : 'red'}
-                  />
-                </View>
               </View>
-            )}
-          ></FlatList>
-        </View>
+
+              {/* date going and returning */}
+              <Text style={[styles.listItem, styles.travelDate]}>
+                {' '}
+                Date Going: {item.dateGoing}
+              </Text>
+              <Text style={[styles.listItem, styles.travelDate]}>
+                {' '}
+                Date Returning: {item.dateReturning}
+              </Text>
+
+              {/* Accepting Tourists */}
+              <View style={styles.listItem}>
+                <Ionicons
+                  name={
+                    item.acceptingTourists
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={20}
+                  color={item.acceptingTourists ? 'green' : 'red'}
+                />
+                <Text> Accepting Tourists </Text>
+              </View>
+              {/* test required? */}
+              <View style={styles.listItem}>
+                <Ionicons
+                  name={
+                    item.testRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={20}
+                  color={item.testRequired ? 'green' : 'red'}
+                />
+                <Text> Test Required </Text>
+              </View>
+
+              {/* Vaccine Required */}
+              <View style={styles.listItem}>
+                <Ionicons
+                  name={
+                    item.vaccineRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={20}
+                  color={item.vaccineRequired ? 'green' : 'red'}
+                />
+                <Text> Vaccine Required </Text>
+              </View>
+
+              {/* Docs required? */}
+              <View style={styles.listItem}>
+                <Ionicons
+                  name={
+                    item.docsRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={20}
+                  color={item.docsRequired ? 'green' : 'red'}
+                />
+                <Text> Docs Required </Text>
+              </View>
+            </View>
+          )}
+        ></FlatList>
       </View>
     </SafeAreaView>
   );
@@ -180,29 +176,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#5f9ea0'
   },
   myTripsContainer: {
+    flex: 1,
     borderColor: 'blue',
     borderWidth: 2,
     flexDirection: 'column',
-    height: 500,
-    marginTop: 100,
-    margin: 50,
-    padding: 50
+    paddingHorizontal: 5
   },
   myTripsTitle: {
+    textTransform: 'uppercase',
     alignSelf: 'center',
     margin: 5
   },
-  singleTripContainer: {
+  singleTrip: {
     borderColor: 'red',
     borderWidth: 2,
-    flex: 1,
     backgroundColor: 'yellow',
     flexDirection: 'column',
-    marginTop: 80,
-    margin: 50,
-    height: 400,
-    width: 200,
-    padding: 20
+    margin: 5,
+    paddingHorizontal: 50
   },
   countryName: {
     textAlign: 'center',
@@ -226,7 +217,8 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   listItem: {
-    padding: 5
+    padding: 5,
+    flexDirection: 'row'
   },
   info: {
     margin: 2,
