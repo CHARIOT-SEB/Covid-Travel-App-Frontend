@@ -6,7 +6,7 @@ import CountryPicker from '../navigation/CountryPicker';
 
 const Home = (props: { location: {} }) => {
 	const { location } = props;
-	console.log(location);
+	// console.log(location);
 
 	return (
 		<SafeAreaView style={styles.container}>
