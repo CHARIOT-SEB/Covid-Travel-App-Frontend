@@ -57,6 +57,7 @@ const Trips = (props: any) => {
 	};
 	const trips: any = userData.trips;
 
+
 	return (
 		<SafeAreaView>
 			<View style={styles.container}>
@@ -220,6 +221,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		borderRadius: 15,
 	},
+
 });
 
 export default Trips;
