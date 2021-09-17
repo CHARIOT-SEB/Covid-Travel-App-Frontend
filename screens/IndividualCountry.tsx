@@ -18,13 +18,14 @@ const IndividualCountry = (country: { route: { params: string } }) => {
   //   function getKeyByValue(object: any, value: string) {
   //     return Object.keys(object).find((key) => object[key] === value);
   //   }
+  console.log(region);
 
   useEffect(() => {
     const mapArea = country.route.params;
-    setRegion(geoLocations.estonia);
-  }, [country]);
+    console.log(mapArea);
 
-  //   console.log(geoLocations.Denmark);
+    setRegion(geoLocations[mapArea]);
+  }, [country]);
 
   const params = country.route.params;
 
