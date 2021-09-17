@@ -42,6 +42,7 @@ const handleIcons = ({ route }) => ({
   tabBarInactiveTintColor: 'gray',
 });
 
+
 interface State {
   location: {
     latitude: number;
@@ -79,6 +80,7 @@ const MyTabs: React.FC<State> = () => {
       </Tabs.Navigator>
     </NavigationContainer>
   );
+
 };
 
 const styles = StyleSheet.create({

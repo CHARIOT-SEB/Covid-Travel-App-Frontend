@@ -4,7 +4,6 @@ import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const IndividualCountry = () => {
-  //initial region currently set to france, will use google api to fetch country locations onChange
 
   return (
     <SafeAreaView>
