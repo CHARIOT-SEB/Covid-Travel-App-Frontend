@@ -42,38 +42,43 @@ const handleIcons = ({ route }) => ({
 	tabBarInactiveTintColor: 'gray',
 });
 
-interface State {
-	location: {
-		latitude: number;
-		longitude: number;
-		latitudeDelta: number;
-		longitudeDelta: number;
-	};
-}
 
-const MyTabs: React.FC<State> = () => {
-	const [location, setLocation] = useState({
-		location: {
-			latitude: 47.4256,
-			longitude: 2.6054,
-			latitudeDelta: 10,
-			longitudeDelta: 0.25,
-		},
-	});
-	console.log(location);
+const MyTabs = () => {
 
 	return (
 		<NavigationContainer>
 			<Tabs.Navigator initialRouteName='Home' screenOptions={handleIcons}>
 				<Tabs.Screen
 					name='Home'
-					children={() => <Home location={location} setLocation={setLocation} />}
+
+					component={Home}
+					options={{ headerShown: false }}
 				/>
-				<Tabs.Screen name='Account' component={Account} />
-				<Tabs.Screen name='Trips' component={Trips} />
-				<Tabs.Screen name='Country' component={IndividualCountry} />
-				<Tabs.Screen name='SignUpForm' component={SignUpForm} />
-				<Tabs.Screen name='LandingPage' component={LandingPage} />
+				<Tabs.Screen
+					name='Account'
+					component={Account}
+					options={{ headerShown: false }}
+				/>
+				<Tabs.Screen
+					name='Trips'
+					component={Trips}
+					options={{ headerShown: false }}
+				/>
+				<Tabs.Screen
+					name='Country'
+					component={Home}
+					options={{ headerShown: false }}
+				/>
+				<Tabs.Screen
+					name='SignUpForm'
+					component={SignUpForm}
+					options={{ headerShown: false }}
+				/>
+				<Tabs.Screen
+					name='LandingPage'
+					component={LandingPage}
+					options={{ headerShown: false }}
+				/>
 			</Tabs.Navigator>
 		</NavigationContainer>
 	);

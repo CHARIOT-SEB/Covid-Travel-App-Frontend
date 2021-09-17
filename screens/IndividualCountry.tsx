@@ -3,13 +3,36 @@ import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const IndividualCountry = () => {
+
+interface State {
+		latitude: number;
+		longitude: number;
+		latitudeDelta: number;
+		longitudeDelta: number;
+	};
+}
+
+const IndividualCountry: React.FC<State> = () => {
+	/* requires access to country that was set 
+	in the countryPicker, so that the region prop can be set */
+
+	const [region, setRegion] = useState({
+			latitude: 47.4256,
+			longitude: 2.6054,
+			latitudeDelta: 10,
+			longitudeDelta: 0.25,
+	});
+
+
 	return (
 		<SafeAreaView>
 			<View style={styles.container}>
 				<MapView
 					style={styles.map}
 					showsUserLocation={true}
+
+					region={region}
+
 					// user location will be available to see, if location services are enabled
 				/>
 				<View style={styles.container}></View>
