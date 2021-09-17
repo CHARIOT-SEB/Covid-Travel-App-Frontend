@@ -4,10 +4,7 @@ import { SafeAreaView, StyleSheet, View, Text, Button } from 'react-native';
 // file imports
 import CountryPicker from '../navigation/CountryPicker';
 
-const Home = (props: { location: {} }) => {
-	const { location } = props;
-	// console.log(location);
-
+const Home = (navigation: any) => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.container}>
