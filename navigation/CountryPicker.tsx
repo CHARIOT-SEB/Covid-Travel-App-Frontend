@@ -10,13 +10,16 @@ import { Picker } from '@react-native-picker/picker';
 function CountryPicker() {
   const [country, setCountry] = useState('');
   const [countries, setCountries] = useState([
+    'Austria',
+    'Belgium',
+    'Bulgaria',
+    'Croatia',
+    'Cyprus',
+    'czechRepublic',
+    'Denmark',
+    'Estonia',
+    'Finland',
     'France',
-    'Spain',
-    'Italy',
-    'Poland',
-    'Germany',
-    'Norway',
-    'Ireland'
   ]);
 
   console.log(country);
@@ -27,11 +30,11 @@ function CountryPicker() {
       <Picker
         selectedValue={country}
         onValueChange={(value, index) => setCountry(value)}
-        mode="dropdown" // Android only
+        mode='dropdown' // Android only
         style={styles.picker}
       >
-        <Picker.Item label="Please choose a country" value="Unknown" />
-        {countries.map((country) => {
+        <Picker.Item label='Please choose a country' value='Unknown' />
+        {countries.map(country => {
           return <Picker.Item key={country} label={country} value={country} />;
         })}
       </Picker>
@@ -47,16 +50,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightblue'
+    backgroundColor: 'lightblue',
   },
   text: {
-    fontSize: 24
+    fontSize: 24,
   },
   picker: {
     marginVertical: 30,
     width: 300,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#666'
-  }
+    borderColor: '#666',
+  },
 });
