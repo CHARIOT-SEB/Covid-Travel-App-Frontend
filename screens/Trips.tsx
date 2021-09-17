@@ -94,13 +94,9 @@ const Trips = (props: any) => {
                 style={[
                   item.trafficLight === 'green'
                     ? { backgroundColor: 'green' }
-                    : { backgroundColor: 'gray' },
-                  item.trafficLight === 'amber'
+                    : item.trafficLight === 'amber'
                     ? { backgroundColor: 'orange' }
-                    : { backgroundColor: 'gray' },
-                  // item.trafficLight === 'red'
-                  //   ? { backgroundColor: 'crimson' }
-                  //   : { backgroundColor: 'gray' },
+                    : { backgroundColor: 'crimson' },
                   styles.countryNameContainer
                 ]}
               >
