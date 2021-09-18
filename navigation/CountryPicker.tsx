@@ -1,11 +1,12 @@
 // See https://www.npmjs.com/package/@react-native-picker/picker for more information
 
 import 'react-native-gesture-handler';
-
-import React, { useState } from 'react';
+// react imports
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-
+// file imports
 import { Picker } from '@react-native-picker/picker';
+import { getCountries } from '../screens/api';
 
 function CountryPicker(props: any) {
 	const nav: any = props.nav;
@@ -23,7 +24,15 @@ function CountryPicker(props: any) {
 		'France',
 	]);
 
-	console.log(country);
+
+  //   set the countries from api
+  useEffect(() => {
+    getCountries().then((countries: any) => {
+      setCountries(countries);
+    });
+  }, []);
+
+
 
 	return (
 		<View style={styles.screen}>

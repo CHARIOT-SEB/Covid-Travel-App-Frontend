@@ -20,25 +20,8 @@ const IndividualCountry = (country: { route: { params: any } }) => {
 		longitudeDelta: 0.25,
 	});
 
-	let newGeo = {
-		latitude: 0,
-		longitude: 0,
-		latitudeDelta: 0,
-		longitudeDelta: 0,
-	};
+  
 
-	let mapArea = country.route.params;
-
-	const geo = Object.entries(geoLocations).find(arr => {
-		if (arr[0] === mapArea) {
-			newGeo.latitude = arr[1].latitude;
-			newGeo.longitude = arr[1].longitude;
-			newGeo.latitudeDelta = arr[1].latitudeDelta;
-			newGeo.longitudeDelta = arr[1].longitudeDelta;
-			return;
-		}
-	});
-	console.log(newGeo);
 
 	useEffect(() => {
 		setRegion(newGeo);
