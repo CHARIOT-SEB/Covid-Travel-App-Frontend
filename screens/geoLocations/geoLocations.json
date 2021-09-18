@@ -1,63 +1,68 @@
 {
-
-  "Austria": {
-    "latitude": 48.2104,
-    "longitude": 16.3654,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "Belgium": {
-    "latitude": 50.8455,
-    "longitude": 4.3571,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "Bulgaria": {
-    "latitude": 43,
-    "longitude": 25,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "Croatia": {
-    "latitude": 45.1,
-    "longitude": 15.2,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "Cyprus": {
-    "latitude": 45.1,
-    "longitude": 15.2,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "Czech republic": {
-    "latitude": 50.0755,
-    "longitude": 14.4378,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "Denmark": {
-    "latitude": 55.6761,
-    "longitude": 12.5683,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "Estonia": {
-    "latitude": 59.437,
-    "longitude": 24.7536,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "Finland": {
-    "latitude": 65.1699,
-    "longitude": 24.7536,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  },
-  "France": {
-    "latitude": 47.4256,
-    "longitude": 2.6054,
-    "latitudeDelta": 10,
-    "longitudeDelta": 0.25
-  }
-
+	"Austria": {
+		"latitude": 48,
+		"longitude": 14.5,
+		"latitudeDelta": 5,
+		"longitudeDelta": 0.25
+	},
+	"Belgium": {
+		"latitude": 50.8455,
+		"longitude": 4.3571,
+		"latitudeDelta": 3.75,
+		"longitudeDelta": 0.25
+	},
+	"Bulgaria": {
+		"latitude": 43,
+		"longitude": 25,
+		"latitudeDelta": 6.25,
+		"longitudeDelta": 0.25
+	},
+	"Croatia": {
+		"latitude": 45,
+		"longitude": 16,
+		"latitudeDelta": 5.75,
+		"longitudeDelta": 0.25
+	},
+	"Cyprus": {
+		"country": "Cyprus",
+		"latitude": 35.095192,
+		"longitude": 33.45,
+		"latitudeDelta": 2.75,
+		"longitudeDelta": 0.25
+	},
+	"czechRepublic": {
+		"country": "Czech Republic",
+		"latitude": 50,
+		"longitude": 15.5,
+		"latitudeDelta": 6,
+		"longitudeDelta": 0.25
+	},
+	"Denmark": {
+		"country": "Denmark",
+		"latitude": 55.65,
+		"longitude": 9.75,
+		"latitudeDelta": 4,
+		"longitudeDelta": 0.25
+	},
+	"Estonia": {
+		"country": "Estonia",
+		"latitude": 58.75,
+		"longitude": 26,
+		"latitudeDelta": 3.75,
+		"longitudeDelta": 0.25
+	},
+	"Finland": {
+		"country": "Finland",
+		"latitude": 60.1699,
+		"longitude": 24.7536,
+		"latitudeDelta": 5,
+		"longitudeDelta": 0.25
+	},
+	"France": {
+		"country": "France",
+		"latitude": 47.4256,
+		"longitude": 2.6054,
+		"latitudeDelta": 10,
+		"longitudeDelta": 0.25
+	}
+}
