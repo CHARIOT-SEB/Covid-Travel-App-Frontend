@@ -24,44 +24,74 @@
 		"longitudeDelta": 0.25
 	},
 	"Cyprus": {
-		"country": "Cyprus",
 		"latitude": 35.095192,
 		"longitude": 33.45,
 		"latitudeDelta": 2.75,
 		"longitudeDelta": 0.25
 	},
 	"czechRepublic": {
-		"country": "Czech Republic",
 		"latitude": 50,
 		"longitude": 15.5,
 		"latitudeDelta": 6,
 		"longitudeDelta": 0.25
 	},
 	"Denmark": {
-		"country": "Denmark",
 		"latitude": 55.65,
 		"longitude": 9.75,
 		"latitudeDelta": 4,
 		"longitudeDelta": 0.25
 	},
 	"Estonia": {
-		"country": "Estonia",
 		"latitude": 58.75,
 		"longitude": 26,
 		"latitudeDelta": 3.75,
 		"longitudeDelta": 0.25
 	},
 	"Finland": {
-		"country": "Finland",
 		"latitude": 60.1699,
 		"longitude": 24.7536,
 		"latitudeDelta": 5,
 		"longitudeDelta": 0.25
 	},
 	"France": {
-		"country": "France",
 		"latitude": 47.4256,
 		"longitude": 2.6054,
+		"latitudeDelta": 10,
+		"longitudeDelta": 0.25
+	},
+	"Germany": {
+		"latitude": 51.0647,
+		"longitude": 10.25,
+		"latitudeDelta": 8,
+		"longitudeDelta": 0.25
+	},
+	"Greece": {
+		"latitude": 38.6044,
+		"longitude": 22.7152,
+		"latitudeDelta": 4,
+		"longitudeDelta": 0.25
+	},
+	"Hungary": {
+		"latitude": 47.1,
+		"longitude": 19.4618,
+		"latitudeDelta": 5,
+		"longitudeDelta": 0.25
+	},
+	"Iceland": {
+		"latitude": 64.1466,
+		"longitude": 21,
+		"latitudeDelta": 8,
+		"longitudeDelta": 0.25
+	},
+	"Ireland": {
+		"latitude": 53.3498,
+		"longitude": -7.75,
+		"latitudeDelta": 5,
+		"longitudeDelta": 0.25
+	},
+	"Italy": {
+		"latitude": 43,
+		"longitude": 12,
 		"latitudeDelta": 10,
 		"longitudeDelta": 0.25
 	}
