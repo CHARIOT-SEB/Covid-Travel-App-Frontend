@@ -27,7 +27,8 @@ const IndividualCountry = (country: { route: { params: any } }) => {
 	};
 
 	let mapArea = country.route.params;
-	console.log(newGeo);
+	// console.log(newGeo);
+	console.log(mapArea);
 
 	useEffect(() => {
 		setRegion(newGeo);
