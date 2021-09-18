@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import geoLocations from './geoLocations/geoLocations.json';
+import { getCountry } from '../screens/api';
 
 interface State {
 	latitude: number;
@@ -11,7 +12,8 @@ interface State {
 	longitudeDelta: number;
 }
 
-const IndividualCountry = (country: { route: { params: any } }) => {
+const IndividualCountry = (country: { route: { params: string } }) => {
+	const [info, setInfo] = useState({});
 	const [region, setRegion] = useState({
 		latitude: 47.4256,
 		longitude: 2.6054,
@@ -27,11 +29,8 @@ const IndividualCountry = (country: { route: { params: any } }) => {
 	};
 
 	let mapArea = country.route.params;
-	console.log(newGeo);
-
-	useEffect(() => {
-		setRegion(newGeo);
-	}, [country]);
+	const searchParam = mapArea[0].toLowerCase() + mapArea.slice(1);
+	console.log(searchParam);
 
 	const geo = Object.entries(geoLocations).find(arr => {
 		if (arr[0] === mapArea) {
@@ -42,6 +41,14 @@ const IndividualCountry = (country: { route: { params: any } }) => {
 			return;
 		}
 	});
+
+	useEffect(() => {
+		getCountry(searchParam).then((country: object) => {
+			console.log(country);
+			setInfo(country);
+		});
+		setRegion(newGeo);
+	}, [country]);
 
 	//   console.log(geoLocations.Denmark);
 

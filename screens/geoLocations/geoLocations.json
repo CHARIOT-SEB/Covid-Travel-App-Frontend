@@ -29,7 +29,7 @@
 		"latitudeDelta": 2.75,
 		"longitudeDelta": 0.25
 	},
-	"czechRepublic": {
+	"Czech_Republic": {
 		"latitude": 50,
 		"longitude": 15.5,
 		"latitudeDelta": 6,
@@ -48,9 +48,9 @@
 		"longitudeDelta": 0.25
 	},
 	"Finland": {
-		"latitude": 60.1699,
-		"longitude": 24.7536,
-		"latitudeDelta": 5,
+		"latitude": 65.1699,
+		"longitude": 25.7536,
+		"latitudeDelta": 8.75,
 		"longitudeDelta": 0.25
 	},
 	"France": {
@@ -78,9 +78,9 @@
 		"longitudeDelta": 0.25
 	},
 	"Iceland": {
-		"latitude": 64.1466,
-		"longitude": 21,
-		"latitudeDelta": 8,
+		"latitude": 65,
+		"longitude": -19,
+		"latitudeDelta": 7.5,
 		"longitudeDelta": 0.25
 	},
 	"Ireland": {
@@ -93,6 +93,96 @@
 		"latitude": 43,
 		"longitude": 12,
 		"latitudeDelta": 10,
+		"longitudeDelta": 0.25
+	},
+	"Latvia": {
+		"latitude": 56.8796,
+		"longitude": 24.6032,
+		"latitudeDelta": 5,
+		"longitudeDelta": 0.25
+	},
+	"Liechtenstein": {
+		"latitude": 47.141,
+		"longitude": 9.525,
+		"latitudeDelta": 0.25,
+		"longitudeDelta": 0.25
+	},
+	"Lithuania": {
+		"latitude": 55.1694,
+		"longitude": 23.8813,
+		"latitudeDelta": 4.75,
+		"longitudeDelta": 0.25
+	},
+	"Luxembourg": {
+		"latitude": 49.8153,
+		"longitude": 6.1296,
+		"latitudeDelta": 0.75,
+		"longitudeDelta": 0.25
+	},
+	"Malta": {
+		"latitude": 35.9375,
+		"longitude": 14.3954,
+		"latitudeDelta": 0.5,
+		"longitudeDelta": 0.25
+	},
+	"Netherlands": {
+		"latitude": 52.3326,
+		"longitude": 5.2913,
+		"latitudeDelta": 3,
+		"longitudeDelta": 0.25
+	},
+	"Norway": {
+		"latitude": 60.472,
+		"longitude": 8.4689,
+		"latitudeDelta": 7.5,
+		"longitudeDelta": 0.25
+	},
+	"Poland": {
+		"latitude": 51.9194,
+		"longitude": 19.1451,
+		"latitudeDelta": 8,
+		"longitudeDelta": 0.25
+	},
+	"Portugal": {
+		"latitude": 39.825,
+		"longitude": -7.2245,
+		"latitudeDelta": 6,
+		"longitudeDelta": 0.25
+	},
+	"Romania": {
+		"latitude": 45.9432,
+		"longitude": 24.9668,
+		"latitudeDelta": 7.25,
+		"longitudeDelta": 0.25
+	},
+	"Slovakia": {
+		"latitude": 48.9432,
+		"longitude": 19.699,
+		"latitudeDelta": 5,
+		"longitudeDelta": 0.25
+	},
+	"Slovenia": {
+		"latitude": 46.512,
+		"longitude": 14.9668,
+		"latitudeDelta": 3,
+		"longitudeDelta": 0.35
+	},
+	"Spain": {
+		"latitude": 39.825,
+		"longitude": -3.5245,
+		"latitudeDelta": 11,
+		"longitudeDelta": 0.25
+	},
+	"Sweden": {
+		"latitude": 62.1282,
+		"longitude": 16.6435,
+		"latitudeDelta": 10.25,
+		"longitudeDelta": 0.25
+	},
+	"Switzerland": {
+		"latitude": 46.8182,
+		"longitude": 8.2275,
+		"latitudeDelta": 4.25,
 		"longitudeDelta": 0.25
 	}
 }

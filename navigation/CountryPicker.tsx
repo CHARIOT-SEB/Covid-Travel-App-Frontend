@@ -11,28 +11,14 @@ import { getCountries } from '../screens/api';
 function CountryPicker(props: any) {
 	const nav: any = props.nav;
 	const [country, setCountry] = useState('');
-	const [countries, setCountries] = useState([
-		'Austria',
-		'Belgium',
-		'Bulgaria',
-		'Croatia',
-		'Cyprus',
-		'czechRepublic',
-		'Denmark',
-		'Estonia',
-		'Finland',
-		'France',
-	]);
+	const [countries, setCountries] = useState([]);
 
-
-  //   set the countries from api
-  useEffect(() => {
-    getCountries().then((countries: any) => {
-      setCountries(countries);
-    });
-  }, []);
-
-
+	//   set the countries from api
+	useEffect(() => {
+		getCountries().then((countries: any) => {
+			setCountries(countries);
+		});
+	}, []);
 
 	return (
 		<View style={styles.screen}>
