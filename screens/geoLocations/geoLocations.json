@@ -1,4 +1,5 @@
 {
+
   "Austria": {
     "latitude": 48.2104,
     "longitude": 16.3654,
@@ -59,4 +60,4 @@
     "latitudeDelta": 10,
     "longitudeDelta": 0.25
   }
-}
+
