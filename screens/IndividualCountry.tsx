@@ -30,6 +30,7 @@ const IndividualCountry = (country: { route: { params: string } }) => {
 
 	let mapArea = country.route.params;
 	const searchParam = mapArea[0].toLowerCase() + mapArea.slice(1);
+	console.log(searchParam);
 
 	const geo = Object.entries(geoLocations).find(arr => {
 		if (arr[0] === mapArea) {
