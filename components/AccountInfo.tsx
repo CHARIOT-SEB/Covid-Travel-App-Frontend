@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const AccountInfo = () => {
 	return (
 		<View style={styles.accountInfoContainer}>
-			<Text style={styles.text}> Name: Joe Blogs</Text>
-			<Text style={styles.text}> Email: joe@blogs.com</Text>
+			<Text style={styles.text}><Ionicons name={'md-person'} size={15} />    Joe Blogs</Text>
+			<Text style={styles.text}><Ionicons name={'md-mail'} size={15} />    joe@blogs.com</Text>
 		</View>
 	);
 };
@@ -18,8 +19,9 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 	},
 	text: {
-		textAlign: 'center',
+		textAlign: 'left',
 		margin: 5,
+		fontSize: 15,
 	},
 });
 
