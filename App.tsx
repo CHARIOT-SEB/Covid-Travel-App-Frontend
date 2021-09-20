@@ -8,9 +8,15 @@ import MyTabs from './navigation/MyTabs';
 import MyStack from './navigation/MyStack';
 import LandingPage from './screens/LandingPage';
 import { NativeBaseProvider } from 'native-base';
+import Trips from './screens/Trips';
 import appLogo from './logo.png';
+import IndividualCountry from './screens/IndividualCountry';
+import Home from './screens/Home';
+import Account from './screens/Account';
+import { useState } from 'react';
 
 const App = () => {
+    const [country, setCountry] = useState({})
 	return (
 		<SafeAreaProvider>
 			<NativeBaseProvider>
@@ -24,6 +30,18 @@ const App = () => {
 					<MyTabs />
 				</View>
 				<StatusBar style='auto' />
+            <Modal visible={false}>
+                <Trips />
+            </Modal>
+            <Modal visible={false}>
+                <IndividualCountry country={country} />
+            </Modal>
+            <Modal visible={false}>
+                <Home />
+            </Modal>
+            <Modal visible={false}>
+                <Account />
+            </Modal>
 			</NativeBaseProvider>
 		</SafeAreaProvider>
 	);
