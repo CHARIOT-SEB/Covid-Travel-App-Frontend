@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 20,
 		color: '#fff',
 		textAlign: 'center',
-		backgroundColor: 'rgb(153, 153, 230)',
+		backgroundColor: 'rgb(80, 186, 9)',
 		borderRadius: 10,
 		borderWidth: 1,
 		borderColor: '#fff',
