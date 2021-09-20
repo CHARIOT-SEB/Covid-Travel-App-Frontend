@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import geoLocations from './geoLocations/geoLocations.json';
 import { getCountry } from '../screens/api';
 import Logo from '../components/Logo';
-
-interface State {
-  country: string;
-  colorList: string;
-  withFullVaccination: { documentsRequired: [boolean] };
-}
+import IsVaccinated from '../components/IsVaccinated';
+import IsntVaccinated from '../components/IsntVaccinated';
 
 const IndividualCountry = (country: { route: { params: string } }) => {
-  const [info, setInfo] = useState<State>({
-    country: 'test',
-    colorList: 'test',
-    withFullVaccination: { documentsRequired: [true] }
-  });
+  let info: any, setInfo: any;
+  [info, setInfo] = useState({});
   const [region, setRegion] = useState({
     latitude: 47.4256,
     longitude: 2.6054,
@@ -44,24 +37,26 @@ const IndividualCountry = (country: { route: { params: string } }) => {
     setRegion(region);
   }, [country]);
 
-  //   console.log(info.withFullVaccination.documentsRequired);
+  console.log(info);
+
+  if (!info.country) return null;
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <Logo />
-        <Text>{info.country}</Text>
+        <View style={styles.trafficLight}>
+          <Text style={styles.name}>{info.country}</Text>
+        </View>
+        <Text>{info.colorList}</Text>
         <MapView
           style={styles.map}
           showsUserLocation={true}
           region={region}
           // user location will be available to see, if location services are enabled
         />
-        <View style={styles.container}>
-          <Text>Where is this??</Text>
-          <Text>{info.colorList}</Text>
-          <Text></Text>
-        </View>
+        <IsVaccinated info={info} />
+        <IsntVaccinated info={info} />
       </View>
     </SafeAreaView>
   );
@@ -81,6 +76,14 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#ddd',
     borderRadius: 6
+  },
+  trafficLight: {
+    padding: 20,
+    backgroundColor: '#4d94ff',
+    borderRadius: 15
+  },
+  name: {
+    fontSize: 30
   },
   logo: {
     flex: 1,
@@ -132,7 +135,17 @@ const styles = StyleSheet.create({
     margin: 2,
     alignSelf: 'center'
   },
-  text: {}
+  infoContainer: {
+    margin: 20,
+    padding: 20,
+    backgroundColor: '#4d94ff',
+    borderRadius: 15
+  },
+  text: {
+    textAlign: 'center',
+    margin: 5,
+    fontSize: 15
+  }
 });
 
 export default IndividualCountry;
