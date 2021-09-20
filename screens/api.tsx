@@ -20,4 +20,4 @@ export const getUser = async (email: string, password: string) => {
   const data = await coromerApi.post(`/users/${email}`, password);
   console.log(data, 'data');
   return data;
-
+};
