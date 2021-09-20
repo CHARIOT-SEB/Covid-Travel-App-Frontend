@@ -8,6 +8,7 @@ import MyTabs from './navigation/MyTabs';
 import MyStack from './navigation/MyStack';
 import LandingPage from './screens/LandingPage';
 import { NativeBaseProvider } from 'native-base';
+import appLogo from './logo.png';
 
 const App = () => {
 	return (
@@ -26,19 +27,18 @@ const App = () => {
 			</NativeBaseProvider>
 		</SafeAreaProvider>
 	);
-
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  tabs: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-evenly'
-  }
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+	},
+	tabs: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'space-evenly',
+	},
 });
 
 export default App;
