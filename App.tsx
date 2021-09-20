@@ -8,7 +8,7 @@ import MyTabs from './navigation/MyTabs';
 import MyStack from './navigation/MyStack';
 import LandingPage from './screens/LandingPage';
 import { NativeBaseProvider } from 'native-base';
-import appLogo from './logo.png';
+import logo from './logo.png';
 
 const App = () => {
 	return (
