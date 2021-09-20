@@ -9,17 +9,26 @@ import {
 	Button,
 } from 'react-native';
 import FormComponent from '../components/formComponent';
+import Logo from '../components/Logo';
 
 const SignUpForm = (props: any) => {
 	const nav = props.navigation;
 	return (
 		<SafeAreaView>
+			<View>
+				<Logo />
+			</View>
+
+			<FormComponent />
 			<View style={styles.container}>
-				<Text style={styles.logo}> logo</Text>
-				<TouchableOpacity style={styles.button} onPress={() => nav.navigate('Home')}>
-					<Text> Back </Text>
+				<TouchableOpacity
+					style={styles.btn}
+					onPress={() => {
+						nav.navigation('Home');
+					}}
+				>
+					<Text style={styles.btnText}> Back </Text>
 				</TouchableOpacity>
-				<FormComponent />
 			</View>
 		</SafeAreaView>
 	);
@@ -27,8 +36,12 @@ const SignUpForm = (props: any) => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		alignItems: 'stretch',
+		alignSelf: 'center',
+		width: 300,
+		alignItems: 'center',
+		borderWidth: 3,
+		borderColor: '#ddd',
+		borderRadius: 6,
 	},
 	logo: {
 		height: 10,
@@ -38,15 +51,19 @@ const styles = StyleSheet.create({
 		alignItems: 'stretch',
 		backgroundColor: '#5f9ea0',
 	},
-	button: {
-		backgroundColor: '#00ced1',
-		height: 5,
-		alignSelf: 'center',
-		margin: 5,
-		marginTop: 25,
-		padding: 15,
+	btn: {
+		borderRadius: 8,
+		marginVertical: 8,
+		paddingVertical: 14,
+		paddingHorizontal: 50,
+		backgroundColor: '#cd5c5c',
+	},
+	btnText: {
+		color: 'white',
+		fontWeight: 'bold',
+		textTransform: 'uppercase',
+		fontSize: 16,
 		textAlign: 'center',
-		borderRadius: 15,
 	},
 });
 
