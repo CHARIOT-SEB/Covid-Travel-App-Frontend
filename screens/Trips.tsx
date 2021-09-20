@@ -45,13 +45,10 @@ const Trips = (props: any) => {
     // setIsLoading(true);
 
     getUser(email, password).then((user) => {
-      console.log(user, 'in get');
       setUser(user);
       // setIsLoading(false);
     });
-  }, [user]);
-
-  console.log(user, 'userstate');
+  }, []);
 
   const trips: any = user.trips;
 
@@ -92,13 +89,13 @@ const Trips = (props: any) => {
 
               {/* date going and returning */}
               <View style={styles.dateContainer}>
-                <AntDesign name="calendar" size={30} color="grey" />
+                <AntDesign name='calendar' size={30} color='grey' />
                 <Text style={[styles.listItem, styles.itemText]}>
                   Date Going: {item.dateGoing}
                 </Text>
               </View>
               <View style={styles.dateContainer}>
-                <AntDesign name="calendar" size={30} color="grey" />
+                <AntDesign name='calendar' size={30} color='grey' />
                 <Text style={[styles.listItem, styles.itemText]}>
                   {' '}
                   Date Returning: {item.dateReturning}
@@ -121,9 +118,9 @@ const Trips = (props: any) => {
               {/* test required? */}
               <View style={styles.listItem}>
                 <MaterialCommunityIcons
-                  name="test-tube"
+                  name='test-tube'
                   size={30}
-                  color="grey"
+                  color='grey'
                 />
                 <Text style={styles.itemText}> Test Required </Text>
                 <Ionicons
@@ -159,7 +156,7 @@ const Trips = (props: any) => {
 
               {/* Docs required? */}
               <View style={styles.listItem}>
-                <AntDesign name="filetext1" size={30} color="grey" />
+                <AntDesign name='filetext1' size={30} color='grey' />
                 <Text style={styles.itemText}> Docs Required </Text>
                 <Ionicons
                   name={

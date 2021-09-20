@@ -1,5 +1,5 @@
 // react imports
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Modal } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -10,23 +10,23 @@ import LandingPage from './screens/LandingPage';
 import { NativeBaseProvider } from 'native-base';
 
 const App = () => {
-	return (
-		<SafeAreaProvider>
-			<NativeBaseProvider>
-				<Modal visible={false}>
-					<LandingPage />
-				</Modal>
-				<View>
-					<MyStack />
-				</View>
-				<View style={styles.container}>
-					<MyTabs />
-				</View>
-				<StatusBar style='auto' />
-			</NativeBaseProvider>
-		</SafeAreaProvider>
-	);
-
+  const [signedIn, setSignedIn] = useState(false);
+  return (
+    <SafeAreaProvider>
+      <NativeBaseProvider>
+        <Modal visible={false}>
+          <LandingPage />
+        </Modal>
+        <View>
+          <MyStack signedIn={signedIn} setSignedIn={setSignedIn} />
+        </View>
+        <View style={styles.container}>
+          <MyTabs />
+        </View>
+        <StatusBar style='auto' />
+      </NativeBaseProvider>
+    </SafeAreaProvider>
+  );
 };
 
 const styles = StyleSheet.create({
