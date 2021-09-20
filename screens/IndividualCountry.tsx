@@ -13,11 +13,8 @@ interface State {
 }
 
 const IndividualCountry = (country: { route: { params: string } }) => {
-  const [info, setInfo] = useState<State>({
-    country: 'test',
-    colorList: 'test',
-    withFullVaccination: { documentsRequired: [true] }
-  });
+  let info: any, setInfo: any;
+  [info, setInfo] = useState({});
   const [region, setRegion] = useState({
     latitude: 47.4256,
     longitude: 2.6054,
@@ -44,13 +41,16 @@ const IndividualCountry = (country: { route: { params: string } }) => {
     setRegion(region);
   }, [country]);
 
-  //   console.log(info.withFullVaccination.documentsRequired);
+  console.log(info);
+
+  if (!info.country) return null;
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <Logo />
         <Text>{info.country}</Text>
+        <Text>{info.colorList}</Text>
         <MapView
           style={styles.map}
           showsUserLocation={true}
@@ -58,9 +58,29 @@ const IndividualCountry = (country: { route: { params: string } }) => {
           // user location will be available to see, if location services are enabled
         />
         <View style={styles.container}>
-          <Text>Where is this??</Text>
-          <Text>{info.colorList}</Text>
-          <Text></Text>
+          <View>
+            <Text>With Full Vaccination</Text>
+          </View>
+          <Text>
+            Days innoculated before entry{' '}
+            {
+              info.entryRequirements.withFullVaccination
+                .daysInnoculatedBeforeEntry
+            }
+          </Text>
+          <Text>
+            Covid Test required{' '}
+            {info.entryRequirements.withFullVaccination.test.maximumHoursBefore}{' '}
+            hours before travel
+          </Text>
+          <Text>Documents Required</Text>
+          <Text>
+            {info.entryRequirements.withFullVaccination.documentsRequired.map(
+              (item: string) => {
+                return <Text>{item}</Text>;
+              }
+            )}
+          </Text>
         </View>
       </View>
     </SafeAreaView>
