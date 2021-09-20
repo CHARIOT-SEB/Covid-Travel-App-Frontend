@@ -1,28 +1,24 @@
 // See https://www.npmjs.com/package/@react-native-picker/picker for more information
 
 import 'react-native-gesture-handler';
-
-import React, { useState } from 'react';
+// react imports
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-
+// file imports
 import { Picker } from '@react-native-picker/picker';
+import { getCountries } from '../screens/api';
 
-function CountryPicker() {
+function CountryPicker(props: any) {
+	const nav: any = props.nav;
 	const [country, setCountry] = useState('');
-	const [countries, setCountries] = useState([
-		'Austria',
-		'Belgium',
-		'Bulgaria',
-		'Croatia',
-		'Cyprus',
-		'czechRepublic',
-		'Denmark',
-		'Estonia',
-		'Finland',
-		'France',
-	]);
+	const [countries, setCountries] = useState([]);
 
-	console.log(country);
+	//   set the countries from api
+	useEffect(() => {
+		getCountries().then((countries: any) => {
+			setCountries(countries);
+		});
+	}, []);
 
 	return (
 		<View style={styles.screen}>
@@ -34,10 +30,11 @@ function CountryPicker() {
 				style={styles.picker}
 			>
 				<Picker.Item label='Please choose a country' value='Unknown' />
-				{countries.map((country) => {
+				{countries.map(country => {
 					return <Picker.Item key={country} label={country} value={country} />;
 				})}
 			</Picker>
+			<Button title='Go' onPress={() => nav.navigate('Country', country)} />
 		</View>
 	);
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const coromerApi = axios.create({
+
   baseURL: 'https://covid-travel-app-21.herokuapp.com/api'
 });
 
@@ -19,4 +20,4 @@ export const getUser = async (email: string, password: string) => {
   const data = await coromerApi.post(`/users/${email}`, password);
   console.log(data, 'data');
   return data;
-};
+

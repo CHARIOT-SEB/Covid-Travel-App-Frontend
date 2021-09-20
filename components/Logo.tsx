@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const Logo = () => {
 	return (
 		<View style={styles.logoContainer}>
-			<Text style={styles.logo}>L O G O</Text>
+			<Text style={styles.logo}>COROAMER</Text>
 		</View>
 	);
 };
@@ -12,6 +12,8 @@ const Logo = () => {
 const styles = StyleSheet.create({
 	logo: {
 		textAlign: 'center',
+		fontSize: 22,
+		fontWeight: 'bold',
 	},
 	logoContainer: {
 		margin: 20,
