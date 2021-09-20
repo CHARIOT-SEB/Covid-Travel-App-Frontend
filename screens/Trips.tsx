@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -9,66 +9,51 @@ import {
   FlatList
 } from 'react-native';
 
-import uuid from 'react-uuid';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import Logo from '../components/Logo';
-
+import { getUser } from './api';
 const Trips = (props: any) => {
-  const nav = props.navigation;
+  // user state will come from App or SignUp and be passed in as a prop?
 
-  // will we need to fetch the data for each country in the array and set a state
-  // get individual country?
-
-  //temp info until we get heroku
-  const userData = {
-    fullName: 'John Smith',
-    email: 'js@google.com',
-    password: 'password',
+  const [user, setUser] = useState({
+    fullName: 'Jane Smith',
+    email: 'jsmith@google.com',
     trips: [
       {
         country: 'france',
         trafficLight: 'amber',
         dateGoing: '2022.01.12',
         dateReturning: '2022.01.24',
-        acceptingTourists: false,
+        acceptingTourists: true,
         vaccineRequired: true,
         testRequired: true,
         extraDocsRequired: true,
         newInfo: false
-      },
-      {
-        country: 'greece',
-        trafficLight: 'green',
-        dateGoing: '2022.05.03',
-        dateReturning: '2022.05.10',
-        acceptingTourists: true,
-        vaccineRequired: true,
-        testRequired: true,
-        extraDocsRequired: true,
-        newInfo: true
-      },
-      {
-        country: 'portugal',
-        trafficLight: 'red',
-        dateGoing: '2022.05.03',
-        dateReturning: '2022.05.10',
-        acceptingTourists: true,
-        vaccineRequired: false,
-        testRequired: true,
-        extraDocsRequired: true,
-        newInfo: true
       }
     ],
-    pastTrips: [
-      {
-        country: 'poland',
-        dateGoing: '2021.12.02',
-        dateReturning: '2021.12.06'
-      }
-    ]
-  };
-  const trips: any = userData.trips;
+    pastTrips: []
+  });
+
+  const nav = props.navigation;
+  // password and email come from props from the login page?
+
+  const email = 'js@google.com';
+  const password = 'password';
+
+  useEffect(() => {
+    // setIsLoading(true);
+
+    getUser(email, password).then((user) => {
+      console.log(user, 'in get');
+      setUser(user);
+      // setIsLoading(false);
+    });
+  }, [user]);
+
+  console.log(user, 'userstate');
+
+  const trips: any = user.trips;
 
   return (
     <SafeAreaView style={styles.container}>
