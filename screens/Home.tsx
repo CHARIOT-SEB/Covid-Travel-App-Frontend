@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#fff',
 	},
+	go_button: {
+		backgroundColor: 'green',
+	},
 });
 
 export default Home;

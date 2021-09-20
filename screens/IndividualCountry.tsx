@@ -67,8 +67,8 @@ const IndividualCountry = (country: { route: { params: string } }) => {
 					region={region}
 					// user location will be available to see, if location services are enabled
 				/>
-				<IsVaccinated info={info} />
-				<IsntVaccinated info={info} />
+				{/* <IsVaccinated info={info} />
+				<IsntVaccinated info={info} /> */}
 			</View>
 		</SafeAreaView>
 	);
