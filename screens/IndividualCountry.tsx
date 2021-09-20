@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import geoLocations from './geoLocations/geoLocations.json';
 import { getCountry } from '../screens/api';
 import Logo from '../components/Logo';
-
-interface State {
-  country: string;
-  colorList: string;
-  withFullVaccination: { documentsRequired: [boolean] };
-}
+import IsVaccinated from '../components/IsVaccinated';
+import IsntVaccinated from '../components/IsntVaccinated';
 
 const IndividualCountry = (country: { route: { params: string } }) => {
   let info: any, setInfo: any;
@@ -49,7 +45,9 @@ const IndividualCountry = (country: { route: { params: string } }) => {
     <SafeAreaView>
       <View style={styles.container}>
         <Logo />
-        <Text>{info.country}</Text>
+        <View style={styles.trafficLight}>
+          <Text style={styles.name}>{info.country}</Text>
+        </View>
         <Text>{info.colorList}</Text>
         <MapView
           style={styles.map}
@@ -57,31 +55,8 @@ const IndividualCountry = (country: { route: { params: string } }) => {
           region={region}
           // user location will be available to see, if location services are enabled
         />
-        <View style={styles.container}>
-          <View>
-            <Text>With Full Vaccination</Text>
-          </View>
-          <Text>
-            Days innoculated before entry{' '}
-            {
-              info.entryRequirements.withFullVaccination
-                .daysInnoculatedBeforeEntry
-            }
-          </Text>
-          <Text>
-            Covid Test required{' '}
-            {info.entryRequirements.withFullVaccination.test.maximumHoursBefore}{' '}
-            hours before travel
-          </Text>
-          <Text>Documents Required</Text>
-          <Text>
-            {info.entryRequirements.withFullVaccination.documentsRequired.map(
-              (item: string) => {
-                return <Text>{item}</Text>;
-              }
-            )}
-          </Text>
-        </View>
+        <IsVaccinated info={info} />
+        <IsntVaccinated info={info} />
       </View>
     </SafeAreaView>
   );
@@ -101,6 +76,14 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#ddd',
     borderRadius: 6
+  },
+  trafficLight: {
+    padding: 20,
+    backgroundColor: '#4d94ff',
+    borderRadius: 15
+  },
+  name: {
+    fontSize: 30
   },
   logo: {
     flex: 1,
@@ -152,7 +135,17 @@ const styles = StyleSheet.create({
     margin: 2,
     alignSelf: 'center'
   },
-  text: {}
+  infoContainer: {
+    margin: 20,
+    padding: 20,
+    backgroundColor: '#4d94ff',
+    borderRadius: 15
+  },
+  text: {
+    textAlign: 'center',
+    margin: 5,
+    fontSize: 15
+  }
 });
 
 export default IndividualCountry;
