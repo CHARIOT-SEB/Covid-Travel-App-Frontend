@@ -1,29 +1,28 @@
 import React, { createContext, useState } from 'react';
 
-// interface InitialState {
-// 	userData: {};
-// 	country: string;
-// }
-
 // create and export a new 'context'
 export const dataStore = createContext({});
 
 const dataProvider = ({ children }) => {
-	// all states that need passing should sit here
-	const [country, setCountry] = useState('');
-	const [boo, setBoo] = useState(false);
-	const [countries, setCountries] = useState([]);
-	
 
-	console.log(country, '<--------- in provider');
-	console.log(boo, '<--------- in provider');
+	// all states that need passing should sit here
+	const [countryName, setCountryName] = useState('');
+	const [countries, setCountries] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [countryInfo, setCountryInfo] = useState({});
 
 	// pass everything into 'value', so .Provider can provide everywhere in App
 	return (
-		<dataStore.Provider value={{ country, setCountry, boo, setBoo, countries, setCountries}}>
+		<dataStore.Provider
+			value={{ countries, setCountries, countryName, setCountryName, countryInfo, setCountryInfo, isLoading, setIsLoading }}
+		>
 			{children}
 		</dataStore.Provider>
 	);
 };
 
 export default dataProvider;
+
+// const [state, dispatch] = React.useReducer(reducer, initialState);
+// const value = { state, dispatch };
+// return <Store.Provider value={value as MyContextType}>{props.children}</Store.Provider>;
