@@ -1,21 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MyTrips from '../components/PastTrips';
 import Logo from '../components/Logo';
 import AccountInfo from '../components/AccountInfo';
-import { Popover, Button } from 'native-base';
+import { Popover, Button, Spinner } from 'native-base';
 import { dataStore } from '../providers/Data';
+import {
+	useFonts,
+	Oxygen_300Light,
+	Oxygen_400Regular,
+	Oxygen_700Bold,
+} from '@expo-google-fonts/oxygen';
+
 
 const Account = (props) => {
 	// const [popoverOpen, setPopoverOpen] = useState(false);
 	const nav = props.navigation;
     const {setIsLoggedIn} = useContext(dataStore)
 
+	const { isLoading, setIsLoading } = useContext(dataStore);
+
+	const [fontsLoaded] = useFonts({
+		Oxygen_300Light,
+		Oxygen_400Regular,
+		Oxygen_700Bold,
+	});
+
+	{
+		if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
+	}
+
+
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={styles.container}>
 			<ScrollView>
-				<Logo />
+				<View style={{ alignItems: 'center' }}>
+					<Logo />
+				</View>
 				<View style={styles.background}>
 					<Text style={styles.myAccount}>My Account</Text>
 					<AccountInfo />
@@ -27,10 +49,7 @@ const Account = (props) => {
 					<Popover
 						trigger={(triggerProps) => {
 							return (
-								<Button
-									style={styles.button}
-									{...triggerProps}
-								>
+								<Button style={styles.button} {...triggerProps}>
 									Log Out
 								</Button>
 							);
@@ -78,7 +97,12 @@ const Account = (props) => {
 									<Button size='sm' variant='ghost'>
 										Cancel
 									</Button>
-									<Button onPress={() => {nav.navigate('LandingPage');}} size='sm'>
+									<Button
+										onPress={() => {
+											nav.navigate('LandingPage');
+										}}
+										size='sm'
+									>
 										DELETE MY ACCOUNT
 									</Button>
 								</Button.Group>
@@ -94,22 +118,23 @@ const Account = (props) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: '#DCEFF9',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
 	background: {
-		backgroundColor: '#66b2ff',
 		margin: 10,
 		borderRadius: 15,
 	},
 	myAccount: {
+		fontFamily: 'Oxygen_700Bold',
 		textAlign: 'center',
 		marginTop: 20,
 		fontSize: 20,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
 	},
 	button: {
-		backgroundColor: '#FF3232',
+		backgroundColor: '#1D7253',
 		alignSelf: 'center',
 		margin: 20,
 		padding: 15,

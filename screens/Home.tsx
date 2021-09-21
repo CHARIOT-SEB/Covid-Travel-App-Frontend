@@ -1,24 +1,55 @@
 // react imports
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, Button } from 'react-native';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { SafeAreaView, StyleSheet, View, Text, Pressable } from 'react-native';
 import Logo from '../components/Logo';
 // file imports
 import CountryPicker from '../navigation/CountryPicker';
+// google fonts
+import { useFonts, Oxygen_400Regular } from '@expo-google-fonts/dev';
+// loading base
+import { Spinner } from 'native-base';
 
 const Home = (props: any) => {
 	const nav = props.navigation;
 
+	let [fontsLoaded] = useFonts({
+		Oxygen_400Regular,
+	});
+
+	if (!fontsLoaded) {
+		return (
+			<View style={{ flex: 1, justifyContent: 'center' }}>
+				<Spinner />
+			</View>
+		);
+	}
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.content}>
 				<Logo />
-				<Text style={styles.text}>
+				<Text
+					style={{
+						flex: 0.15,
+						fontFamily: 'Oxygen_400Regular',
+						fontSize: 18,
+						margin: 40,
+						textAlign: 'center',
+					}}
+				>
 					Up-to-date travel information for 31 countries in Europe
 				</Text>
-				<TouchableHighlight onPress={() => nav.navigate('Trips')}>
-					<Text style={styles.button}>My Trips</Text>
-				</TouchableHighlight>
+				<Pressable style={styles.button} onPress={() => nav.navigate('Trips')}>
+					<Text
+						style={{
+							fontFamily: 'Oxygen_400Regular',
+							fontSize: 20,
+							margin: 10,
+							position: 'relative',
+						}}
+					>
+						My Trips
+					</Text>
+				</Pressable>
 				<CountryPicker nav={nav} />
 			</View>
 		</SafeAreaView>
@@ -37,17 +68,14 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	text: {
-		marginTop: 100,
-		marginBottom: 10,
-		fontSize: 15,
+		flex: 0.3,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	button: {
-		width: 125,
-		paddingTop: 20,
-		paddingBottom: 20,
-		color: '#fff',
-		textAlign: 'center',
-		backgroundColor: '#5c98C0',
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#1D7253',
 		borderRadius: 10,
 	},
 });
