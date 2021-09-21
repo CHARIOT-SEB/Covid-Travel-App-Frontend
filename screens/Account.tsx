@@ -17,9 +17,7 @@ import {
 const Account = (props) => {
 	// const [popoverOpen, setPopoverOpen] = useState(false);
 	const nav = props.navigation;
-    const {setIsLoggedIn} = useContext(dataStore)
-
-	const { isLoading, setIsLoading } = useContext(dataStore);
+    const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading} = useContext(dataStore)
 
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
@@ -27,10 +25,9 @@ const Account = (props) => {
 		Oxygen_700Bold,
 	});
 
-	{
-		if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
-	}
-
+    if(!isLoggedIn) return null;
+	
+	if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
 
 	return (
 		<SafeAreaView style={styles.container}>
