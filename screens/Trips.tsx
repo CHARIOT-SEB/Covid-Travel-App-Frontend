@@ -52,6 +52,10 @@ const Trips = (props: any) => {
     });
   }, []);
 
+  // const getDate = (date: string) => {
+  //   return date.slice(0, 10).join('');
+  // };
+
   const trips = user.trips;
   console.log(trips, 'trips');
 
@@ -63,7 +67,6 @@ const Trips = (props: any) => {
       <Logo />
       <Button
         // style={styles.button}
-        colorScheme='primary'
         variant='outline'
         size='lg'
         onPress={() => nav.navigate('IndividualCountry')}
@@ -187,6 +190,7 @@ const Trips = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#DCEFF9',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
@@ -194,11 +198,9 @@ const styles = StyleSheet.create({
   myTripsContainer: {
     flex: 1,
     alignItems: 'center',
-    borderColor: 'lightgray',
-    borderWidth: 2,
     borderRadius: 15,
     padding: 10,
-    margin: 2,
+    marginVertical: 10,
     paddingHorizontal: 25
   },
   myTripsTitle: {
@@ -209,16 +211,19 @@ const styles = StyleSheet.create({
   },
   singleTrip: {
     flex: 1,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#DCEFF9',
     flexDirection: 'column',
     padding: 5,
-    margin: 10,
-    borderRadius: 10
+    margin: 5,
+    borderRadius: 10,
+    borderBottomColor: '#5c98c0',
+    borderBottomWidth: 1
   },
   countryNameContainer: {
     transform: [{ scaleX: 2 }],
     borderRadius: 120,
-    margin: 20,
+    marginHorizontal: 3,
+    marginVertical: 8,
     width: 70,
     height: 70,
     alignItems: 'center',
@@ -237,13 +242,15 @@ const styles = StyleSheet.create({
   },
   listItem: {
     flexDirection: 'row',
-    paddingVertical: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
     justifyContent: 'space-between'
   },
   dateContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 5
+    paddingVertical: 5,
+    paddingHorizontal: 15
   },
   button: {
     backgroundColor: '#4d94ff',
