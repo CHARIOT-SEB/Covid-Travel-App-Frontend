@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Text,
   View,
@@ -18,28 +18,42 @@ import {
   Oxygen_700Bold
 } from '@expo-google-fonts/oxygen';
 import { dataStore } from '../providers/Data';
+import { createUser } from '../screens/api';
 
 const userSchema = yup.object({
   name: yup.string().required(),
   email: yup.string().required().email(),
   password: yup.string().min(4).max(10).required()
-  // can do a .matches(takes a regex for password rules)
-  // can do a .test(takes 3 args, name of func, message to user, function to test input)
 });
-const formComponent = () => {
-  const [user, setUser] = useState({
-    name: 'Bob',
-    email: 'bob@cat.com',
-    password: 'ghj'
-  });
-  const { isLoading, setIsLoading } = useContext(dataStore);
 
+const formComponent = () => {
+  //states from usecontext
+  const { isLoading, setIsLoading } = useContext(dataStore);
+  const { user, setUser } = useContext(dataStore);
+  //internal states
+  const [formSubmit, setFormSubmit] = useState(false);
+  //fonts
   const [fontsLoaded] = useFonts({
     Oxygen_300Light,
     Oxygen_400Regular,
     Oxygen_700Bold
   });
 
+  useEffect(() => {
+    signUpUser(userInfo);
+  }, [formSubmit]);
+
+  // function to set new user from form
+  const signUpUser = (userInfo: object) => {
+    setIsLoading(true);
+    createUser(userInfo).then((response) => {
+      const newUser = response.user;
+      setUser(newUser);
+      setIsLoading(false);
+    });
+  };
+
+  // spinner to wait for loading
   {
     if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
   }
@@ -50,7 +64,8 @@ const formComponent = () => {
         initialValues={{ name: '', email: '', password: '' }}
         validationSchema={userSchema}
         onSubmit={(values, actions) => {
-          setUser(values);
+          setFormSubmit(true);
+          signUpUser(values);
           actions.resetForm();
         }}
       >
