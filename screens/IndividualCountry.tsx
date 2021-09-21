@@ -8,6 +8,7 @@ import Logo from '../components/Logo';
 import IsVaccinated from '../components/IsVaccinated';
 import IsntVaccinated from '../components/IsntVaccinated';
 import { dataStore } from '../providers/Data';
+import { Spinner } from 'native-base';
 
 // country: { route: { params: string } }
 
@@ -37,15 +38,33 @@ const IndividualCountry = () => {
 	// 		return;
 	// 	}
 	// });
-
-	useEffect(() => {
-		getCountry(mapArea).then((countryInfo) => {
-			setInfo(countryInfo);
-		});
-		setRegion(region);
+    
+  useEffect(() => {
+		setIsLoading(true);
+		getCountry(mapArea)
+			.then((country: any) => {
+				setInfo(country);
+				setRegion({
+					latitude: country.geoLocation.latitude,
+					longitude: country.geoLocation.longitude,
+					latitudeDelta: country.geoLocation.latitudeDelta,
+					longitudeDelta: country.geoLocation.longitudeDelta,
+				});
+			})
+			.then(() => {
+				setIsLoading(false);
+			});
 	}, [country]);
 
 	if (!info.country) return null;
+    
+ if (isLoading) {
+	return (
+		<View style={{ flex: 1, justifyContent: 'center' }}>
+			<Spinner />
+		</View>
+    }
+  }
 
 	return (
 		<SafeAreaView>
@@ -67,6 +86,27 @@ const IndividualCountry = () => {
 		</SafeAreaView>
 	);
 };
+
+// return (
+// 	<SafeAreaView>
+// 		<View style={styles.container}>
+// 			<Logo />
+// 			<View style={styles.trafficLight}>
+// 				<Text style={styles.name}>{info.country}</Text>
+// 			</View>
+// 			<Text>{info.colorList}</Text>
+// 			<MapView
+// 				style={styles.map}
+// 				showsUserLocation={true}
+// 				region={region}
+// 				// user location will be available to see, if location services are enabled
+// 			/>
+// 			<IsVaccinated info={info} />
+// 			<IsntVaccinated info={info} />
+// 		</View>
+// 	</SafeAreaView>
+// );
+// };
 
 const styles = StyleSheet.create({
 	container: {
@@ -151,6 +191,15 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		margin: 5,
 		fontSize: 15,
+	},
+	loading: {
+		position: 'absolute',
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 });
 

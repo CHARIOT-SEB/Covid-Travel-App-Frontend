@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+const logo = require('../logo.png');
 
 const Logo = () => {
 	return (
-		<View style={styles.logoContainer}>
-			<Text style={styles.logo}>COROAMER</Text>
+		<View>
+			<Image source={logo} style={{ width: 150, height: 50 }} />
 		</View>
 	);
 };

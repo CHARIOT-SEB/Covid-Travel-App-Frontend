@@ -2,8 +2,15 @@
 
 import 'react-native-gesture-handler';
 // react imports
-import React, { useEffect, useState, useContext } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+
+import React, { useEffect, useState } from 'react';
+import {
+	View,
+	Text,
+	StyleSheet,
+	Button,
+	TouchableHighlight,
+} from 'react-native';
 // file imports
 import { Picker } from '@react-native-picker/picker';
 import { getCountries } from '../screens/api';
@@ -47,12 +54,16 @@ function CountryPicker(props: any) {
 					return <Picker.Item key={country} label={country} value={country} />;
 				})}
 			</Picker>
-			<Button title='Go' onPress={() => nav.navigate('Country', country)} />
+			<TouchableHighlight onPress={() => nav.navigate('Country', country)}>
+				<Text style={styles.button}>Go</Text>
+			</TouchableHighlight>
 		</View>
 	);
 }
 
 export default CountryPicker;
+
+const GREY = '#9E9E9E';
 
 // Some default styles
 const styles = StyleSheet.create({
@@ -68,7 +79,16 @@ const styles = StyleSheet.create({
 		marginVertical: 30,
 		width: 300,
 		padding: 10,
+	},
+	button: {
+		width: 125,
+		paddingTop: 20,
+		paddingBottom: 20,
+		color: '#fff',
+		textAlign: 'center',
+		backgroundColor: '#00A676',
+		borderRadius: 10,
 		borderWidth: 1,
-		borderColor: '#666',
+		borderColor: '#fff',
 	},
 });
