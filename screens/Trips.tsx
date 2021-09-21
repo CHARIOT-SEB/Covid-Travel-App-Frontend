@@ -4,18 +4,17 @@ import {
   Text,
   View,
   StyleSheet,
-  Button,
   TouchableOpacity,
   FlatList
 } from 'react-native';
-
+import { Button, Spinner } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import Logo from '../components/Logo';
 import { getUser } from './api';
 const Trips = (props: any) => {
-  // user state will come from App or SignUp and be passed in as a prop?
-
+  const nav = props.navigation;
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState({
     fullName: 'Jane Smith',
     email: 'jsmith@google.com',
@@ -35,35 +34,45 @@ const Trips = (props: any) => {
     pastTrips: []
   });
 
-  const nav = props.navigation;
   // password and email come from props from the login page?
 
-  const email = 'js@google.com';
-  const password = 'password';
+  const userObj = {
+    email: 'rc@sadballoons.com',
+    password: 'sadBalloons'
+  };
 
   useEffect(() => {
-    // setIsLoading(true);
+    setIsLoading(true);
 
-    getUser(email, password).then((user) => {
-      console.log(user, 'in get');
-      setUser(user);
-      // setIsLoading(false);
+    getUser(userObj.email, userObj).then((response) => {
+      const newUser = response.user;
+      console.log(newUser, 'response in get');
+      setUser(newUser);
+      setIsLoading(false);
     });
-  }, [user]);
+  }, []);
 
-  console.log(user, 'userstate');
+  // const getDate = (date: string) => {
+  //   return date.slice(0, 10).join('');
+  // };
 
-  const trips: any = user.trips;
+  const trips = user.trips;
+  console.log(trips, 'trips');
 
+  {
+    if (isLoading) return <Spinner color='blue' />;
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Logo />
-      <TouchableOpacity
-        style={styles.button}
+      <Button
+        // style={styles.button}
+        variant='outline'
+        size='lg'
         onPress={() => nav.navigate('IndividualCountry')}
       >
         <Text>Check Country</Text>
-      </TouchableOpacity>
+      </Button>
 
       <View style={styles.myTripsContainer}>
         <Text style={styles.myTripsTitle}>My Trips</Text>
@@ -92,13 +101,13 @@ const Trips = (props: any) => {
 
               {/* date going and returning */}
               <View style={styles.dateContainer}>
-                <AntDesign name="calendar" size={30} color="grey" />
+                <AntDesign name='calendar' size={30} color='grey' />
                 <Text style={[styles.listItem, styles.itemText]}>
                   Date Going: {item.dateGoing}
                 </Text>
               </View>
               <View style={styles.dateContainer}>
-                <AntDesign name="calendar" size={30} color="grey" />
+                <AntDesign name='calendar' size={30} color='grey' />
                 <Text style={[styles.listItem, styles.itemText]}>
                   {' '}
                   Date Returning: {item.dateReturning}
@@ -121,9 +130,9 @@ const Trips = (props: any) => {
               {/* test required? */}
               <View style={styles.listItem}>
                 <MaterialCommunityIcons
-                  name="test-tube"
+                  name='test-tube'
                   size={30}
-                  color="grey"
+                  color='grey'
                 />
                 <Text style={styles.itemText}> Test Required </Text>
                 <Ionicons
@@ -159,16 +168,16 @@ const Trips = (props: any) => {
 
               {/* Docs required? */}
               <View style={styles.listItem}>
-                <AntDesign name="filetext1" size={30} color="grey" />
+                <AntDesign name='filetext1' size={30} color='grey' />
                 <Text style={styles.itemText}> Docs Required </Text>
                 <Ionicons
                   name={
-                    item.docsRequired
+                    item.extraDocsRequired
                       ? 'md-checkmark-circle'
                       : 'md-close-circle'
                   }
                   size={25}
-                  color={item.docsRequired ? 'green' : 'crimson'}
+                  color={item.extraDocsRequired ? 'green' : 'crimson'}
                 />
               </View>
             </View>
@@ -181,6 +190,7 @@ const Trips = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#DCEFF9',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
@@ -188,10 +198,9 @@ const styles = StyleSheet.create({
   myTripsContainer: {
     flex: 1,
     alignItems: 'center',
-    borderColor: 'lightgray',
-    borderWidth: 2,
     borderRadius: 15,
-    padding: 5,
+    padding: 10,
+    marginVertical: 10,
     paddingHorizontal: 25
   },
   myTripsTitle: {
@@ -202,16 +211,19 @@ const styles = StyleSheet.create({
   },
   singleTrip: {
     flex: 1,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#DCEFF9',
     flexDirection: 'column',
-    padding: 15,
-    margin: 10,
-    borderRadius: 10
+    padding: 5,
+    margin: 5,
+    borderRadius: 10,
+    borderBottomColor: '#5c98c0',
+    borderBottomWidth: 1
   },
   countryNameContainer: {
     transform: [{ scaleX: 2 }],
     borderRadius: 120,
-    margin: 20,
+    marginHorizontal: 3,
+    marginVertical: 8,
     width: 70,
     height: 70,
     alignItems: 'center',
@@ -219,7 +231,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   countryName: {
-    fontSize: 16,
+    fontSize: 14,
     textTransform: 'uppercase',
     color: 'black',
     transform: [{ scaleX: 0.5 }]
@@ -230,13 +242,15 @@ const styles = StyleSheet.create({
   },
   listItem: {
     flexDirection: 'row',
-    paddingVertical: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
     justifyContent: 'space-between'
   },
   dateContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 5
+    paddingVertical: 5,
+    paddingHorizontal: 15
   },
   button: {
     backgroundColor: '#4d94ff',

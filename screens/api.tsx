@@ -14,9 +14,8 @@ export const getCountry = async (countryName: string) => {
   return data.country;
 };
 
-export const getUser = async (email: string, password: string) => {
-  console.log(password, 'pass');
-  const data = await coromerApi.post(`/users/${email}`, password);
+export const getUser = async (email: string, userObj: object) => {
+  const { data } = await coromerApi.post(`/users/${email}`, userObj);
   console.log(data, 'data');
   return data;
 };
