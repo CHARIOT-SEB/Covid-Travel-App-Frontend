@@ -11,7 +11,7 @@ const Account = (props) => {
 	const nav = props.navigation;
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={styles.container}>
 			<ScrollView>
 				<Logo />
 				<View style={styles.background}>
@@ -89,22 +89,23 @@ const Account = (props) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: '#DCEFF9',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
 	background: {
-		backgroundColor: '#66b2ff',
 		margin: 10,
 		borderRadius: 15,
 	},
 	myAccount: {
+		fontFamily: 'Oxygen_700Bold',
 		textAlign: 'center',
 		marginTop: 20,
 		fontSize: 20,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
 	},
 	button: {
-		backgroundColor: '#FF3232',
+		backgroundColor: '#1D7253',
 		alignSelf: 'center',
 		margin: 20,
 		padding: 15,
