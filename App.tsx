@@ -16,7 +16,9 @@ import Account from './screens/Account';
 import { useState } from 'react';
 
 const App = () => {
+
 	const [country, setCountry] = useState({});
+
 	return (
 		<SafeAreaProvider>
 			<NativeBaseProvider>
@@ -30,6 +32,7 @@ const App = () => {
 					<MyTabs />
 				</View>
 				<StatusBar style='auto' />
+
 				<Modal visible={false}>
 					<Trips />
 				</Modal>
@@ -42,6 +45,7 @@ const App = () => {
 				<Modal visible={false}>
 					<Account />
 				</Modal>
+
 			</NativeBaseProvider>
 		</SafeAreaProvider>
 	);

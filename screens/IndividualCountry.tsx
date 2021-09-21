@@ -7,6 +7,7 @@ import { getCountry } from '../screens/api';
 import Logo from '../components/Logo';
 import IsVaccinated from '../components/IsVaccinated';
 import IsntVaccinated from '../components/IsntVaccinated';
+
 import { Spinner } from 'native-base';
 const IndividualCountry = (country: { route: { params: string } }) => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +21,7 @@ const IndividualCountry = (country: { route: { params: string } }) => {
 	});
 
 	let mapArea = country.route.params;
+
 
 	//   const geo = Object.entries(geoLocations).find((arr) => {
 	//     if (arr[0] === mapArea) {
@@ -44,6 +46,7 @@ const IndividualCountry = (country: { route: { params: string } }) => {
 	}, [country]);
 
 	console.log(info);
+
 
 	if (isLoading) {
 		return (
@@ -72,6 +75,7 @@ const IndividualCountry = (country: { route: { params: string } }) => {
 			</View>
 		</SafeAreaView>
 	);
+
 };
 
 const styles = StyleSheet.create({
@@ -83,6 +87,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		width: 370,
 		height: 500,
+
 
 		alignItems: 'center',
 		borderWidth: 3,
@@ -167,6 +172,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
+
 });
 
 export default IndividualCountry;
