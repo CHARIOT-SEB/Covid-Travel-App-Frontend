@@ -8,13 +8,15 @@ import Logo from '../components/Logo';
 import IsVaccinated from '../components/IsVaccinated';
 import IsntVaccinated from '../components/IsntVaccinated';
 import { dataStore } from '../providers/Data';
+
 // country: { route: { params: string } }
+
 const IndividualCountry = () => {
 	// destructure from dataStore to bring in state to be used
 	const { country, boo } = useContext(dataStore);
 
 	console.log(country, '<--------- in individualCountry');
-	// console.log(boo, '<--------- in individualCountry also');
+	console.log(boo, '<--------- in individualCountry also');
 
 	const [info, setInfo] = useState({});
 	const [region, setRegion] = useState({

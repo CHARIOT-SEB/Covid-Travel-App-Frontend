@@ -13,14 +13,14 @@ const dataProvider = ({ children }) => {
 	const [country, setCountry] = useState('');
 	const [boo, setBoo] = useState(false);
 	const [countries, setCountries] = useState([]);
+	
 
 	console.log(country, '<--------- in provider');
+	console.log(boo, '<--------- in provider');
 
 	// pass everything into 'value', so .Provider can provide everywhere in App
 	return (
-		<dataStore.Provider
-			value={{ country, setCountry, boo, setBoo, countries, setCountries}}
-		>
+		<dataStore.Provider value={{ country, setCountry, boo, setBoo, countries, setCountries}}>
 			{children}
 		</dataStore.Provider>
 	);

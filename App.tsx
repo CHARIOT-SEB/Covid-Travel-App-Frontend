@@ -34,18 +34,6 @@ const App = () => {
 						<MyTabs />
 					</View>
 					<StatusBar style='auto' />
-					<Modal visible={false}>
-						<Trips />
-					</Modal>
-					<Modal visible={false}>
-						<IndividualCountry />
-					</Modal>
-					<Modal visible={false}>
-						<Home />
-					</Modal>
-					<Modal visible={false}>
-						<Account />
-					</Modal>
 				</NativeBaseProvider>
 			</DataProvider>
 		</SafeAreaProvider>

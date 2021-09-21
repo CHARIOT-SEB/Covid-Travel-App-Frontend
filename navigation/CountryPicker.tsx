@@ -11,7 +11,7 @@ import { dataStore } from '../providers/Data';
 
 function CountryPicker(props: any) {
 	// destructuring each state from the dataStore to be used
-	const { country, setCountry } = useContext(dataStore);
+	const { country, setCountry  } = useContext(dataStore);
 	const { setBoo } = useContext(dataStore);
 	const { countries, setCountries } = useContext(dataStore);
 
