@@ -3,12 +3,11 @@
 import 'react-native-gesture-handler';
 // react imports
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
 	View,
 	Text,
 	StyleSheet,
-	Button,
 	TouchableHighlight,
 } from 'react-native';
 // file imports
@@ -18,14 +17,11 @@ import { dataStore } from '../providers/Data';
 
 function CountryPicker(props: any) {
 	// destructuring each state from the dataStore to be used
-	const { country, setCountry  } = useContext(dataStore);
-	const { setBoo } = useContext(dataStore);
+	const { countryName, setCountryName } = useContext(dataStore);
 	const { countries, setCountries } = useContext(dataStore);
-
+	
 
 	const nav: any = props.nav;
-	// const [country, setCountry] = useState('');
-	// const [countries, setCountries] = useState([]);
 
 	//   set the countries from api
 	useEffect(() => {
@@ -40,11 +36,9 @@ function CountryPicker(props: any) {
 
 			<Text>Choose here...</Text>
 			<Picker
-				selectedValue={country}
+				selectedValue={countryName}
 				onValueChange={(value, index) => {
-					setCountry(value);
-					// setData(value);
-					setBoo(true);
+					setCountryName(value);
 				}}
 				mode='dropdown' // Android only
 				style={styles.picker}
@@ -54,7 +48,7 @@ function CountryPicker(props: any) {
 					return <Picker.Item key={country} label={country} value={country} />;
 				})}
 			</Picker>
-			<TouchableHighlight onPress={() => nav.navigate('Country', country)}>
+			<TouchableHighlight onPress={() => nav.navigate('Country')}>
 				<Text style={styles.button}>Go</Text>
 			</TouchableHighlight>
 		</View>
