@@ -4,22 +4,17 @@ import 'react-native-gesture-handler';
 // react imports
 
 import React, { useEffect, useState, useContext } from 'react';
-import {
-	View,
-	Text,
-	StyleSheet,
-	TouchableHighlight,
-} from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 // file imports
 import { Picker } from '@react-native-picker/picker';
 import { getCountries } from '../screens/api';
 import { dataStore } from '../providers/Data';
+import { useFonts, Oxygen_400Regular } from '@expo-google-fonts/dev';
 
 function CountryPicker(props: any) {
 	// destructuring each state from the dataStore to be used
 	const { countryName, setCountryName } = useContext(dataStore);
 	const { countries, setCountries } = useContext(dataStore);
-	
 
 	const nav: any = props.nav;
 
@@ -44,13 +39,22 @@ function CountryPicker(props: any) {
 				style={styles.picker}
 			>
 				<Picker.Item label='Please choose a country' value='Unknown' />
-				{countries.map((country) => {
+				{countries.map(country => {
 					return <Picker.Item key={country} label={country} value={country} />;
 				})}
 			</Picker>
-			<TouchableHighlight onPress={() => nav.navigate('Country')}>
-				<Text style={styles.button}>Go</Text>
-			</TouchableHighlight>
+			<Pressable style={styles.button} onPress={() => nav.navigate('Country')}>
+				<Text
+					style={{
+						fontFamily: 'Oxygen_400Regular',
+						margin: 20,
+						fontSize: 20,
+						position: 'relative',
+					}}
+				>
+					Go
+				</Text>
+			</Pressable>
 		</View>
 	);
 }
@@ -67,7 +71,10 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	text: {
-		fontSize: 24,
+		fontFamily: 'Oxygen_400Regular',
+		fontSize: 18,
+		margin: 40,
+		textAlign: 'center',
 	},
 	picker: {
 		marginVertical: 30,
@@ -75,14 +82,10 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	button: {
-		width: 125,
-		paddingTop: 20,
-		paddingBottom: 20,
-		color: '#fff',
-		textAlign: 'center',
-		backgroundColor: '#00A676',
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#1D7253',
 		borderRadius: 10,
-		borderWidth: 1,
-		borderColor: '#fff',
+		position: 'relative',
 	},
 });
