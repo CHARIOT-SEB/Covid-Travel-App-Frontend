@@ -1,5 +1,5 @@
 // react imports
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Pressable } from 'react-native';
 import Logo from '../components/Logo';
 // file imports
@@ -8,13 +8,17 @@ import CountryPicker from '../navigation/CountryPicker';
 import { useFonts, Oxygen_400Regular } from '@expo-google-fonts/dev';
 // loading base
 import { Spinner } from 'native-base';
+import { dataStore } from '../providers/Data';
 
 const Home = (props: any) => {
+    const {isLoggedIn} = useContext(dataStore)
 	const nav = props.navigation;
 
 	let [fontsLoaded] = useFonts({
 		Oxygen_400Regular,
 	});
+
+    if(!isLoggedIn) return null;
 
 	if (!fontsLoaded) {
 		return (

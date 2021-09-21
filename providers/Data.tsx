@@ -13,9 +13,9 @@ const dataProvider = ({ children }) => {
 	[countries, setCountries] = useState([]);
 	[isLoading, setIsLoading] = useState(false);
 	[countryInfo, setCountryInfo] = useState({});
-  [user, setUser] = useState({});
-  [loginInfo, setLoginInfo] = useState({});
-
+    [user, setUser] = useState({});
+    [loginInfo, setLoginInfo] = useState({});
+ 
 	// pass everything into 'value', so .Provider can provide everywhere in App
 	return (
 		<dataStore.Provider
