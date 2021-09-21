@@ -14,7 +14,7 @@ const LandingPage = () => {
     console.log(isLoggedIn, "Logged In?")
 
 
-    if(!isLoggedIn) return null;
+    if(isLoggedIn) return null;
 
 	return (
 		<View style={styles.formContainer}>
