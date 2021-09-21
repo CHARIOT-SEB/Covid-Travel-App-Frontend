@@ -47,7 +47,8 @@ function CountryPicker(props: any) {
 				<Text
 					style={{
 						fontFamily: 'Oxygen_400Regular',
-						margin: 20,
+						color: '#fff',
+						margin: 10,
 						fontSize: 20,
 						position: 'relative',
 					}}
@@ -82,10 +83,10 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	button: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#1D7253',
+		elevation: 8,
+		backgroundColor: '#009688',
 		borderRadius: 10,
-		position: 'relative',
+		paddingVertical: 1,
+		paddingHorizontal: 25,
 	},
 });
