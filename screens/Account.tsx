@@ -13,11 +13,10 @@ import {
 	Oxygen_700Bold,
 } from '@expo-google-fonts/oxygen';
 
-
 const Account = (props) => {
 	// const [popoverOpen, setPopoverOpen] = useState(false);
 	const nav = props.navigation;
-    const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading} = useContext(dataStore)
+	const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading } = useContext(dataStore);
 
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
@@ -25,8 +24,8 @@ const Account = (props) => {
 		Oxygen_700Bold,
 	});
 
-    if(!isLoggedIn) return null;
-	
+	if (!isLoggedIn) return null;
+
 	if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
 
 	return (
@@ -62,10 +61,13 @@ const Account = (props) => {
 									<Button size='sm' variant='ghost'>
 										Cancel
 									</Button>
-									<Button onPress={() => {
-                                        setIsLoggedIn(false)
-                                        nav.navigate('LandingPage')
-                                        }} size='sm'>
+									<Button
+										onPress={() => {
+											setIsLoggedIn(false);
+											nav.navigate('LandingPage');
+										}}
+										size='sm'
+									>
 										Log Out
 									</Button>
 								</Button.Group>
