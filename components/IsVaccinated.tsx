@@ -25,7 +25,7 @@ const IsVaccinated = () => {
 			<Text>Documents Required for entry: -</Text>
 			<Text>
 				{countryInfo.entryRequirements.withFullVaccination.documentsRequired.map((item: string) => {
-					return <Text>{item}</Text>;
+					return <Text  key={item}>{item}</Text>;
 				})}
 			</Text>
 		</View>

@@ -25,7 +25,7 @@ const IsntVaccinated = () => {
 					<Text>
 						{countryInfo.entryRequirements.withoutFullVaccination.documentsRequired.map(
 							(item: string) => {
-								return <Text>{item}</Text>;
+								return <Text key={item}>{item}</Text>;
 							}
 						)}
 					</Text>
