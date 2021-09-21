@@ -5,11 +5,7 @@ import Logo from '../components/Logo';
 // file imports
 import CountryPicker from '../navigation/CountryPicker';
 // google fonts
-import {
-	useFonts,
-	Oxygen_400Regular,
-	Oxygen_300Light,
-} from '@expo-google-fonts/dev';
+import { useFonts, Oxygen_400Regular } from '@expo-google-fonts/dev';
 // loading base
 import { Spinner } from 'native-base';
 

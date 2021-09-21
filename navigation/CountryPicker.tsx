@@ -46,7 +46,7 @@ function CountryPicker(props: any) {
 			<Pressable style={styles.button} onPress={() => nav.navigate('Country')}>
 				<Text
 					style={{
-						fontFamily: 'Oxygen_400Italic',
+						fontFamily: 'Oxygen_400Regular',
 						margin: 20,
 						fontSize: 20,
 						position: 'relative',
