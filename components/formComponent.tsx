@@ -28,8 +28,8 @@ const userSchema = yup.object({
 
 const formComponent = () => {
   //states from usecontext
-  const { isLoading, setIsLoading } = useContext(dataStore);
-  const { user, setUser } = useContext(dataStore);
+  const { isLoading, setIsLoading, user, setUser, setIsLoggedIn } = useContext(dataStore);
+  const [signupDetails, setSignupDetails] = useState({name: '', email:'', password: ''})
   //internal states
   const [formSubmit, setFormSubmit] = useState(false);
   //fonts
@@ -39,18 +39,19 @@ const formComponent = () => {
     Oxygen_700Bold
   });
 
-  useEffect(() => {
-    signUpUser(userInfo);
-  }, [formSubmit]);
-
   // function to set new user from form
   const signUpUser = (userInfo: object) => {
     setIsLoading(true);
     createUser(userInfo).then((response) => {
       const newUser = response.user;
       setUser(newUser);
+      setIsLoggedIn(true);
+      //Redirect to home page
       setIsLoading(false);
-    });
+    })
+    .catch((err: object) => {
+        //sorry, email taken...
+    })
   };
 
   // spinner to wait for loading
@@ -70,7 +71,7 @@ const formComponent = () => {
         }}
       >
         {(props) => (
-          <View>
+            <View>
             <TextInput
               style={styles.input}
               placeholder='name'
