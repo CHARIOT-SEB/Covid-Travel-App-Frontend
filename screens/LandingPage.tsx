@@ -1,12 +1,20 @@
 //react imports
 import { Formik } from 'formik';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, Modal } from 'react-native';
+import { dataStore } from '../providers/Data';
 // screen imports
 import SignUpForm from '../screens/SignUpForm';
 
+
 const LandingPage = () => {
 	const [signUp, setSignUp] = useState(false);
+    const {isLoggedIn, setIsLoggedIn} = useContext(dataStore);
+
+    console.log(isLoggedIn, "Logged In?")
+
+
+    if(isLoggedIn) return null;
 
 	return (
 		<View style={styles.formContainer}>

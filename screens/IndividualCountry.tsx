@@ -10,7 +10,10 @@ import { Spinner } from 'native-base';
 import { dataStore } from '../providers/Data';
 
 const IndividualCountry = () => {
-	const { countryName, countryInfo, setCountryInfo, isLoading, setIsLoading } = useContext(dataStore);
+
+  const { countryName, countryInfo, setCountryInfo, isLoading, setIsLoading, isLoggedIn } =
+    useContext(dataStore);
+
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -23,7 +26,9 @@ const IndividualCountry = () => {
 			});
 	}, [countryName]);
 
-	if (!countryInfo.country) return null;
+
+  if (!isLoggedIn) return null;
+
 
 	if (isLoading) {
 		return (

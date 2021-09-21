@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
 	Text,
 	View,
@@ -10,9 +10,14 @@ import {
 } from 'react-native';
 import FormComponent from '../components/formComponent';
 import Logo from '../components/Logo';
+import { dataStore } from '../providers/Data';
 
 const SignUpForm = (props: any) => {
 	const nav = props.navigation;
+    const {isLoggedIn} = useContext(dataStore);
+
+    if(isLoggedIn) return null;
+    
 	return (
 		<SafeAreaView>
 			<View>
