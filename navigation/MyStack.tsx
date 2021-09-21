@@ -18,10 +18,7 @@ const MyStack = () => {
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Trips" component={Trips} />
-          <Stack.Screen
-            name="IndividualCountry"
-            component={IndividualCountry}
-          />
+          <Stack.Screen name="Country" component={IndividualCountry}/>
         </Stack.Navigator>
       </NavigationContainer>
     </View>
