@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState, useContext} from 'react';
+import { View, Text, StyleSheet, ScrollView, } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import geoLocations from './geoLocations/geoLocations.json';
@@ -7,19 +7,11 @@ import { getCountry } from '../screens/api';
 import Logo from '../components/Logo';
 import IsVaccinated from '../components/IsVaccinated';
 import IsntVaccinated from '../components/IsntVaccinated';
-import { dataStore } from '../providers/Data';
 import { Spinner } from 'native-base';
-
-// country: { route: { params: string } }
+import { dataStore } from '../providers/Data';
 
 const IndividualCountry = () => {
-	// destructure from dataStore to bring in state to be used
-	const { country, boo } = useContext(dataStore);
 
-	console.log(country, '<--------- in individualCountry');
-	console.log(boo, '<--------- in individualCountry also');
-
-	const [info, setInfo] = useState({});
 	const [region, setRegion] = useState({
 		latitude: 47.4256,
 		longitude: 2.6054,
@@ -27,23 +19,15 @@ const IndividualCountry = () => {
 		longitudeDelta: 0.25,
 	});
 
-	let mapArea = country.route.params;
+	const { countryName, setCountryName } = useContext(dataStore);
+	const { countryInfo, setCountryInfo } = useContext(dataStore);
+	const { isLoading, setIsLoading } = useContext(dataStore);
 
-	// const geo = Object.entries(geoLocations).find((arr) => {
-	// 	if (arr[0] === mapArea) {
-	// 		newGeo.latitude = arr[1].latitude;
-	// 		newGeo.longitude = arr[1].longitude;
-	// 		newGeo.latitudeDelta = arr[1].latitudeDelta;
-	// 		newGeo.longitudeDelta = arr[1].longitudeDelta;
-	// 		return;
-	// 	}
-	// });
-    
-  useEffect(() => {
+	useEffect(() => {
 		setIsLoading(true);
-		getCountry(mapArea)
+		getCountry(countryName)
 			.then((country: any) => {
-				setInfo(country);
+				setCountryInfo(country);
 				setRegion({
 					latitude: country.geoLocation.latitude,
 					longitude: country.geoLocation.longitude,
@@ -54,59 +38,38 @@ const IndividualCountry = () => {
 			.then(() => {
 				setIsLoading(false);
 			});
-	}, [country]);
+	}, [countryName]);
 
-	if (!info.country) return null;
-    
- if (isLoading) {
-	return (
-		<View style={{ flex: 1, justifyContent: 'center' }}>
-			<Spinner />
-		</View>
-    }
-  }
+	if (!countryInfo.country) return null;
+
+	if (isLoading) {
+		return (
+			<View style={{ flex: 1, justifyContent: 'center' }}>
+				<Spinner />
+			</View>
+		);
+	}
 
 	return (
 		<SafeAreaView>
 			<View style={styles.container}>
 				<Logo />
 				<View style={styles.trafficLight}>
-					<Text style={styles.name}>{info.country}</Text>
+					<Text style={styles.name}>{countryInfo.country}</Text>
 				</View>
-				<Text>{info.colorList}</Text>
+				<Text>{countryInfo.colorList}</Text>
 				<MapView
 					style={styles.map}
 					showsUserLocation={true}
 					region={region}
 					// user location will be available to see, if location services are enabled
 				/>
-				<IsVaccinated info={info} />
-				<IsntVaccinated info={info} />
+				<IsVaccinated countryInfo={countryInfo} />
+				<IsntVaccinated countryInfo={countryInfo} />
 			</View>
 		</SafeAreaView>
 	);
 };
-
-// return (
-// 	<SafeAreaView>
-// 		<View style={styles.container}>
-// 			<Logo />
-// 			<View style={styles.trafficLight}>
-// 				<Text style={styles.name}>{info.country}</Text>
-// 			</View>
-// 			<Text>{info.colorList}</Text>
-// 			<MapView
-// 				style={styles.map}
-// 				showsUserLocation={true}
-// 				region={region}
-// 				// user location will be available to see, if location services are enabled
-// 			/>
-// 			<IsVaccinated info={info} />
-// 			<IsntVaccinated info={info} />
-// 		</View>
-// 	</SafeAreaView>
-// );
-// };
 
 const styles = StyleSheet.create({
 	container: {
