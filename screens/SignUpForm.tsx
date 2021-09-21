@@ -1,70 +1,94 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
-	Text,
-	View,
-	StyleSheet,
-	SafeAreaView,
-	TouchableOpacity,
-	TextInput,
-	Button,
+  Text,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+  TextInput,
+  Button
 } from 'react-native';
 import FormComponent from '../components/formComponent';
 import Logo from '../components/Logo';
+import { Spinner } from 'native-base';
+import {
+  useFonts,
+  Oxygen_300Light,
+  Oxygen_400Regular,
+  Oxygen_700Bold
+} from '@expo-google-fonts/oxygen';
+import { dataStore } from '../providers/Data';
 
 const SignUpForm = (props: any) => {
-	const nav = props.navigation;
-	return (
-		<SafeAreaView>
-			<View>
-				<Logo />
-			</View>
+  const [fontsLoaded] = useFonts({
+    Oxygen_300Light,
+    Oxygen_400Regular,
+    Oxygen_700Bold
+  });
+  const { isLoading, setIsLoading } = useContext(dataStore);
+  const nav = props.navigation;
 
-			<FormComponent />
-			<View style={styles.container}>
-				<TouchableOpacity
-					style={styles.btn}
-					onPress={() => {
-						nav.navigation('Home');
-					}}
-				>
-					<Text style={styles.btnText}> Back </Text>
-				</TouchableOpacity>
-			</View>
-		</SafeAreaView>
-	);
+  {
+    if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.logoBox}>
+        <Logo style={styles.logo} />
+      </View>
+
+      <FormComponent />
+      <View style={styles.formContainer}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {
+            nav.navigation('Home');
+          }}
+        >
+          <Text style={styles.btnText}> Back </Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-	container: {
-		alignSelf: 'center',
-		width: 300,
-		alignItems: 'center',
-		borderWidth: 3,
-		borderColor: '#ddd',
-		borderRadius: 6,
-	},
-	logo: {
-		height: 10,
-		padding: 20,
-		margin: 10,
-		borderRadius: 80,
-		alignItems: 'stretch',
-		backgroundColor: '#5f9ea0',
-	},
-	btn: {
-		borderRadius: 8,
-		marginVertical: 8,
-		paddingVertical: 14,
-		paddingHorizontal: 50,
-		backgroundColor: '#cd5c5c',
-	},
-	btnText: {
-		color: 'white',
-		fontWeight: 'bold',
-		textTransform: 'uppercase',
-		fontSize: 16,
-		textAlign: 'center',
-	},
+  container: {
+    flex: 1,
+    backgroundColor: '#DCEFF9',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  formContainer: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DCEFF9'
+  },
+  logoBox: {
+    height: 30,
+    padding: 10,
+    margin: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  logo: {
+    height: 35
+  },
+  btn: {
+    borderRadius: 8,
+    marginVertical: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#1D7253'
+  },
+  btnText: {
+    color: 'white',
+    fontFamily: 'Oxygen_700Bold',
+    textTransform: 'uppercase',
+    fontSize: 12,
+    textAlign: 'center'
+  }
 });
 
 export default SignUpForm;
