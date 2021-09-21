@@ -2,16 +2,23 @@
 
 import 'react-native-gesture-handler';
 // react imports
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 // file imports
 import { Picker } from '@react-native-picker/picker';
 import { getCountries } from '../screens/api';
+import { dataStore } from '../providers/Data';
 
 function CountryPicker(props: any) {
+	// destructuring each state from the dataStore to be used
+	const { country, setCountry } = useContext(dataStore);
+	const { setBoo } = useContext(dataStore);
+	const { countries, setCountries } = useContext(dataStore);
+
+
 	const nav: any = props.nav;
-	const [country, setCountry] = useState('');
-	const [countries, setCountries] = useState([]);
+	// const [country, setCountry] = useState('');
+	// const [countries, setCountries] = useState([]);
 
 	//   set the countries from api
 	useEffect(() => {
@@ -27,12 +34,16 @@ function CountryPicker(props: any) {
 			<Text>Choose here...</Text>
 			<Picker
 				selectedValue={country}
-				onValueChange={(value, index) => setCountry(value)}
+				onValueChange={(value, index) => {
+					setCountry(value);
+					// setData(value);
+					setBoo(true);
+				}}
 				mode='dropdown' // Android only
 				style={styles.picker}
 			>
 				<Picker.Item label='Please choose a country' value='Unknown' />
-				{countries.map(country => {
+				{countries.map((country) => {
 					return <Picker.Item key={country} label={country} value={country} />;
 				})}
 			</Picker>

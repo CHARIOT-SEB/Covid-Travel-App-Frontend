@@ -14,35 +14,40 @@ import IndividualCountry from './screens/IndividualCountry';
 import Home from './screens/Home';
 import Account from './screens/Account';
 import { useState } from 'react';
+import DataProvider from './providers/Data';
+
+//  <DataProvider> component stores any data in state, and wraps the app to share data from the top down
 
 const App = () => {
-    const [country, setCountry] = useState({})
+
 	return (
 		<SafeAreaProvider>
-			<NativeBaseProvider>
-				<Modal visible={false}>
-					<LandingPage />
-				</Modal>
-				<View>
-					<MyStack />
-				</View>
-				<View style={styles.container}>
-					<MyTabs />
-				</View>
-				<StatusBar style='auto' />
-            <Modal visible={false}>
-                <Trips />
-            </Modal>
-            <Modal visible={false}>
-                <IndividualCountry country={country} />
-            </Modal>
-            <Modal visible={false}>
-                <Home />
-            </Modal>
-            <Modal visible={false}>
-                <Account />
-            </Modal>
-			</NativeBaseProvider>
+			<DataProvider>  
+				<NativeBaseProvider>
+					<Modal visible={false}>
+						<LandingPage />
+					</Modal>
+					<View>
+						<MyStack />
+					</View>
+					<View style={styles.container}>
+						<MyTabs />
+					</View>
+					<StatusBar style='auto' />
+					<Modal visible={false}>
+						<Trips />
+					</Modal>
+					<Modal visible={false}>
+						<IndividualCountry />
+					</Modal>
+					<Modal visible={false}>
+						<Home />
+					</Modal>
+					<Modal visible={false}>
+						<Account />
+					</Modal>
+				</NativeBaseProvider>
+			</DataProvider>
 		</SafeAreaProvider>
 	);
 };
