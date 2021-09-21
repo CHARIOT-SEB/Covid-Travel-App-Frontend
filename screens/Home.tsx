@@ -43,10 +43,10 @@ const Home = (props: any) => {
 				<Pressable style={styles.button} onPress={() => nav.navigate('Trips')}>
 					<Text
 						style={{
-							fontFamily: 'Oxygen_400Regular',
-							fontSize: 18,
-							margin: 40,
-							textAlign: 'center',
+							fontFamily: 'Oxygen_400Italic',
+							margin: 20,
+							fontSize: 20,
+							position: 'relative',
 						}}
 					>
 						My Trips
