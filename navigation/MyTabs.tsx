@@ -62,16 +62,6 @@ const MyTabs = () => {
 					options={{ headerShown: false }}
 				/>
 				<Tabs.Screen
-					name='Country'
-					component={IndividualCountry}
-					options={{ headerShown: false }}
-				/>
-				<Tabs.Screen
-					name='SignUpForm'
-					component={SignUpForm}
-					options={{ headerShown: false }}
-				/>
-				<Tabs.Screen
 					name='LandingPage'
 					component={LandingPage}
 					options={{ headerShown: false }}
