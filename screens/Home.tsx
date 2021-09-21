@@ -1,17 +1,19 @@
 // react imports
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Pressable } from 'react-native';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 import Logo from '../components/Logo';
 // file imports
 import CountryPicker from '../navigation/CountryPicker';
 // google fonts
-import { useFonts, Oxygen_400Regular } from '@expo-google-fonts/dev';
+import {
+	useFonts,
+	Oxygen_400Regular,
+	Oxygen_300Light,
+} from '@expo-google-fonts/dev';
 // loading base
 import { Spinner } from 'native-base';
 
 const Home = (props: any) => {
-	const [isLoading, setIsLoading] = useState(false);
 	const nav = props.navigation;
 
 	let [fontsLoaded] = useFonts({
@@ -43,9 +45,9 @@ const Home = (props: any) => {
 				<Pressable style={styles.button} onPress={() => nav.navigate('Trips')}>
 					<Text
 						style={{
-							fontFamily: 'Oxygen_400Italic',
-							margin: 20,
+							fontFamily: 'Oxygen_400Regular',
 							fontSize: 20,
+							margin: 10,
 							position: 'relative',
 						}}
 					>
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	text: {
-		flex: 0.25,
+		flex: 0.3,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
