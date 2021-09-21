@@ -5,10 +5,12 @@ import MyTrips from '../components/PastTrips';
 import Logo from '../components/Logo';
 import AccountInfo from '../components/AccountInfo';
 import { Popover, Button } from 'native-base';
+import { dataStore } from '../providers/Data';
 
 const Account = (props) => {
 	// const [popoverOpen, setPopoverOpen] = useState(false);
 	const nav = props.navigation;
+    const {setIsLoggedIn} = useContext(dataStore)
 
 	return (
 		<SafeAreaView>
@@ -44,7 +46,10 @@ const Account = (props) => {
 									<Button size='sm' variant='ghost'>
 										Cancel
 									</Button>
-									<Button onPress={() => nav.navigate('LandingPage')} size='sm'>
+									<Button onPress={() => {
+                                        setIsLoggedIn(false)
+                                        nav.navigate('LandingPage')
+                                        }} size='sm'>
 										Log Out
 									</Button>
 								</Button.Group>

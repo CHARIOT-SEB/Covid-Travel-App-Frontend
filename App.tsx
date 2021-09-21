@@ -1,5 +1,5 @@
 // react imports
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Modal } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -14,17 +14,17 @@ import IndividualCountry from './screens/IndividualCountry';
 import Home from './screens/Home';
 import Account from './screens/Account';
 import { useState } from 'react';
-import DataProvider from './providers/Data';
+import DataProvider, { dataStore } from './providers/Data';
 
 //  <DataProvider> component stores any data in state, and wraps the app to share data from the top down
 
 const App = () => {
-
-	return (
+    
+     return (
 		<SafeAreaProvider>
 			<DataProvider>  
 				<NativeBaseProvider>
-					<Modal visible={false}>
+					<Modal visible={isLoggedIn}>
 						<LandingPage />
 					</Modal>
 					<View>
