@@ -9,7 +9,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { getCountries } from '../screens/api';
 import { dataStore } from '../providers/Data';
-import { useFonts, Oxygen_400Regular } from '@expo-google-fonts/dev';
+import { useFonts, Oxygen_400Regular } from '@expo-google-fonts/oxygen';
 
 function CountryPicker(props: any) {
 	// destructuring each state from the dataStore to be used
