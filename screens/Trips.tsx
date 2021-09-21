@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -12,39 +12,37 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import Logo from '../components/Logo';
 import { getUser } from './api';
+import { dataStore } from '../providers/Data';
+import {
+  useFonts,
+  Oxygen_300Light,
+  Oxygen_400Regular,
+  Oxygen_700Bold
+} from '@expo-google-fonts/oxygen';
+
 const Trips = (props: any) => {
-  const nav = props.navigation;
-  const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState({
-    fullName: 'Jane Smith',
-    email: 'jsmith@google.com',
-    trips: [
-      {
-        country: 'france',
-        trafficLight: 'amber',
-        dateGoing: '2022.01.12',
-        dateReturning: '2022.01.24',
-        acceptingTourists: true,
-        vaccineRequired: true,
-        testRequired: true,
-        extraDocsRequired: true,
-        newInfo: false
-      }
-    ],
-    pastTrips: []
+  const [fontsLoaded] = useFonts({
+    Oxygen_300Light,
+    Oxygen_400Regular,
+    Oxygen_700Bold
   });
 
-  // password and email come from props from the login page?
+  const { isLoading, setIsLoading } = useContext(dataStore);
+  const { user, setUser } = useContext(dataStore);
+  // const { loginInfo } = useContext(dataStore);
 
-  const userObj = {
-    email: 'rc@sadballoons.com',
+  // login info comes from state that is passed from login page
+  const loginInfo = {
+    email: 'ek@sadballoons.com',
     password: 'sadBalloons'
   };
+
+  const nav = props.navigation;
 
   useEffect(() => {
     setIsLoading(true);
 
-    getUser(userObj.email, userObj).then((response) => {
+    getUser(loginInfo.email, loginInfo).then((response) => {
       const newUser = response.user;
       console.log(newUser, 'response in get');
       setUser(newUser);
@@ -52,27 +50,20 @@ const Trips = (props: any) => {
     });
   }, []);
 
-  // const getDate = (date: string) => {
-  //   return date.slice(0, 10).join('');
-  // };
-
   const trips = user.trips;
-  console.log(trips, 'trips');
 
   {
-    if (isLoading) return <Spinner color='blue' />;
+    if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
   }
   return (
     <SafeAreaView style={styles.container}>
       <Logo />
-      <Button
-        // style={styles.button}
-        variant='outline'
-        size='lg'
-        onPress={() => nav.navigate('IndividualCountry')}
+      <TouchableOpacity
+        style={styles.countryButton}
+        onPress={() => nav.navigate('Home')}
       >
-        <Text>Check Country</Text>
-      </Button>
+        <Text style={styles.countryButtonText}>Check Country</Text>
+      </TouchableOpacity>
 
       <View style={styles.myTripsContainer}>
         <Text style={styles.myTripsTitle}>My Trips</Text>
@@ -82,18 +73,18 @@ const Trips = (props: any) => {
           data={trips}
           renderItem={({ item }) => (
             <View style={styles.singleTrip}>
-              {/* country name and traffic light color behind  */}
+              <View style={styles.countryNameContainer}>
+                <View
+                  style={[
+                    item.trafficLight === 'green'
+                      ? { backgroundColor: '#0aa33a' }
+                      : item.trafficLight === 'amber'
+                      ? { backgroundColor: '#eb8407' }
+                      : { backgroundColor: '#ba1f11' },
+                    styles.trafficLight
+                  ]}
+                ></View>
 
-              <View
-                style={[
-                  item.trafficLight === 'green'
-                    ? { backgroundColor: 'green' }
-                    : item.trafficLight === 'amber'
-                    ? { backgroundColor: 'orange' }
-                    : { backgroundColor: 'crimson' },
-                  styles.countryNameContainer
-                ]}
-              >
                 <Text style={[styles.listItem, styles.countryName]}>
                   {item.country}
                 </Text>
@@ -124,7 +115,7 @@ const Trips = (props: any) => {
                       : 'md-close-circle'
                   }
                   size={25}
-                  color={item.acceptingTourists ? 'green' : 'crimson'}
+                  color={item.acceptingTourists ? '#1D7253' : '#ba1f11'}
                 />
               </View>
               {/* test required? */}
@@ -142,7 +133,7 @@ const Trips = (props: any) => {
                       : 'md-close-circle'
                   }
                   size={25}
-                  color={item.testRequired ? 'green' : 'crimson'}
+                  color={item.testRequired ? '#1D7253' : '#ba1f11'}
                 />
               </View>
 
@@ -162,7 +153,7 @@ const Trips = (props: any) => {
                       : 'md-close-circle'
                   }
                   size={25}
-                  color={item.vaccineRequired ? 'green' : 'crimson'}
+                  color={item.vaccineRequired ? '#1D7253' : '#ba1f11'}
                 />
               </View>
 
@@ -177,7 +168,7 @@ const Trips = (props: any) => {
                       : 'md-close-circle'
                   }
                   size={25}
-                  color={item.extraDocsRequired ? 'green' : 'crimson'}
+                  color={item.extraDocsRequired ? '#1D7253' : '#ba1f11'}
                 />
               </View>
             </View>
@@ -199,44 +190,54 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     borderRadius: 15,
-    padding: 10,
+    padding: 5,
     marginVertical: 10,
     paddingHorizontal: 25
   },
   myTripsTitle: {
+    fontFamily: 'Oxygen_700Bold',
     textTransform: 'uppercase',
     padding: 5,
     margin: 5,
-    fontWeight: 'bold'
+    fontSize: 24
   },
   singleTrip: {
     flex: 1,
     backgroundColor: '#DCEFF9',
     flexDirection: 'column',
-    padding: 5,
+    paddingVertical: 10,
+
     margin: 5,
     borderRadius: 10,
-    borderBottomColor: '#5c98c0',
+    borderBottomColor: '#1D7253',
     borderBottomWidth: 1
   },
-  countryNameContainer: {
-    transform: [{ scaleX: 2 }],
-    borderRadius: 120,
+  trafficLight: {
+    borderRadius: 50,
     marginHorizontal: 3,
     marginVertical: 8,
-    width: 70,
-    height: 70,
+    width: 50,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center'
   },
+  countryNameContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 3,
+    marginVertical: 8,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
   countryName: {
-    fontSize: 14,
+    fontFamily: 'Oxygen_700Bold',
+    fontSize: 20,
     textTransform: 'uppercase',
-    color: 'black',
-    transform: [{ scaleX: 0.5 }]
+    color: 'black'
   },
   itemText: {
+    fontFamily: 'Oxygen_700Bold',
     paddingHorizontal: 15,
     color: 'black'
   },
@@ -244,21 +245,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 8,
     paddingHorizontal: 15,
-    justifyContent: 'space-between'
+    justifyContent: 'flex-start'
   },
   dateContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     paddingVertical: 5,
     paddingHorizontal: 15
   },
-  button: {
-    backgroundColor: '#4d94ff',
-    height: 5,
-    margin: 5,
-    padding: 15,
-    alignItems: 'stretch',
-    borderRadius: 15
+  countryButtonText: {
+    fontFamily: 'Oxygen_700Bold',
+    color: 'white',
+    textTransform: 'uppercase'
+  },
+  countryButton: {
+    backgroundColor: '#1D7253',
+    height: 15,
+    margin: 20,
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8
   }
 });
 
