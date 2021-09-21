@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext} from 'react';
 import { View, Text, StyleSheet, ScrollView, } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import geoLocations from './geoLocations/geoLocations.json';
 import { getCountry } from '../screens/api';
 import Logo from '../components/Logo';
 import IsVaccinated from '../components/IsVaccinated';
@@ -12,9 +11,9 @@ import { dataStore } from '../providers/Data';
 
 const IndividualCountry = () => {
 
-	const { countryName, setCountryName } = useContext(dataStore);
-	const { countryInfo, setCountryInfo } = useContext(dataStore);
-	const { isLoading, setIsLoading } = useContext(dataStore);
+	const { countryName, countryInfo, setCountryInfo, isLoading, setIsLoading } = useContext(dataStore);
+	// const { countryInfo, setCountryInfo } = useContext(dataStore);
+	// const { isLoading, setIsLoading } = useContext(dataStore);
 
 	useEffect(() => {
 		setIsLoading(true);

@@ -6,10 +6,11 @@ export const dataStore = createContext({});
 const dataProvider = ({ children }) => {
 
 	// all states that need passing should sit here
-	const [countryName, setCountryName] = useState('');
-	const [countries, setCountries] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [countryInfo, setCountryInfo] = useState({});
+    let countryName, setCountryName, countries, setCountries, isLoading, setIsLoading, countryInfo, setCountryInfo: any
+	[countryName, setCountryName] = useState('');
+	[countries, setCountries] = useState([]);
+	[isLoading, setIsLoading] = useState(false);
+	[countryInfo, setCountryInfo] = useState({});
 
 	// pass everything into 'value', so .Provider can provide everywhere in App
 	return (
