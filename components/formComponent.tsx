@@ -6,7 +6,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  Button
+  Button,
+  Alert
 } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -26,12 +27,12 @@ const userSchema = yup.object({
   password: yup.string().min(4).max(10).required()
 });
 
-const formComponent = () => {
+const formComponent = (props: any) => {
   //states from usecontext
-  const { isLoading, setIsLoading, user, setUser, setIsLoggedIn } = useContext(dataStore);
-  const [signupDetails, setSignupDetails] = useState({name: '', email:'', password: ''})
-  //internal states
-  const [formSubmit, setFormSubmit] = useState(false);
+  const { isLoading, setIsLoading, user, setUser, isLoggedIn, setIsLoggedIn } =
+    useContext(dataStore);
+  // navigation for redirect
+  const nav = props.navigation;
   //fonts
   const [fontsLoaded] = useFonts({
     Oxygen_300Light,
@@ -42,18 +43,31 @@ const formComponent = () => {
   // function to set new user from form
   const signUpUser = (userInfo: object) => {
     setIsLoading(true);
-    createUser(userInfo).then((response) => {
-      const newUser = response.user;
-      setUser(newUser);
-      setIsLoggedIn(true);
-      //Redirect to home page
-      setIsLoading(false);
-    })
-    .catch((err: object) => {
-        //sorry, email taken...
-    })
+    createUser(userInfo)
+      .then((response) => {
+        const newUser = response.user;
+        setUser(newUser);
+        setIsLoggedIn(true);
+        //redirect to home page
+        //   nav.navigation('Home');
+
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        Alert.alert('Warning!', 'User already exists!', [
+          {
+            text: 'Ok',
+            onPress: (nav) => navigateHome(nav),
+            style: 'cancel'
+          }
+        ]);
+      });
+  };
+  const navigateHome = (nav: any) => {
+    nav.navigate('Home');
   };
 
+  console.log(user, 'user');
   // spinner to wait for loading
   {
     if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
@@ -65,13 +79,12 @@ const formComponent = () => {
         initialValues={{ name: '', email: '', password: '' }}
         validationSchema={userSchema}
         onSubmit={(values, actions) => {
-          setFormSubmit(true);
           signUpUser(values);
           actions.resetForm();
         }}
       >
         {(props) => (
-            <View>
+          <View>
             <TextInput
               style={styles.input}
               placeholder='name'
