@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useContext} from 'react';
+import React, { useEffect, useContext} from 'react';
 import { View, Text, StyleSheet, ScrollView, } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import geoLocations from './geoLocations/geoLocations.json';
 import { getCountry } from '../screens/api';
 import Logo from '../components/Logo';
 import IsVaccinated from '../components/IsVaccinated';
@@ -11,10 +10,7 @@ import { Spinner } from 'native-base';
 import { dataStore } from '../providers/Data';
 
 const IndividualCountry = () => {
-
-	const { countryName, setCountryName } = useContext(dataStore);
-	const { countryInfo, setCountryInfo } = useContext(dataStore);
-	const { isLoading, setIsLoading } = useContext(dataStore);
+	const { countryName, countryInfo, setCountryInfo, isLoading, setIsLoading } = useContext(dataStore);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -39,21 +35,23 @@ const IndividualCountry = () => {
 
 	return (
 		<SafeAreaView>
-			<View style={styles.container}>
-				<Logo />
-				<View style={styles.trafficLight}>
-					<Text style={styles.name}>{countryInfo.country}</Text>
-				</View>
-				<Text>{countryInfo.colorList}</Text>
-				<MapView
-					style={styles.map}
-					showsUserLocation={true}
-					region={countryInfo.geoLocation}
-					// user location will be available to see, if location services are enabled
-				/>
-				<IsVaccinated countryInfo={countryInfo} />
-				<IsntVaccinated countryInfo={countryInfo} />
-			</View>
+            <ScrollView>
+                <View style={styles.container}>
+                    <Logo />
+                    <View style={styles.trafficLight}>
+                        <Text style={styles.name}>{countryInfo.country}</Text>
+                    </View>
+                    <Text>{countryInfo.colorList}</Text>
+                    <MapView
+                        style={styles.map}
+                        showsUserLocation={true}
+                        region={countryInfo.geoLocation}
+                        // user location will be available to see, if location services are enabled
+                    />
+                    <IsVaccinated countryInfo={countryInfo} />
+                    <IsntVaccinated countryInfo={countryInfo} />
+                </View>
+            </ScrollView>
 		</SafeAreaView>
 	);
 };
