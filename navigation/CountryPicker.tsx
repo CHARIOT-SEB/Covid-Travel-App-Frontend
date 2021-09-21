@@ -29,7 +29,7 @@ function CountryPicker(props: any) {
 		<View style={styles.screen}>
 			<Text style={styles.text}>Got a destination in mind? </Text>
 
-			<Text>Choose here...</Text>
+			<Text style={styles.text}>Please choose a country</Text>
 			<Picker
 				selectedValue={countryName}
 				onValueChange={(value, index) => {
@@ -38,7 +38,6 @@ function CountryPicker(props: any) {
 				mode='dropdown' // Android only
 				style={styles.picker}
 			>
-				<Picker.Item label='Please choose a country' value='Unknown' />
 				{countries.map(country => {
 					return <Picker.Item key={country} label={country} value={country} />;
 				})}
@@ -74,11 +73,11 @@ const styles = StyleSheet.create({
 	text: {
 		fontFamily: 'Oxygen_400Regular',
 		fontSize: 18,
-		margin: 40,
+		marginTop: 40,
 		textAlign: 'center',
 	},
 	picker: {
-		marginVertical: 30,
+		marginVertical: 0,
 		width: 300,
 		padding: 10,
 	},
