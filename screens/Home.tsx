@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		textAlign: 'center',
 		alignItems: 'center',
-		backgroundColor: 'rgb(153, 153, 230)',
+		backgroundColor: '#DCEFF9',
 	},
 	content: {
 		display: 'flex',
@@ -47,13 +47,8 @@ const styles = StyleSheet.create({
 		paddingBottom: 20,
 		color: '#fff',
 		textAlign: 'center',
-		backgroundColor: 'rgb(153, 153, 230)',
+		backgroundColor: '#5c98C0',
 		borderRadius: 10,
-		borderWidth: 1,
-		borderColor: '#fff',
-	},
-	go_button: {
-		backgroundColor: 'green',
 	},
 });
 
