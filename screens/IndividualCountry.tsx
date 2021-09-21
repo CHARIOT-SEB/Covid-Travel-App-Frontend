@@ -12,13 +12,6 @@ import { dataStore } from '../providers/Data';
 
 const IndividualCountry = () => {
 
-	const [region, setRegion] = useState({
-		latitude: 47.4256,
-		longitude: 2.6054,
-		latitudeDelta: 10,
-		longitudeDelta: 0.25,
-	});
-
 	const { countryName, setCountryName } = useContext(dataStore);
 	const { countryInfo, setCountryInfo } = useContext(dataStore);
 	const { isLoading, setIsLoading } = useContext(dataStore);
@@ -28,12 +21,6 @@ const IndividualCountry = () => {
 		getCountry(countryName)
 			.then((country: any) => {
 				setCountryInfo(country);
-				setRegion({
-					latitude: country.geoLocation.latitude,
-					longitude: country.geoLocation.longitude,
-					latitudeDelta: country.geoLocation.latitudeDelta,
-					longitudeDelta: country.geoLocation.longitudeDelta,
-				});
 			})
 			.then(() => {
 				setIsLoading(false);
@@ -61,7 +48,7 @@ const IndividualCountry = () => {
 				<MapView
 					style={styles.map}
 					showsUserLocation={true}
-					region={region}
+					region={countryInfo.geoLocation}
 					// user location will be available to see, if location services are enabled
 				/>
 				<IsVaccinated countryInfo={countryInfo} />
