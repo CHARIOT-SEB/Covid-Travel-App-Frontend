@@ -26,10 +26,10 @@ const LandingPage = () => {
         const URL = `https://covid-travel-app-21.herokuapp.com/api/users/${loginDetails.email}`;
         axios.post(URL, {password: loginDetails.password})
             .then((user: any) => {
-                setUser(user.data);
+                setUser(user.data.user);
                 setIsLoggedIn(true);
             })
-            .catch((error: object) => {
+            .catch((error: object) => { 
 
             })
     }

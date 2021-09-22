@@ -39,7 +39,6 @@ const IndividualCountry = () => {
 	}, [countryName]);
 
 	if (!isLoggedIn) return null;
-  if (!countryInfo.country) return null;
 
 	if (isLoading) {
 		return (
@@ -64,7 +63,6 @@ const IndividualCountry = () => {
 						region={countryInfo.geoLocation}
 						// user location will be available to see, if location services are enabled
 					/>
-
 					<View>
 						<IsVaccinated />
 						<AddToTrips />
@@ -97,7 +95,6 @@ const styles = StyleSheet.create({
 	},
 	trafficLight: {
 		padding: 20,
-
 		backgroundColor: '#5c98c0',
 		borderRadius: 10,
 	},
