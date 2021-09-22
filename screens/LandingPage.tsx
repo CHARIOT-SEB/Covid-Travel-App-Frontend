@@ -19,65 +19,74 @@ import Logo from '../components/Logo';
 
 const LandingPage = () => {
 	const [signUp, setSignUp] = useState(false);
-    const {isLoggedIn, setIsLoggedIn, setUser} = useContext(dataStore);
+	const { isLoggedIn, setIsLoggedIn, setUser } = useContext(dataStore);
 
-    const loginUser = (loginDetails: any) => {
-        loginDetails.email = loginDetails.email.toLowerCase()
-        const URL = `https://covid-travel-app-21.herokuapp.com/api/users/${loginDetails.email}`;
-        axios.post(URL, {password: loginDetails.password})
-            .then((user: any) => {
-                setUser(user.data.user);
-                setIsLoggedIn(true);
-            })
-            .catch((error: object) => { 
+	const loginUser = (loginDetails: any) => {
+		loginDetails.email = loginDetails.email.toLowerCase();
+		const URL = `https://covid-travel-app-21.herokuapp.com/api/users/${loginDetails.email}`;
+		axios
+			.post(URL, { password: loginDetails.password })
+			.then((user: any) => {
+				setUser(user.data.user);
+				setIsLoggedIn(true);
+			})
+			.catch((error: object) => {});
+	};
 
-            })
-    }
-
-    if(isLoggedIn) return null;
+	if (isLoggedIn) return null;
 
 	return (
-		<View style={styles.formContainer}>
-			<Modal visible={signUp} animationType='slide'>
-				<SignUpForm />
-				<Button title='Return to Login Page' onPress={() => setSignUp(false)} />
-			</Modal>
-			<Text>Welcome to the APPNAMEHERE</Text>
-			<Text>Login in</Text>
-			<Formik
-				initialValues={{ email: '', password: '' }}
-				onSubmit={(values) => {
-				}}
-			>
-				{(props) => (
-					<View>
-						<TextInput
-							style={styles.input}
-							placeholder='email'
-							onChangeText={props.handleChange('email')}
-							value={props.values.email}
-						/>
+		<SafeAreaView style={styles.container}>
+			<View>
+				<Modal visible={signUp} animationType='slide'>
+					<SignUpForm />
+				</Modal>
 
-						<TextInput
-							style={styles.input}
-							placeholder='password'
-							onChangeText={props.handleChange('password')}
-							value={props.values.password}
-							secureTextEntry
-						/>
-						<Button
-							title='submit'
-							color='red'
-							onPress={() => {
-								props.handleSubmit();
-                loginUser(props.values)
-							}}
-						/>
-					</View>
-				)}
-			</Formik>
-			<Button title='Sign Up' onPress={() => setSignUp(true)} />
-		</View>
+				<View style={styles.logo}>
+					<Logo />
+				</View>
+
+				<Text style={{ textAlign: 'center' }}>Log In </Text>
+				<Formik initialValues={{ email: '', password: '' }} onSubmit={(values) => {}}>
+					{(props) => (
+						<View>
+							<TextInput
+								style={styles.input}
+								placeholder='   Email'
+								onChangeText={props.handleChange('email')}
+								value={props.values.email}
+							/>
+
+							<TextInput
+								style={styles.input}
+								placeholder='   Password'
+								onChangeText={props.handleChange('password')}
+								value={props.values.password}
+								secureTextEntry
+							/>
+
+							<View>
+								<TouchableOpacity
+									style={styles.btn}
+									onPress={() => {
+										props.handleSubmit();
+										loginUser(props.values);
+									}}
+								>
+									<Text style={styles.btnText}> Log In </Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					)}
+				</Formik>
+
+				<View>
+					<TouchableOpacity style={styles.btn} onPress={() => setSignUp(true)}>
+						<Text style={styles.btnText}> Sign Up </Text>
+					</TouchableOpacity>
+				</View>
+			</View>
+		</SafeAreaView>
 	);
 };
 
@@ -89,19 +98,17 @@ const styles = StyleSheet.create({
 	},
 	logo: {
 		alignItems: 'center',
-	},
-	login: {
-		top: 200,
+		marginBottom: 150,
 	},
 	input: {
-		width: 300,
+		margin: 10,
+		width: 280,
 		height: 40,
 		backgroundColor: 'white',
 		borderWidth: 2,
 		borderColor: '#ddd',
 		fontSize: 18,
 		borderRadius: 10,
-		margin: 10,
 	},
 	btn: {
 		borderRadius: 8,
