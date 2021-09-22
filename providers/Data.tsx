@@ -29,41 +29,7 @@ const dataProvider = ({ children }) => {
   [countryInfo, setCountryInfo] = useState({});
   [isLoggedIn, setIsLoggedIn] = useState(true);
   [signUp, setSignUp] = useState(false);
-  [user, setUser] = useState({
-    name: 'John Smith',
-    email: 'js@google.com',
-    trips: [
-      {
-        country: 'france',
-        trafficLight: 'amber',
-        dateGoing: '2022-01-12T00:00:00.000Z',
-        dateReturning: '2022-01-24T00:00:00.000Z',
-        acceptingTourists: true,
-        vaccineRequired: true,
-        testRequired: true,
-        extraDocsRequired: true,
-        newInfo: false
-      },
-      {
-        country: 'greece',
-        trafficLight: 'amber',
-        dateGoing: '2022-05-02T23:00:00.000Z',
-        dateReturning: '2022-05-09T23:00:00.000Z',
-        acceptingTourists: true,
-        vaccineRequired: true,
-        testRequired: true,
-        extraDocsRequired: true,
-        newInfo: true
-      }
-    ],
-    pastTrips: [
-      {
-        country: 'poland',
-        dateGoing: '2021-12-02T00:00:00.000Z',
-        dateReturning: '2021-12-06T00:00:00.000Z'
-      }
-    ]
-  });
+  [user, setUser] = useState({});
 
   // pass everything into 'value', so .Provider can provide everywhere in App
   return (
