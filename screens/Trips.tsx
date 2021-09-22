@@ -8,7 +8,11 @@ import {
   FlatList
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  AntDesign
+} from '@expo/vector-icons';
 import Logo from '../components/Logo';
 import { dataStore } from '../providers/Data';
 import {
@@ -17,6 +21,8 @@ import {
   Oxygen_400Regular,
   Oxygen_700Bold
 } from '@expo-google-fonts/oxygen';
+import { patchTrips } from './api';
+import { Spinner } from 'native-base';
 
 const Trips = (props: any) => {
   const [fontsLoaded] = useFonts({
@@ -24,14 +30,67 @@ const Trips = (props: any) => {
     Oxygen_400Regular,
     Oxygen_700Bold
   });
-  const { user, isLoggedIn } = useContext(dataStore);
+  const { user, setUser, isLoggedIn, isLoading, setIsLoading } =
+    useContext(dataStore);
+
   const nav = props.navigation;
   const trips = user.trips;
 
-  if (!isLoggedIn) return null;
+  if (!isLoggedIn || !user) return null;
 
-  if (trips.length === 0) return <Text> You have no trips booked yet</Text>;
+  const handleDelete = (country: string) => {
+    const index = 0;
+    const email = user.email;
+    const tripInfo = { deleteTrip: index };
+    editTrip(tripInfo, email);
+  };
 
+  const handleArchive = (country: string) => {
+    const index = 0;
+    const email = user.email;
+    const tripInfo = { archiveTrip: index };
+    editTrip(tripInfo, email);
+  };
+
+  const editTrip = (tripInfo: object, email: string) => {
+    setIsLoading(true);
+
+    patchTrips(tripInfo, email).then((data: any) => {
+      setUser(data);
+      console.log(user, 'new user');
+      setIsLoading(false);
+    });
+  };
+
+  if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
+
+  if (trips && trips.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Logo />
+        <TouchableOpacity
+          style={styles.countryButton}
+          onPress={() => nav.navigate('Home')}
+        >
+          <Text style={styles.countryButtonText}>Check Country</Text>
+        </TouchableOpacity>
+
+        <View style={styles.myTripsContainer}>
+          <Text style={styles.myTripsTitle}>My Trips</Text>
+
+          <Text style={styles.noTrips}>You haven't planned any trips yet</Text>
+
+
+          <TouchableOpacity
+            style={styles.countryButton}
+            onPress={() => nav.navigate('Home')}
+          >
+            <Text style={styles.countryButtonText}>Start planning...</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Logo />
@@ -65,6 +124,24 @@ const Trips = (props: any) => {
                 <Text style={[styles.listItem, styles.countryName]}>
                   {item.country}
                 </Text>
+
+                <TouchableOpacity
+                  style={styles.smlBtn}
+                  onPress={() => {
+                    handleDelete(item.country);
+                  }}
+                >
+                  <Ionicons name='trash-outline' size={30} color='grey' />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.smlBtn}
+                  onPress={() => {
+                    handleArchive(item.country);
+                  }}
+                >
+                  <MaterialIcons name='file-present' size={30} color='grey' />
+                </TouchableOpacity>
               </View>
 
               {/* date going and returning */}
@@ -183,7 +260,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#DCEFF9',
     flexDirection: 'column',
     paddingVertical: 10,
-
     margin: 5,
     borderRadius: 10,
     borderBottomColor: '#1D7253',
@@ -191,10 +267,10 @@ const styles = StyleSheet.create({
   },
   trafficLight: {
     borderRadius: 50,
-    marginHorizontal: 3,
+    marginHorizontal: 13,
     marginVertical: 8,
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center'
@@ -209,9 +285,17 @@ const styles = StyleSheet.create({
   },
   countryName: {
     fontFamily: 'Oxygen_700Bold',
-    fontSize: 20,
+    fontSize: 16,
     textTransform: 'uppercase',
-    color: 'black'
+    color: 'black',
+    borderBottomColor: '#1D7253',
+    borderBottomWidth: 0.5
+  },
+  noTrips: {
+    fontFamily: 'Oxygen_400Regular',
+    fontSize: 16,
+    color: 'black',
+    alignSelf: 'center'
   },
   itemText: {
     fontFamily: 'Oxygen_700Bold',
@@ -243,6 +327,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8
+  },
+  smlBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 5
   }
 });
 
