@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -7,11 +7,9 @@ import {
   TouchableOpacity,
   FlatList
 } from 'react-native';
-import { Button, Spinner } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import Logo from '../components/Logo';
-import { getUser } from './api';
 import { dataStore } from '../providers/Data';
 import {
   useFonts,
@@ -26,34 +24,13 @@ const Trips = (props: any) => {
     Oxygen_400Regular,
     Oxygen_700Bold
   });
-
-  const { isLoading, setIsLoading, user, setUser, isLoggedIn } = useContext(dataStore);
-  // const { loginInfo } = useContext(dataStore);
-
-  // login info comes from state that is passed from login page
-  const loginInfo = {
-    email: 'ek@sadballoons.com',
-    password: 'sadBalloons'
-  };
-
+  const { user, isLoggedIn } = useContext(dataStore);
   const nav = props.navigation;
+  const trips = user.trips;
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    getUser(loginInfo.email, loginInfo).then((response) => {
-      const newUser = response.user;
-      console.log(newUser, 'response in get');
-      setUser(newUser);
-      setIsLoading(false);
-    });
-  }, []);
-
-  const trips = user.trips ? user.trips : null;
-
-  if(!isLoggedIn) return null;
-
-    if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
+  if (!isLoggedIn) return null;
+  
+  if (trips.length === 0) return <Text> You have no trips booked yet</Text>;
 
   return (
     <SafeAreaView style={styles.container}>

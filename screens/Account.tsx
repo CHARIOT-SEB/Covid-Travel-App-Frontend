@@ -13,11 +13,10 @@ import {
 	Oxygen_700Bold,
 } from '@expo-google-fonts/oxygen';
 
-
 const Account = (props) => {
 	// const [popoverOpen, setPopoverOpen] = useState(false);
 	const nav = props.navigation;
-    const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading} = useContext(dataStore)
+	const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading } = useContext(dataStore);
 
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
@@ -25,8 +24,8 @@ const Account = (props) => {
 		Oxygen_700Bold,
 	});
 
-    if(!isLoggedIn) return null;
-	
+	if (!isLoggedIn) return null;
+
 	if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
 
 	return (
@@ -63,10 +62,14 @@ const Account = (props) => {
 									<Button size='sm' variant='ghost'>
 										Cancel
 									</Button>
-									<Button onPress={() => {
-                                        setIsLoggedIn(false)
-                                        nav.navigate('LandingPage')
-                                        }} size='sm'>
+									<Button
+										style={{ backgroundColor: '#1D7253' }}
+										onPress={() => {
+											setIsLoggedIn(false);
+											nav.navigate('LandingPage');
+										}}
+										size='sm'
+									>
 										Log Out
 									</Button>
 								</Button.Group>
@@ -77,7 +80,7 @@ const Account = (props) => {
 					<Popover
 						trigger={(triggerProps) => {
 							return (
-								<Button style={styles.button} {...triggerProps}>
+								<Button style={styles.deleteButton} {...triggerProps}>
 									Delete Account
 								</Button>
 							);
@@ -96,6 +99,7 @@ const Account = (props) => {
 										Cancel
 									</Button>
 									<Button
+										style={{ backgroundColor: '#cd5c5c' }}
 										onPress={() => {
 											nav.navigate('LandingPage');
 										}}
@@ -133,6 +137,14 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		backgroundColor: '#1D7253',
+		alignSelf: 'center',
+		margin: 20,
+		padding: 15,
+		textAlign: 'center',
+		borderRadius: 15,
+	},
+	deleteButton: {
+		backgroundColor: '#cd5c5c',
 		alignSelf: 'center',
 		margin: 20,
 		padding: 15,
