@@ -14,33 +14,33 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
 
-     return (
-            <SafeAreaProvider>
-                <DataProvider>  
-                    <NativeBaseProvider>
-                        <View>
-                            <MyStack />
-                        </View>
-                        <View style={styles.container}>
-                            <MyTabs />
-                        </View>
-                        <StatusBar style='auto' />
-                    </NativeBaseProvider>
-                </DataProvider>
-            </SafeAreaProvider>
-	);
+  return (
+    <SafeAreaProvider>
+      <DataProvider>
+        <NativeBaseProvider>
+          <View>
+            <MyStack />
+          </View>
+          <View style={styles.container}>
+            <MyTabs />
+          </View>
+          <StatusBar style="auto" />
+        </NativeBaseProvider>
+      </DataProvider>
+    </SafeAreaProvider>
+  );
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-	},
-	tabs: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'space-evenly',
-	},
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  tabs: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-evenly'
+  }
 });
 
 export default App;

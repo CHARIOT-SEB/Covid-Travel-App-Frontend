@@ -1,19 +1,31 @@
-import React, { useEffect, useContext} from 'react';
-import { View, Text, StyleSheet, ScrollView, } from 'react-native';
+import React, { useEffect, useContext } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getCountry } from '../screens/api';
 import Logo from '../components/Logo';
 import IsVaccinated from '../components/IsVaccinated';
 import IsntVaccinated from '../components/IsntVaccinated';
+import Restrictions from '../components/Restrictions';
+import Returning from '../components/Returning';
+import AddToTrips from '../components/AddToTrips';
 import { Spinner } from 'native-base';
 import { dataStore } from '../providers/Data';
+import { useFonts, Oxygen_700Bold } from '@expo-google-fonts/oxygen';
 
 const IndividualCountry = () => {
+	const {
+		countryName,
+		countryInfo,
+		setCountryInfo,
+		isLoading,
+		setIsLoading,
+		isLoggedIn,
+	} = useContext(dataStore);
 
-  const { countryName, countryInfo, setCountryInfo, isLoading, setIsLoading, isLoggedIn } =
-    useContext(dataStore);
-
+	let [fontsLoaded] = useFonts({
+		Oxygen_700Bold,
+	});
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -26,9 +38,8 @@ const IndividualCountry = () => {
 			});
 	}, [countryName]);
 
-
-  if (!isLoggedIn) return null;
-
+	if (!countryInfo.country) return null;
+	if (!isLoggedIn) return null;
 
 	if (isLoading) {
 		return (
@@ -40,31 +51,41 @@ const IndividualCountry = () => {
 
 	return (
 		<SafeAreaView>
-            <ScrollView>
-                <View style={styles.container}>
-                    <Logo />
-                    <View style={styles.trafficLight}>
-                        <Text style={styles.name}>{countryInfo.country}</Text>
-                    </View>
-                    <Text>{countryInfo.colorList}</Text>
-                    <MapView
-                        style={styles.map}
-                        showsUserLocation={true}
-                        region={countryInfo.geoLocation}
-                        // user location will be available to see, if location services are enabled
-                    />
-                    <IsVaccinated countryInfo={countryInfo} />
-                    <IsntVaccinated countryInfo={countryInfo} />
-                </View>
-            </ScrollView>
+			<ScrollView>
+				<View style={styles.container}>
+					<Logo />
+					<View style={styles.trafficLight}>
+						<Text style={styles.name}>{countryInfo.country}</Text>
+					</View>
+					<Text>{countryInfo.colorList}</Text>
+					<MapView
+						style={styles.map}
+						showsUserLocation={true}
+						region={countryInfo.geoLocation}
+						// user location will be available to see, if location services are enabled
+					/>
+					<View>
+						<IsVaccinated />
+						<AddToTrips />
+
+						<IsntVaccinated />
+
+						<Restrictions />
+
+						<Returning />
+					</View>
+				</View>
+			</ScrollView>
 		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		justifyContent: 'flex-end',
+		display: 'flex',
+		textAlign: 'center',
 		alignItems: 'center',
+		backgroundColor: '#DCEFF9',
 	},
 	map: {
 		alignSelf: 'center',
@@ -78,11 +99,13 @@ const styles = StyleSheet.create({
 	},
 	trafficLight: {
 		padding: 20,
-		backgroundColor: '#4d94ff',
-		borderRadius: 15,
+		backgroundColor: '#5c98c0',
+		borderRadius: 10,
 	},
 	name: {
 		fontSize: 30,
+		fontFamily: 'Oxygen_700Bold',
+		color: 'black',
 	},
 	logo: {
 		flex: 1,
@@ -98,7 +121,7 @@ const styles = StyleSheet.create({
 		margin: 20,
 		padding: 20,
 		width: 70,
-		backgroundColor: '#ff7f50',
+		backgroundColor: '#1D7253',
 		borderRadius: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
