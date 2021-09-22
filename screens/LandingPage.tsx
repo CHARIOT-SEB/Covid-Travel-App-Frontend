@@ -6,16 +6,17 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	Button,
 	TextInput,
 	Modal,
 	TouchableOpacity,
 	SafeAreaView,
+	Image,
+	ScrollView,
 } from 'react-native';
 // screen imports
 import { dataStore } from '../providers/Data';
 import SignUpForm from '../screens/SignUpForm';
-import Logo from '../components/Logo';
+const logo = require('../logo.png');
 
 const LandingPage = () => {
 	const [signUp, setSignUp] = useState(false);
@@ -37,55 +38,57 @@ const LandingPage = () => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<View>
-				<Modal visible={signUp} animationType='slide'>
-					<SignUpForm />
-				</Modal>
-
-				<View style={styles.logo}>
-					<Logo />
-				</View>
-
-				<Text style={{ textAlign: 'center' }}>Log In </Text>
-				<Formik initialValues={{ email: '', password: '' }} onSubmit={(values) => {}}>
-					{(props) => (
-						<View>
-							<TextInput
-								style={styles.input}
-								placeholder='   Email'
-								onChangeText={props.handleChange('email')}
-								value={props.values.email}
-							/>
-
-							<TextInput
-								style={styles.input}
-								placeholder='   Password'
-								onChangeText={props.handleChange('password')}
-								value={props.values.password}
-								secureTextEntry
-							/>
-
-							<View>
-								<TouchableOpacity
-									style={styles.btn}
-									onPress={() => {
-										props.handleSubmit();
-										loginUser(props.values);
-									}}
-								>
-									<Text style={styles.btnText}> Log In </Text>
-								</TouchableOpacity>
-							</View>
-						</View>
-					)}
-				</Formik>
-
+			<ScrollView>
 				<View>
-					<TouchableOpacity style={styles.btn} onPress={() => setSignUp(true)}>
-						<Text style={styles.btnText}> Sign Up </Text>
-					</TouchableOpacity>
+					<Modal visible={signUp} animationType='slide'>
+						<SignUpForm />
+					</Modal>
+
+					<View style={styles.logo}>
+						<Image source={logo} style={{ width: 350, height: 150 }} />
+					</View>
+
+					<Formik initialValues={{ email: '', password: '' }} onSubmit={(values) => {}}>
+						{(props) => (
+							<View>
+								<View style={{ alignItems: 'center' }}>
+									<TextInput
+										style={styles.input}
+										placeholder='   Email'
+										onChangeText={props.handleChange('email')}
+										value={props.values.email}
+									/>
+
+									<TextInput
+										style={styles.input}
+										placeholder='   Password'
+										onChangeText={props.handleChange('password')}
+										value={props.values.password}
+										secureTextEntry
+									/>
+								</View>
+								<View style={styles.loginBtn}>
+									<TouchableOpacity
+										style={styles.btn}
+										onPress={() => {
+											props.handleSubmit();
+											loginUser(props.values);
+										}}
+									>
+										<Text style={styles.btnText}> Log In </Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+						)}
+					</Formik>
+
+					<View>
+						<TouchableOpacity style={styles.btn} onPress={() => setSignUp(true)}>
+							<Text style={styles.btnText}> Sign Up </Text>
+						</TouchableOpacity>
+					</View>
 				</View>
-			</View>
+			</ScrollView>
 		</SafeAreaView>
 	);
 };
@@ -98,12 +101,12 @@ const styles = StyleSheet.create({
 	},
 	logo: {
 		alignItems: 'center',
-		marginBottom: 150,
+		marginBottom: 100,
 	},
 	input: {
 		margin: 10,
 		width: 280,
-		height: 40,
+		height: 45,
 		backgroundColor: 'white',
 		borderWidth: 2,
 		borderColor: '#ddd',
@@ -111,10 +114,10 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 	},
 	btn: {
-		borderRadius: 8,
+		borderRadius: 10,
 		marginVertical: 8,
 		paddingVertical: 14,
-		paddingHorizontal: 10,
+		marginHorizontal: 35,
 		backgroundColor: '#5c98c0',
 	},
 	btnText: {
@@ -123,6 +126,9 @@ const styles = StyleSheet.create({
 		textTransform: 'uppercase',
 		fontSize: 16,
 		textAlign: 'center',
+	},
+	loginBtn: {
+		marginBottom: 100,
 	},
 });
 
