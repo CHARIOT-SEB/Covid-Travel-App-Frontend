@@ -11,18 +11,8 @@ import {
 } from '@expo-google-fonts/oxygen';
 
 const PastTrips = () => {
-	// temporary past trips data
-	const { isLoading, setIsLoading, isLoggedIn, user } = useContext(dataStore);
-	const pastTrips =  user.pastTrips;
-    console.log(pastTrips)
-    // [
-	// 	{ country: 'France', dateArrived: '2020-7-1' },
-	// 	{ country: 'Croatia', dateArrived: '2021-2-13' },
-	// 	{ country: 'Poland', dateArrived: '2021-2-13' },
-	// 	{ country: 'Spain', dateArrived: '2021-2-13' },
-	// 	{ country: 'Switzerland', dateArrived: '2021-2-13' },
-	// 	{ country: 'Germany', dateArrived: '2021-2-13' },
-	// ];
+	const { isLoggedIn, user } = useContext(dataStore);
+	const pastTrips =  user.pastTrips || user.user.pastTrips;
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
 		Oxygen_400Regular,
@@ -44,10 +34,7 @@ const PastTrips = () => {
 
 	const renderItem = ({ item }) => <Item country={item.country} dateGoing={item.dateGoing} dateReturning={item.dateReturning} />;
 
-
-	{
-		if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
-	}
+        if(!isLoggedIn) return null;
 
 	return (
 		<View style={styles.container}>

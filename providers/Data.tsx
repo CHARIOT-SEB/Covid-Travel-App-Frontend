@@ -13,7 +13,7 @@ const dataProvider = ({ children }) => {
 	[countryInfo, setCountryInfo] = useState({});
     [user, setUser] = useState({});
     [loginInfo, setLoginInfo] = useState({});
-    [isLoggedIn, setIsLoggedIn] = useState(true)
+    [isLoggedIn, setIsLoggedIn] = useState(false)
  
 	// pass everything into 'value', so .Provider can provide everywhere in App
 	return (

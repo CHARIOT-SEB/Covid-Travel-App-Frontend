@@ -18,17 +18,16 @@ const AccountInfo = () => {
 		Oxygen_400Regular,
 		Oxygen_700Bold,
 	});
-    console.log(user);
 
     if(!isLoggedIn) return null;
 	
 	return (
 		<View style={styles.accountInfoContainer}>
 			<Text style={styles.text}>
-				<Ionicons name={'md-person'} size={15} /> {user.name}
+				<Ionicons name={'md-person'} size={15} /> {user.name || user.user.name}
 			</Text>
 			<Text style={styles.text}>
-				<Ionicons name={'md-mail'} size={15} /> {user.email}
+				<Ionicons name={'md-mail'} size={15} /> {user.email || user.user.email}
 			</Text>
 		</View>
 	);
