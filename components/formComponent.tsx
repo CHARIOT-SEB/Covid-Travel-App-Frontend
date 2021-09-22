@@ -15,13 +15,18 @@ const userSchema = yup.object({
 });
 const formComponent = (props: any) => {
 	const nav = props.navigation;
+
 	const { setSignUp, setUser, user, setLoginInfo, setIsLoggedIn } = useContext(dataStore);
 
 	useEffect(() => {
-		postNewAccount(user).then((data) => {
-			setLoginInfo(data);
-			setIsLoggedIn(true);
-		});
+		postNewAccount(user)
+			.then((data) => {
+				setLoginInfo(data);
+				setIsLoggedIn(true);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}, [user]);
 
 	return (
@@ -49,7 +54,7 @@ const formComponent = (props: any) => {
 								onBlur={props.handleBlur('name')}
 							/>
 							<Text style={styles.errorText}> {props.touched.name && props.errors.name} </Text>
-							
+
 							<Text>Email</Text>
 							<TextInput
 								style={styles.input}
@@ -59,7 +64,7 @@ const formComponent = (props: any) => {
 								onBlur={props.handleBlur('email')}
 							/>
 							<Text style={styles.errorText}> {props.touched.email && props.errors.email} </Text>
-							
+
 							<Text>Password</Text>
 							<TextInput
 								style={styles.input}
