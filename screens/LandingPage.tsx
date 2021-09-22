@@ -17,6 +17,7 @@ import { useFonts, Oxygen_400Regular, Oxygen_700Bold } from '@expo-google-fonts/
 // screen imports
 import { dataStore } from '../providers/Data';
 import SignUpForm from '../screens/SignUpForm';
+import { Spinner } from 'native-base';
 const logo = require('../logo.png');
 
 const LandingPage = () => {
@@ -36,6 +37,18 @@ const LandingPage = () => {
 	};
 
 	if (isLoggedIn) return null;
+
+	const [fontsLoaded] = useFonts({
+		Oxygen_400Regular,
+	});
+
+	if (!fontsLoaded) {
+		return (
+			<View style={{ flex: 1, justifyContent: 'center' }}>
+				<Spinner />
+			</View>
+		);
+	}
 
 	return (
 		<SafeAreaView style={styles.container}>
