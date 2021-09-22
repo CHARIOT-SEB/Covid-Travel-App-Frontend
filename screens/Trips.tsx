@@ -25,13 +25,40 @@ const Trips = (props: any) => {
     Oxygen_700Bold
   });
   const { user, isLoggedIn } = useContext(dataStore);
+
+  console.log(user, 'user');
+  console.log(isLoggedIn, 'is logged in');
   const nav = props.navigation;
   const trips = user.trips;
 
   if (!isLoggedIn) return null;
-  
-  if (trips.length === 0) return <Text> You have no trips booked yet</Text>;
 
+  if (trips.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Logo />
+        <TouchableOpacity
+          style={styles.countryButton}
+          onPress={() => nav.navigate('Home')}
+        >
+          <Text style={styles.countryButtonText}>Check Country</Text>
+        </TouchableOpacity>
+
+        <View style={styles.myTripsContainer}>
+          <Text style={styles.myTripsTitle}>My Trips</Text>
+
+          <Text style={styles.noTrips}>You haven't planned any trips yet</Text>
+
+          <TouchableOpacity
+            style={styles.countryButton}
+            onPress={() => nav.navigate('Home')}
+          >
+            <Text style={styles.countryButtonText}>Start planning...</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Logo />
@@ -212,6 +239,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textTransform: 'uppercase',
     color: 'black'
+  },
+  noTrips: {
+    fontFamily: 'Oxygen_400Regular',
+    fontSize: 16,
+    color: 'black',
+    alignSelf: 'center'
   },
   itemText: {
     fontFamily: 'Oxygen_700Bold',
