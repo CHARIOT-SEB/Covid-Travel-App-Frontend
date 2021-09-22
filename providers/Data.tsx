@@ -27,7 +27,7 @@ const dataProvider = ({ children }) => {
   [countries, setCountries] = useState([]);
   [isLoading, setIsLoading] = useState(false);
   [countryInfo, setCountryInfo] = useState({});
-  [isLoggedIn, setIsLoggedIn] = useState(true);
+  [isLoggedIn, setIsLoggedIn] = useState(false);
   [signUp, setSignUp] = useState(false);
   [user, setUser] = useState({});
 
