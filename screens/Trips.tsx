@@ -8,7 +8,11 @@ import {
   FlatList
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  AntDesign
+} from '@expo/vector-icons';
 import Logo from '../components/Logo';
 import { dataStore } from '../providers/Data';
 import {
@@ -17,6 +21,9 @@ import {
   Oxygen_400Regular,
   Oxygen_700Bold
 } from '@expo-google-fonts/oxygen';
+import patchTrips from './api';
+import { Spinner } from 'native-base';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
 const Trips = (props: any) => {
   const [fontsLoaded] = useFonts({
@@ -24,7 +31,7 @@ const Trips = (props: any) => {
     Oxygen_400Regular,
     Oxygen_700Bold
   });
-  const { user, isLoggedIn } = useContext(dataStore);
+  const { user, isLoggedIn, isLoading, setIsLoading } = useContext(dataStore);
 
   console.log(user, 'user');
   console.log(isLoggedIn, 'is logged in');
@@ -32,6 +39,20 @@ const Trips = (props: any) => {
   const trips = user.trips;
 
   if (!isLoggedIn) return null;
+
+  const removeTrip = (index) => {
+    setIsLoading(true);
+    patchTrips(index).then((data) => {
+      setUser(data);
+    });
+    console.log('deleted');
+  };
+
+  const archiveTrip = () => {
+    console.log('archived');
+  };
+
+  if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
 
   if (trips.length === 0) {
     return (
@@ -92,6 +113,14 @@ const Trips = (props: any) => {
                 <Text style={[styles.listItem, styles.countryName]}>
                   {item.country}
                 </Text>
+
+                <TouchableOpacity style={styles.smlBtn} onPress={removeTrip()}>
+                  <Ionicons name='trash-outline' size={30} color='grey' />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.smlBtn} onPress={archiveTrip()}>
+                  <MaterialIcons name='file-present' size={30} color='grey' />
+                </TouchableOpacity>
               </View>
 
               {/* date going and returning */}
@@ -210,7 +239,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#DCEFF9',
     flexDirection: 'column',
     paddingVertical: 10,
-
     margin: 5,
     borderRadius: 10,
     borderBottomColor: '#1D7253',
@@ -218,7 +246,7 @@ const styles = StyleSheet.create({
   },
   trafficLight: {
     borderRadius: 50,
-    marginHorizontal: 3,
+    marginHorizontal: 13,
     marginVertical: 8,
     width: 50,
     height: 50,
@@ -236,9 +264,11 @@ const styles = StyleSheet.create({
   },
   countryName: {
     fontFamily: 'Oxygen_700Bold',
-    fontSize: 20,
+    fontSize: 22,
     textTransform: 'uppercase',
-    color: 'black'
+    color: 'black',
+    borderBottomColor: '#1D7253',
+    borderBottomWidth: 0.5
   },
   noTrips: {
     fontFamily: 'Oxygen_400Regular',
@@ -276,6 +306,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8
+  },
+  smlBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 5
   }
 });
 
