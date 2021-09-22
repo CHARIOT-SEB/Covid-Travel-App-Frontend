@@ -1,4 +1,5 @@
 //react imports
+import axios from 'axios';
 import { Formik } from 'formik';
 import React, { useContext, useState } from 'react';
 import {
@@ -17,61 +18,66 @@ import SignUpForm from '../screens/SignUpForm';
 import Logo from '../components/Logo';
 
 const LandingPage = () => {
-	const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
-	const { isLoggedIn, setIsLoggedIn, setSignUp, signUp } = useContext(dataStore);
+	const [signUp, setSignUp] = useState(false);
+    const {isLoggedIn, setIsLoggedIn, setUser} = useContext(dataStore);
 
-	console.log(isLoggedIn, 'Logged In?');
+    const loginUser = (loginDetails: any) => {
+        loginDetails.email = loginDetails.email.toLowerCase()
+        const URL = `https://covid-travel-app-21.herokuapp.com/api/users/${loginDetails.email}`;
+        axios.post(URL, {password: loginDetails.password})
+            .then((user: any) => {
+                setUser(user.data);
+                setIsLoggedIn(true);
+            })
+            .catch((error: object) => {
 
-	if (isLoggedIn) return null;
+            })
+    }
+
+    if(isLoggedIn) return null;
 
 	return (
-		<SafeAreaView style={styles.container}>
-			<View>
-				<Modal visible={signUp} animationType='slide'>
-					<SignUpForm />
-				</Modal>
-				<View style={styles.logo}>
-					<Logo />
-				</View>
-				<View style={styles.login}>
-					<Formik
-						initialValues={{ email: '', password: '' }}
-						onSubmit={(values) => {
-							setLoginInfo(values);
-							console.log(loginInfo);
-						}}
-					>
-						{(props) => (
-							<View>
-								<TextInput
-									style={styles.input}
-									placeholder=' Email'
-									onChangeText={props.handleChange('email')}
-									value={props.values.email}
-								/>
+		<View style={styles.formContainer}>
+			<Modal visible={signUp} animationType='slide'>
+				<SignUpForm />
+				<Button title='Return to Login Page' onPress={() => setSignUp(false)} />
+			</Modal>
+			<Text>Welcome to the APPNAMEHERE</Text>
+			<Text>Login in</Text>
+			<Formik
+				initialValues={{ email: '', password: '' }}
+				onSubmit={(values) => {
+				}}
+			>
+				{(props) => (
+					<View>
+						<TextInput
+							style={styles.input}
+							placeholder='email'
+							onChangeText={props.handleChange('email')}
+							value={props.values.email}
+						/>
 
-								<TextInput
-									style={styles.input}
-									placeholder=' Password'
-									onChangeText={props.handleChange('password')}
-									value={props.values.password}
-									secureTextEntry
-								/>
-								{/* {old button} */}
-								{/* <Button title='Log In' color='red' onPress={props.submitForm} /> */}
-								<TouchableOpacity style={styles.btn} onPress={props.submitForm}>
-									<Text style={styles.btnText}>Log In</Text>
-								</TouchableOpacity>
-							</View>
-						)}
-					</Formik>
-					{/* <Button title='Sign Up' onPress={() => setSignUp(true)} /> */}
-					<TouchableOpacity style={styles.btn} onPress={() => setSignUp(true)}>
-						<Text style={styles.btnText}>Sign Up</Text>
-					</TouchableOpacity>
-				</View>
-			</View>
-		</SafeAreaView>
+						<TextInput
+							style={styles.input}
+							placeholder='password'
+							onChangeText={props.handleChange('password')}
+							value={props.values.password}
+							secureTextEntry
+						/>
+						<Button
+							title='submit'
+							color='red'
+							onPress={() => {
+								props.handleSubmit();
+                loginUser(props.values)
+							}}
+						/>
+					</View>
+				)}
+			</Formik>
+			<Button title='Sign Up' onPress={() => setSignUp(true)} />
+		</View>
 	);
 };
 

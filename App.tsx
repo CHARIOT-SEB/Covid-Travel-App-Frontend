@@ -8,7 +8,6 @@ import MyTabs from './navigation/MyTabs';
 import MyStack from './navigation/MyStack';
 import { NativeBaseProvider } from 'native-base';
 import DataProvider from './providers/Data';
-import LandingPage from './screens/LandingPage';
 
 //  <DataProvider> component stores any data in state, and wraps the app to share data from the top down
 
@@ -31,15 +30,15 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-	},
-	tabs: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'space-evenly',
-	},
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  tabs: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-evenly'
+  }
 });
 
 export default App;

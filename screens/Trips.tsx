@@ -24,15 +24,12 @@ const Trips = (props: any) => {
     Oxygen_400Regular,
     Oxygen_700Bold
   });
-
   const { user, isLoggedIn } = useContext(dataStore);
-
   const nav = props.navigation;
-
   const trips = user.trips;
 
   if (!isLoggedIn) return null;
-
+  
   if (trips.length === 0) return <Text> You have no trips booked yet</Text>;
 
   return (

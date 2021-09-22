@@ -33,11 +33,11 @@ const Home = (props: any) => {
 				<Logo />
 				<Text
 					style={{
-						flex: 0.15,
 						fontFamily: 'Oxygen_400Regular',
+						textAlign: 'center',
+						flex: 0.15,
 						fontSize: 18,
 						margin: 40,
-						textAlign: 'center',
 					}}
 				>
 					Up-to-date travel information for 31 countries in Europe
@@ -46,6 +46,8 @@ const Home = (props: any) => {
 					<Text
 						style={{
 							fontFamily: 'Oxygen_400Regular',
+							color: '#fff',
+							textTransform: 'uppercase',
 							fontSize: 20,
 							margin: 10,
 							position: 'relative',
@@ -72,15 +74,18 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	text: {
-		flex: 0.3,
-		alignItems: 'center',
-		justifyContent: 'center',
+		fontSize: 18,
+		color: '#fff',
+		fontWeight: 'bold',
+		alignSelf: 'center',
+		textTransform: 'uppercase',
 	},
 	button: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#1D7253',
+		elevation: 8,
+		backgroundColor: '#009688',
 		borderRadius: 10,
+		paddingVertical: 1,
+		paddingHorizontal: 12,
 	},
 });
 
