@@ -30,16 +30,15 @@ const SignUpForm = (props: any) => {
 
 const styles = StyleSheet.create({
 	container: {
-		// flex: 2,
+		flex: 2,
 		backgroundColor: '#DCEFF9',
 	},
 	logo: {
-
 		alignItems: 'center',
-		// marginBottom: 50, 
+		marginBottom: 100,
 		padding: 20,
-		backgroundColor: '#5f9ea0',
-	}
+		backgroundColor: '#DCEFF9',
+	},
 });
 
 export default SignUpForm;

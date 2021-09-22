@@ -25,41 +25,51 @@ const LandingPage = () => {
 	if (isLoggedIn) return null;
 
 	return (
-		<SafeAreaView>
-			<View >
+		<SafeAreaView style={styles.container}>
+			<View>
 				<Modal visible={signUp} animationType='slide'>
 					<SignUpForm />
-					{/* <Button title='Return to Login Page' onPress={() => setSignUp(false)} /> */}
 				</Modal>
-				<Logo />
-				<Formik
-					initialValues={{ email: '', password: '' }}
-					onSubmit={(values) => {
-						setLoginInfo(values);
-						console.log(loginInfo);
-					}}
-				>
-					{(props) => (
-						<View>
-							<TextInput
-								style={styles.input}
-								placeholder=' Email'
-								onChangeText={props.handleChange('email')}
-								value={props.values.email}
-							/>
+				<View style={styles.logo}>
+					<Logo />
+				</View>
+				<View style={styles.login}>
+					<Formik
+						initialValues={{ email: '', password: '' }}
+						onSubmit={(values) => {
+							setLoginInfo(values);
+							console.log(loginInfo);
+						}}
+					>
+						{(props) => (
+							<View>
+								<TextInput
+									style={styles.input}
+									placeholder=' Email'
+									onChangeText={props.handleChange('email')}
+									value={props.values.email}
+								/>
 
-							<TextInput
-								style={styles.input}
-								placeholder=' Password'
-								onChangeText={props.handleChange('password')}
-								value={props.values.password}
-								secureTextEntry
-							/>
-							<Button title='Log In' color='red' onPress={props.submitForm} />
-						</View>
-					)}
-				</Formik>
-				<Button title='Sign Up' onPress={() => setSignUp(true)} />
+								<TextInput
+									style={styles.input}
+									placeholder=' Password'
+									onChangeText={props.handleChange('password')}
+									value={props.values.password}
+									secureTextEntry
+								/>
+								{/* {old button} */}
+								{/* <Button title='Log In' color='red' onPress={props.submitForm} /> */}
+								<TouchableOpacity style={styles.btn} onPress={props.submitForm}>
+									<Text style={styles.btnText}>Log In</Text>
+								</TouchableOpacity>
+							</View>
+						)}
+					</Formik>
+					{/* <Button title='Sign Up' onPress={() => setSignUp(true)} /> */}
+					<TouchableOpacity style={styles.btn} onPress={() => setSignUp(true)}>
+						<Text style={styles.btnText}>Sign Up</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</SafeAreaView>
 	);
@@ -68,23 +78,31 @@ const LandingPage = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		alignItems: 'center',
 		backgroundColor: '#DCEFF9',
+	},
+	logo: {
 		alignItems: 'center',
 	},
+	login: {
+		top: 200,
+	},
 	input: {
-		height: 30,
+		width: 300,
+		height: 40,
 		backgroundColor: 'white',
+		borderWidth: 2,
 		borderColor: '#ddd',
-		margin: 10,
 		fontSize: 18,
-		borderRadius: 6,
+		borderRadius: 10,
+		margin: 10,
 	},
 	btn: {
-		backgroundColor: '#cd5c5c',
 		borderRadius: 8,
 		marginVertical: 8,
 		paddingVertical: 14,
 		paddingHorizontal: 10,
+		backgroundColor: '#5c98c0',
 	},
 	btnText: {
 		color: 'white',

@@ -62,6 +62,7 @@ const Account = (props) => {
 										Cancel
 									</Button>
 									<Button
+										style={{ backgroundColor: '#1D7253' }}
 										onPress={() => {
 											setIsLoggedIn(false);
 											nav.navigate('LandingPage');
@@ -78,7 +79,7 @@ const Account = (props) => {
 					<Popover
 						trigger={(triggerProps) => {
 							return (
-								<Button style={styles.button} {...triggerProps}>
+								<Button style={styles.deleteButton} {...triggerProps}>
 									Delete Account
 								</Button>
 							);
@@ -97,6 +98,7 @@ const Account = (props) => {
 										Cancel
 									</Button>
 									<Button
+										style={{ backgroundColor: '#cd5c5c' }}
 										onPress={() => {
 											nav.navigate('LandingPage');
 										}}
@@ -134,6 +136,14 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		backgroundColor: '#1D7253',
+		alignSelf: 'center',
+		margin: 20,
+		padding: 15,
+		textAlign: 'center',
+		borderRadius: 15,
+	},
+	deleteButton: {
+		backgroundColor: '#cd5c5c',
 		alignSelf: 'center',
 		margin: 20,
 		padding: 15,

@@ -40,26 +40,30 @@ const formComponent = (props: any) => {
 				>
 					{(props) => (
 						<View>
+							<Text>Name</Text>
 							<TextInput
 								style={styles.input}
-								placeholder='name'
+								placeholder='Name'
 								onChangeText={props.handleChange('name')}
 								value={props.values.name}
 								onBlur={props.handleBlur('name')}
 							/>
 							<Text style={styles.errorText}> {props.touched.name && props.errors.name} </Text>
-
+							
+							<Text>Email</Text>
 							<TextInput
 								style={styles.input}
-								placeholder='email'
+								placeholder='Email'
 								onChangeText={props.handleChange('email')}
 								value={props.values.email}
 								onBlur={props.handleBlur('email')}
 							/>
 							<Text style={styles.errorText}> {props.touched.email && props.errors.email} </Text>
+							
+							<Text>Password</Text>
 							<TextInput
 								style={styles.input}
-								placeholder='password'
+								placeholder='Password'
 								onChangeText={props.handleChange('password')}
 								value={props.values.password}
 								onBlur={props.handleBlur('password')}
@@ -92,8 +96,7 @@ const formComponent = (props: any) => {
 
 const styles = StyleSheet.create({
 	formContainer: {
-		// flex: 1,
-		// alignContent: 'center',
+		alignItems: 'center',
 		// borderWidth: 3,
 		// borderColor: 'black',
 		// borderRadius: 6,
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
 		marginVertical: 8,
 		paddingVertical: 14,
 		paddingHorizontal: 10,
-		backgroundColor: '#cd5c5c',
+		backgroundColor: '#5c98c0',
 	},
 	btnText: {
 		color: 'white',
