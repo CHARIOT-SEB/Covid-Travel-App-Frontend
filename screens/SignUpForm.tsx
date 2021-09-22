@@ -24,7 +24,6 @@ const SignUpForm = (props: any) => {
 				<Logo />
 			</View>
 			<FormComponent />
-			
 		</SafeAreaView>
 	);
 };

@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Container } from 'native-base';
 import { dataStore } from '../providers/Data';
+import { postNewAccount } from '../screens/api';
 
 const userSchema = yup.object({
 	name: yup.string().required(),
@@ -12,23 +13,29 @@ const userSchema = yup.object({
 	// can do a .matches(takes a regex for password rules)
 	// can do a .test(takes 3 args, name of func, message to user, function to test input)
 });
-const formComponent = () => {
-	const { setSignUp } = useContext(dataStore);
-	const [user, setUser] = useState({
-		name: 'Bob',
-		email: 'bob@cat.com',
-		password: 'ghj',
-	});
+const formComponent = (props: any) => {
+	const nav = props.navigation;
+	const { setSignUp, setUser, user, setLoginInfo, setIsLoggedIn } = useContext(dataStore);
+
+	useEffect(() => {
+		postNewAccount(user).then((data) => {
+			setLoginInfo(data);
+			setIsLoggedIn(true);
+		});
+	}, [user]);
 
 	return (
 		<Container>
 			<View style={styles.formContainer}>
+				<Text>Join now!</Text>
 				<Formik
 					initialValues={{ name: '', email: '', password: '' }}
 					validationSchema={userSchema}
 					onSubmit={(values, actions) => {
 						setUser(values);
+						console.log(user);
 						actions.resetForm();
+						setSignUp(false);
 					}}
 				>
 					{(props) => (
@@ -56,6 +63,7 @@ const formComponent = () => {
 								onChangeText={props.handleChange('password')}
 								value={props.values.password}
 								onBlur={props.handleBlur('password')}
+								secureTextEntry
 							/>
 							<Text style={styles.errorText}>
 								{props.touched.password && props.errors.password}
@@ -72,8 +80,6 @@ const formComponent = () => {
 						</View>
 					)}
 				</Formik>
-				{console.log(user)}
-
 				<View>
 					<TouchableOpacity style={styles.btn} onPress={() => setSignUp(false)}>
 						<Text style={styles.btnText}> Back </Text>
