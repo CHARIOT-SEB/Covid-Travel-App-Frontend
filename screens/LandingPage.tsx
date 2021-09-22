@@ -61,7 +61,7 @@ const LandingPage = () => {
 							color='red'
 							onPress={() => {
 								props.handleSubmit();
-                                loginUser(props.values)
+                loginUser(props.values)
 							}}
 						/>
 					</View>

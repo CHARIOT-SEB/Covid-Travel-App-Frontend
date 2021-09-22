@@ -13,6 +13,7 @@ import { NavigationContainer } from '@react-navigation/native';
 //  <DataProvider> component stores any data in state, and wraps the app to share data from the top down
 
 const App = () => {
+
   return (
     <SafeAreaProvider>
       <DataProvider>
