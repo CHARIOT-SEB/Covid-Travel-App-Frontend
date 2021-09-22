@@ -13,11 +13,11 @@ import {
 	Oxygen_700Bold,
 } from '@expo-google-fonts/oxygen';
 
+
 const Account = (props) => {
 	// const [popoverOpen, setPopoverOpen] = useState(false);
 	const nav = props.navigation;
-
-	const { isLoading, setIsLoading } = useContext(dataStore);
+    const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading} = useContext(dataStore)
 
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
@@ -25,10 +25,9 @@ const Account = (props) => {
 		Oxygen_700Bold,
 	});
 
-	{
-		if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
-	}
-
+    if(!isLoggedIn) return null;
+	
+	if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -63,7 +62,10 @@ const Account = (props) => {
 									<Button size='sm' variant='ghost'>
 										Cancel
 									</Button>
-									<Button onPress={() => nav.navigate('LandingPage')} size='sm'>
+									<Button onPress={() => {
+                                        setIsLoggedIn(false)
+                                        nav.navigate('LandingPage')
+                                        }} size='sm'>
 										Log Out
 									</Button>
 								</Button.Group>

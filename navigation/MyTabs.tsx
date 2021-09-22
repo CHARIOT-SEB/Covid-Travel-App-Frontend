@@ -9,8 +9,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Home from '../screens/Home';
 import Account from '../screens/Account';
 import Trips from '../screens/Trips';
-import SignUpForm from '../screens/SignUpForm';
-import IndividualCountry from '../screens/IndividualCountry';
 import LandingPage from '../screens/LandingPage';
 
 // to access TabNavigator properties
@@ -27,10 +25,6 @@ const handleIcons = ({ route }) => ({
 			iconName = focused ? 'person' : 'person-outline';
 		} else if (route.name === 'Trips') {
 			iconName = focused ? 'ios-airplane' : 'ios-airplane-outline';
-		} else if (route.name === 'Country') {
-			iconName = focused ? 'map' : 'map-outline';
-		} else if (route.name === 'SignUpForm') {
-			iconName = focused ? 'laptop' : 'laptop-outline';
 		} else if (route.name === 'LandingPage') {
 			iconName = focused ? 'ios-egg' : 'ios-egg-outline';
 		}
@@ -59,16 +53,6 @@ const MyTabs = () => {
 				<Tabs.Screen
 					name='Trips'
 					component={Trips}
-					options={{ headerShown: false }}
-				/>
-				<Tabs.Screen
-					name='Country'
-					component={IndividualCountry}
-					options={{ headerShown: false }}
-				/>
-				<Tabs.Screen
-					name='SignUpForm'
-					component={SignUpForm}
 					options={{ headerShown: false }}
 				/>
 				<Tabs.Screen
