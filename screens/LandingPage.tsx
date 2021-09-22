@@ -2,11 +2,20 @@
 import axios from 'axios';
 import { Formik } from 'formik';
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, Modal } from 'react-native';
-import { dataStore } from '../providers/Data';
+import {
+	View,
+	Text,
+	StyleSheet,
+	Button,
+	TextInput,
+	Modal,
+	TouchableOpacity,
+	SafeAreaView,
+} from 'react-native';
 // screen imports
+import { dataStore } from '../providers/Data';
 import SignUpForm from '../screens/SignUpForm';
-
+import Logo from '../components/Logo';
 
 const LandingPage = () => {
 	const [signUp, setSignUp] = useState(false);
@@ -75,29 +84,38 @@ const LandingPage = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
 		alignItems: 'center',
-		justifyContent: 'center',
+		backgroundColor: '#DCEFF9',
 	},
-	formContainer: {
-		height: 300,
-		width: 300,
-		padding: 20,
-		margin: 50,
-		alignItems: 'stretch',
-		borderColor: 'red',
-		borderWidth: 1,
+	logo: {
+		alignItems: 'center',
+	},
+	login: {
+		top: 200,
 	},
 	input: {
-		height: 30,
-		alignItems: 'stretch',
+		width: 300,
+		height: 40,
 		backgroundColor: 'white',
-		borderWidth: 3,
+		borderWidth: 2,
 		borderColor: '#ddd',
-		padding: 10,
-		margin: 10,
 		fontSize: 18,
-		borderRadius: 6,
+		borderRadius: 10,
+		margin: 10,
+	},
+	btn: {
+		borderRadius: 8,
+		marginVertical: 8,
+		paddingVertical: 14,
+		paddingHorizontal: 10,
+		backgroundColor: '#5c98c0',
+	},
+	btnText: {
+		color: 'white',
+		fontWeight: 'bold',
+		textTransform: 'uppercase',
+		fontSize: 16,
+		textAlign: 'center',
 	},
 });
 

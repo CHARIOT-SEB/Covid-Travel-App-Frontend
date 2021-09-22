@@ -38,8 +38,8 @@ const IndividualCountry = () => {
 			});
 	}, [countryName]);
 
-	if (!countryInfo.country) return null;
 	if (!isLoggedIn) return null;
+  if (!countryInfo.country) return null;
 
 	if (isLoading) {
 		return (
@@ -48,7 +48,7 @@ const IndividualCountry = () => {
 			</View>
 		);
 	}
-
+  
 	return (
 		<SafeAreaView>
 			<ScrollView>
@@ -64,14 +64,12 @@ const IndividualCountry = () => {
 						region={countryInfo.geoLocation}
 						// user location will be available to see, if location services are enabled
 					/>
+
 					<View>
 						<IsVaccinated />
 						<AddToTrips />
-
 						<IsntVaccinated />
-
 						<Restrictions />
-
 						<Returning />
 					</View>
 				</View>
@@ -99,6 +97,7 @@ const styles = StyleSheet.create({
 	},
 	trafficLight: {
 		padding: 20,
+
 		backgroundColor: '#5c98c0',
 		borderRadius: 10,
 	},
