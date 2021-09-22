@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { Spinner } from 'native-base';
+import { Button, Spinner } from 'native-base';
 import { dataStore } from '../providers/Data';
 import {
 	useFonts,
@@ -12,7 +12,7 @@ import {
 
 const PastTrips = () => {
 	const { isLoggedIn, user } = useContext(dataStore);
-	const pastTrips =  user.pastTrips || user.user.pastTrips;
+	const pastTrips =  user.pastTrips;
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
 		Oxygen_400Regular,
@@ -47,7 +47,7 @@ const PastTrips = () => {
 					fontFamily: 'Oxygen_700Bold',
 				}}
 			>
-				Past Trips
+				Past Trips:
 			</Text>
 			<FlatList data={pastTrips} renderItem={renderItem} keyExtractor={(item) => item.country} />
 		</View>
