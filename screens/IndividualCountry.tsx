@@ -27,8 +27,6 @@ const IndividualCountry = () => {
     Oxygen_700Bold
   });
 
-  console.log(countryName);
-
   useEffect(() => {
     setIsLoading(true);
     getCountry(countryName)
@@ -40,7 +38,7 @@ const IndividualCountry = () => {
       });
   }, [countryName]);
 
-  // if (!countryInfo.country) return null;
+  if (!countryInfo.country) return null;
   if (!isLoggedIn) return null;
 
   if (isLoading) {

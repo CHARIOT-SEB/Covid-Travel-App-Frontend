@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
-import { View, Pressable, Text, StyleSheet } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import { dataStore } from '../providers/Data';
+import { Popover, Pressable } from 'native-base';
 import { patchTrips } from '../screens/api';
+import { Formik } from 'formik';
 
 // This button will add the country chosen, to the user's upcoming trips
 // construct a request to send to the back-end
@@ -21,6 +23,11 @@ import { patchTrips } from '../screens/api';
 
 const AddToTrips = () => {
   const { countryInfo, user, setUser } = useContext(dataStore);
+  const [submitTrip, setSubmitTrip] = useState(false);
+
+  useEffect(() => {
+    setSubmitTrip(false);
+  }, []);
 
   const newTrip = {
     trip: {
@@ -53,7 +60,12 @@ const AddToTrips = () => {
 
   return (
     <View>
-      <Pressable style={styles.button} onPress={handlePress}>
+      <Pressable
+        style={styles.button}
+        onPress={() =>
+          submitTrip ? setSubmitTrip(false) : setSubmitTrip(true)
+        }
+      >
         <Text
           style={{
             fontFamily: 'Oxygen_400Regular',
@@ -67,6 +79,35 @@ const AddToTrips = () => {
           Add To Trips
         </Text>
       </Pressable>
+      <Formik
+        initialValues={{ dateGoing: '', dateReturning: '' }}
+        onSubmit={(values) => {}}
+      >
+        {(props) => (
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Date Leaving"
+              onChangeText={props.handleChange('dateGoing')}
+              value={props.values.dateGoing}
+            />
+
+            <TextInput
+              style={styles.input}
+              placeholder="Date Returning"
+              onChangeText={props.handleChange('dateReturning')}
+              value={props.values.dateReturning}
+            />
+            <Button
+              title="Add Your Trip"
+              color="red"
+              onPress={() => {
+                props.handleSubmit();
+              }}
+            />
+          </View>
+        )}
+      </Formik>
     </View>
   );
 };
@@ -78,6 +119,30 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 2
+  },
+  input: {
+    width: 300,
+    height: 40,
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: '#ddd',
+    fontSize: 18,
+    borderRadius: 10,
+    margin: 10
+  },
+  btn: {
+    borderRadius: 8,
+    marginVertical: 8,
+    paddingVertical: 14,
+    paddingHorizontal: 10,
+    backgroundColor: '#5c98c0'
+  },
+  btnText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    fontSize: 16,
+    textAlign: 'center'
   }
 });
 
