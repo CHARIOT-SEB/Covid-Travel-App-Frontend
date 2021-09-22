@@ -21,9 +21,8 @@ import {
   Oxygen_400Regular,
   Oxygen_700Bold
 } from '@expo-google-fonts/oxygen';
-import patchTrips from './api';
+import { patchTrips } from './api';
 import { Spinner } from 'native-base';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
 const Trips = (props: any) => {
   const [fontsLoaded] = useFonts({
@@ -31,30 +30,41 @@ const Trips = (props: any) => {
     Oxygen_400Regular,
     Oxygen_700Bold
   });
-  const { user, isLoggedIn, isLoading, setIsLoading } = useContext(dataStore);
+  const { user, setUser, isLoggedIn, isLoading, setIsLoading } =
+    useContext(dataStore);
 
-  console.log(user, 'user');
-  console.log(isLoggedIn, 'is logged in');
   const nav = props.navigation;
   const trips = user.trips;
 
-  if (!isLoggedIn) return null;
+  if (!isLoggedIn || !user) return null;
 
-  const removeTrip = (index) => {
-    setIsLoading(true);
-    patchTrips(index).then((data) => {
-      setUser(data);
-    });
-    console.log('deleted');
+  const handleDelete = (country: string) => {
+    const index = 0;
+    const email = user.email;
+    const tripInfo = { deleteTrip: index };
+    editTrip(tripInfo, email);
   };
 
-  const archiveTrip = () => {
-    console.log('archived');
+  const handleArchive = (country: string) => {
+    const index = 0;
+    const email = user.email;
+    const tripInfo = { archiveTrip: index };
+    editTrip(tripInfo, email);
+  };
+
+  const editTrip = (tripInfo: object, email: string) => {
+    setIsLoading(true);
+
+    patchTrips(tripInfo, email).then((data: any) => {
+      setUser(data);
+      console.log(user, 'new user');
+      setIsLoading(false);
+    });
   };
 
   if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
 
-  if (trips.length === 0) {
+  if (trips && trips.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
         <Logo />
@@ -114,11 +124,21 @@ const Trips = (props: any) => {
                   {item.country}
                 </Text>
 
-                <TouchableOpacity style={styles.smlBtn} onPress={removeTrip()}>
+                <TouchableOpacity
+                  style={styles.smlBtn}
+                  onPress={() => {
+                    handleDelete(item.country);
+                  }}
+                >
                   <Ionicons name='trash-outline' size={30} color='grey' />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.smlBtn} onPress={archiveTrip()}>
+                <TouchableOpacity
+                  style={styles.smlBtn}
+                  onPress={() => {
+                    handleArchive(item.country);
+                  }}
+                >
                   <MaterialIcons name='file-present' size={30} color='grey' />
                 </TouchableOpacity>
               </View>
@@ -248,8 +268,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginHorizontal: 13,
     marginVertical: 8,
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center'
@@ -264,7 +284,7 @@ const styles = StyleSheet.create({
   },
   countryName: {
     fontFamily: 'Oxygen_700Bold',
-    fontSize: 22,
+    fontSize: 16,
     textTransform: 'uppercase',
     color: 'black',
     borderBottomColor: '#1D7253',
