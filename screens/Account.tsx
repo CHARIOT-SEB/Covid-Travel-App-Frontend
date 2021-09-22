@@ -38,7 +38,7 @@ const Account = (props) => {
 				<View style={styles.background}>
 					<Text style={styles.myAccount}>My Account</Text>
 					<AccountInfo />
-                    <Button style={styles.button} onPress={editUserDetails}>Edit Account</Button>
+                    {/* <Button style={styles.button} onPress={editUserDetails}>Edit Account</Button> */}
 					<MyTrips />
 				</View>
 

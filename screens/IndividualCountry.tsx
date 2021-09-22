@@ -34,8 +34,6 @@ const IndividualCountry = () => {
 
   if (!isLoggedIn) return null;
 
-  if (!countryInfo.country) return null;
-
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center' }}>
