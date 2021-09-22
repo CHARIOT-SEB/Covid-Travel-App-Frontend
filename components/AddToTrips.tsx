@@ -20,65 +20,65 @@ import { patchTrips } from '../screens/api';
 // on press: extract info and build trip object, using information
 
 const AddToTrips = () => {
-  const { countryInfo, user, setUser } = useContext(dataStore);
+	const { countryInfo, user, setUser } = useContext(dataStore);
 
-  const newTrip = {
-    trip: {
-      country: countryInfo.country,
-      trafficLight: countryInfo.colorList,
-      dateGoing: new Date(2021, 11, 18),
-      dateReturning: new Date(2022, 0, 1),
-      acceptingTourists:
-        countryInfo.entryRequirements.withFullVaccination.acceptingVisitors,
-      vaccineRequired:
-        !countryInfo.entryRequirements.withoutFullVaccination.acceptingVisitors,
-      testRequired: countryInfo.entryRequirements.withFullVaccination.test
-        ? true
-        : false,
-      extraDocsRequired: countryInfo.entryRequirements.withFullVaccination
-        .documentsRequired.length
-        ? true
-        : false,
-      newInfo: false
-    }
-  };
+	const newTrip = {
+		trip: {
+			country: countryInfo.country,
+			trafficLight: countryInfo.colorList,
+			dateGoing: new Date(2021, 11, 18),
+			dateReturning: new Date(2022, 0, 1),
+			acceptingTourists:
+				countryInfo.entryRequirements.withFullVaccination.acceptingVisitors,
+			vaccineRequired:
+				!countryInfo.entryRequirements.withoutFullVaccination.acceptingVisitors,
+			testRequired: countryInfo.entryRequirements.withFullVaccination.test
+				? true
+				: false,
+			extraDocsRequired: countryInfo.entryRequirements.withFullVaccination
+				.documentsRequired.length
+				? true
+				: false,
+			newInfo: false,
+		},
+	};
 
-  const email = user.email;
+	const email = user.email;
 
-  const handlePress = () => {
-    patchTrips(newTrip, email).then((user) => {
-      setUser(user);
-    });
-  };
+	const handlePress = () => {
+		patchTrips(newTrip, email).then(user => {
+			setUser(user);
+		});
+	};
 
-  return (
-    <View>
-      <Pressable style={styles.button} onPress={handlePress}>
-        <Text
-          style={{
-            fontFamily: 'Oxygen_400Regular',
-            color: '#fff',
-            textTransform: 'uppercase',
-            fontSize: 20,
-            margin: 10,
-            position: 'relative'
-          }}
-        >
-          Add To Trips
-        </Text>
-      </Pressable>
-    </View>
-  );
+	return (
+		<View>
+			<Pressable style={styles.button} onPress={handlePress}>
+				<Text
+					style={{
+						fontFamily: 'Oxygen_400Regular',
+						color: '#fff',
+						textTransform: 'uppercase',
+						fontSize: 20,
+						margin: 10,
+						position: 'relative',
+					}}
+				>
+					Add To Trips
+				</Text>
+			</Pressable>
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
-  button: {
-    elevation: 8,
-    backgroundColor: '#009688',
-    borderRadius: 10,
-    paddingVertical: 5,
-    paddingHorizontal: 2
-  }
+	button: {
+		backgroundColor: '#009688',
+		alignItems: 'center',
+		borderRadius: 10,
+		paddingVertical: 5,
+		paddingHorizontal: 2,
+	},
 });
 
 export default AddToTrips;
