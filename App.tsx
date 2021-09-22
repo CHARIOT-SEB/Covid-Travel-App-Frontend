@@ -6,19 +6,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // file imports
 import MyTabs from './navigation/MyTabs';
 import MyStack from './navigation/MyStack';
-import LandingPage from './screens/LandingPage';
 import { NativeBaseProvider } from 'native-base';
-import Trips from './screens/Trips';
-import appLogo from './logo.png';
-import IndividualCountry from './screens/IndividualCountry';
-import Home from './screens/Home';
-import Account from './screens/Account';
-import { useState } from 'react';
-import DataProvider, { dataStore } from './providers/Data';
+import DataProvider from './providers/Data';
+import { NavigationContainer } from '@react-navigation/native';
 
 //  <DataProvider> component stores any data in state, and wraps the app to share data from the top down
 
 const App = () => {
+
   return (
     <SafeAreaProvider>
       <DataProvider>

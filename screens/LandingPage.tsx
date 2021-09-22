@@ -1,4 +1,5 @@
 //react imports
+import axios from 'axios';
 import { Formik } from 'formik';
 import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, Modal } from 'react-native';
@@ -9,10 +10,20 @@ import SignUpForm from '../screens/SignUpForm';
 
 const LandingPage = () => {
 	const [signUp, setSignUp] = useState(false);
-    const {isLoggedIn, setIsLoggedIn} = useContext(dataStore);
+    const {isLoggedIn, setIsLoggedIn, setUser} = useContext(dataStore);
 
-    console.log(isLoggedIn, "Logged In?")
+    const loginUser = (loginDetails: any) => {
+        loginDetails.email = loginDetails.email.toLowerCase()
+        const URL = `https://covid-travel-app-21.herokuapp.com/api/users/${loginDetails.email}`;
+        axios.post(URL, {password: loginDetails.password})
+            .then((user: any) => {
+                setUser(user.data);
+                setIsLoggedIn(true);
+            })
+            .catch((error: object) => {
 
+            })
+    }
 
     if(isLoggedIn) return null;
 
@@ -27,7 +38,6 @@ const LandingPage = () => {
 			<Formik
 				initialValues={{ email: '', password: '' }}
 				onSubmit={(values) => {
-					console.log(values);
 				}}
 			>
 				{(props) => (
@@ -50,7 +60,9 @@ const LandingPage = () => {
 							title='submit'
 							color='red'
 							onPress={() => {
-								props.handleSubmit;
+								props.handleSubmit();
+                                console.log(props);
+                                loginUser(props.values)
 							}}
 						/>
 					</View>
