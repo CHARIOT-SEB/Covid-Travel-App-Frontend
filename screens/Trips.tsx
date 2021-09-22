@@ -27,8 +27,7 @@ const Trips = (props: any) => {
     Oxygen_700Bold
   });
 
-  const { isLoading, setIsLoading } = useContext(dataStore);
-  const { user, setUser } = useContext(dataStore);
+  const { isLoading, setIsLoading, user, setUser, isLoggedIn } = useContext(dataStore);
   // const { loginInfo } = useContext(dataStore);
 
   // login info comes from state that is passed from login page
@@ -50,11 +49,12 @@ const Trips = (props: any) => {
     });
   }, []);
 
-  const trips = user.trips;
+  const trips = user.trips ? user.trips : null;
 
-  {
+  if(!isLoggedIn) return null;
+
     if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
-  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Logo />
