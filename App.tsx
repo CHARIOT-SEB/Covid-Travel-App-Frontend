@@ -13,24 +13,6 @@ import { NavigationContainer } from '@react-navigation/native';
 //  <DataProvider> component stores any data in state, and wraps the app to share data from the top down
 
 const App = () => {
-<<<<<<< HEAD
-
-     return (
-            <SafeAreaProvider>
-                <DataProvider>  
-                    <NativeBaseProvider>
-                        <View>
-                            <MyStack />
-                        </View>
-                        <View style={styles.container}>
-                            <MyTabs />
-                        </View>
-                        <StatusBar style='auto' />
-                    </NativeBaseProvider>
-                </DataProvider>
-            </SafeAreaProvider>
-	);
-=======
   return (
     <SafeAreaProvider>
       <DataProvider>
@@ -46,7 +28,6 @@ const App = () => {
       </DataProvider>
     </SafeAreaProvider>
   );
->>>>>>> 2fccfeb5297736fa9d4e4b339540695a6b13eead
 };
 
 const styles = StyleSheet.create({
