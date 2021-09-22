@@ -20,7 +20,6 @@ export const postNewAccount = async (user: any) => {
 };
 
 export const patchTrips = async (trip: object, email: string) => {
-    console.log(trip)
-	const { data } = await coromerApi.patch(`/users/${email}`, trip);
+	const { data } = await coromerApi.patch(`/users/${email}`, { trip });
 	return data.user;
 };

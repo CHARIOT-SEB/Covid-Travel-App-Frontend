@@ -70,7 +70,7 @@ const AddToTrips = () => {
   const handlePress = (dates: any) => {
       console.log("Handle press")
     patchTrips(newTrip(dates), email).then((user) => {
-        console.log(user)
+        console.log(user, "USER!!!")
       setUser(user);
     });
   };
