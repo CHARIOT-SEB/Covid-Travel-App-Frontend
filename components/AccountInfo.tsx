@@ -11,7 +11,7 @@ import {
 import { dataStore } from '../providers/Data';
 
 const AccountInfo = () => {
-	const { isLoading, setIsLoading } = useContext(dataStore);
+	const { isLoggedIn, user } = useContext(dataStore);
 
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
@@ -19,16 +19,15 @@ const AccountInfo = () => {
 		Oxygen_700Bold,
 	});
 
-	{
-		if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
-	}
+    if(!isLoggedIn) return null;
+	
 	return (
 		<View style={styles.accountInfoContainer}>
 			<Text style={styles.text}>
-				<Ionicons name={'md-person'} size={15} /> Joe Blogs
+				<Ionicons name={'md-person'} size={15} /> {user.name || user.user.name}
 			</Text>
 			<Text style={styles.text}>
-				<Ionicons name={'md-mail'} size={15} /> joe@blogs.com
+				<Ionicons name={'md-mail'} size={15} /> {user.email || user.user.email}
 			</Text>
 		</View>
 	);
