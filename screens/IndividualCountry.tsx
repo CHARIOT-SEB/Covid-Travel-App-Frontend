@@ -27,29 +27,30 @@ const IndividualCountry = () => {
 		Oxygen_700Bold,
 	});
 
-	console.log(countryName);
 
-	useEffect(() => {
-		setIsLoading(true);
-		getCountry(countryName)
-			.then((country: any) => {
-				setCountryInfo(country);
-			})
-			.then(() => {
-				setIsLoading(false);
-			});
-	}, [countryName]);
+  useEffect(() => {
+    setIsLoading(true);
+    getCountry(countryName)
+      .then((country: any) => {
+        setCountryInfo(country);
+      })
+      .then(() => {
+        setIsLoading(false);
+      });
+  }, [countryName]);
 
-	// if (!countryInfo.country) return null;
-	if (!isLoggedIn) return null;
+  if (!countryInfo.country) return null;
+  if (!isLoggedIn) return null;
 
-	if (isLoading) {
-		return (
-			<View style={{ flex: 1, justifyContent: 'center' }}>
-				<Spinner />
-			</View>
-		);
-	}
+  if(!countryInfo) return null;
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <Spinner />
+      </View>
+    );
+  }
 
 	return (
 		<SafeAreaView>

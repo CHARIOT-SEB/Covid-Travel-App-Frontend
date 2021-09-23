@@ -24,10 +24,10 @@ const AccountInfo = () => {
 	return (
 		<View style={styles.accountInfoContainer}>
 			<Text style={styles.text}>
-				<Ionicons name={'md-person'} size={15} /> {user.name || user.user.name}
+				<Ionicons name={'md-person'} size={15} /> {user.name}
 			</Text>
 			<Text style={styles.text}>
-				<Ionicons name={'md-mail'} size={15} /> {user.email || user.user.email}
+				<Ionicons name={'md-mail'} size={15} /> {user.email}
 			</Text>
 		</View>
 	);

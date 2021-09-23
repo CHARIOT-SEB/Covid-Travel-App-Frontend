@@ -11,14 +11,17 @@ import { Spinner } from 'native-base';
 import { dataStore } from '../providers/Data';
 
 const Home = (props: any) => {
-    const {isLoggedIn} = useContext(dataStore)
+	const { isLoggedIn } = useContext(dataStore);
 	const nav = props.navigation;
+	
+	if (!isLoggedIn) {
+		nav.navigate('LandingPage');
+	}
 
-	let [fontsLoaded] = useFonts({
+	const [fontsLoaded] = useFonts({
 		Oxygen_400Regular,
 	});
 
-    if(!isLoggedIn) return null;
 
 	if (!fontsLoaded) {
 		return (
@@ -27,6 +30,7 @@ const Home = (props: any) => {
 			</View>
 		);
 	}
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.content}>

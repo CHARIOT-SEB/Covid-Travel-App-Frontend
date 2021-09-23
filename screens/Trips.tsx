@@ -8,7 +8,11 @@ import {
 	FlatList,
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  AntDesign
+} from '@expo/vector-icons';
 import Logo from '../components/Logo';
 import { dataStore } from '../providers/Data';
 import {
@@ -17,8 +21,11 @@ import {
 	Oxygen_400Regular,
 	Oxygen_700Bold,
 } from '@expo-google-fonts/oxygen';
+import { patchTrips } from './api';
+import { Spinner } from 'native-base';
 
 const Trips = (props: any) => {
+
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
 		Oxygen_400Regular,
@@ -42,6 +49,7 @@ const Trips = (props: any) => {
 				<Text style={styles.countryButtonText}>Check Country</Text>
 			</Pressable>
 
+
 			<View style={styles.myTripsContainer}>
 				<Text style={styles.myTripsTitle}>My Trips</Text>
 
@@ -62,10 +70,12 @@ const Trips = (props: any) => {
 									]}
 								></View>
 
+
 								<Text style={[styles.listItem, styles.countryName]}>
 									{item.country}
 								</Text>
 							</View>
+
 
 							{/* date going and returning */}
 							<View style={styles.dateContainer}>
@@ -157,6 +167,7 @@ const Trips = (props: any) => {
 };
 
 const styles = StyleSheet.create({
+
 	container: {
 		backgroundColor: '#DCEFF9',
 		flex: 1,
