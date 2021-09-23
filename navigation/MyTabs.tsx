@@ -28,6 +28,8 @@ const handleIcons = ({ route }) => ({
       iconName = focused ? 'ios-airplane' : 'ios-airplane-outline';
     } else if (route.name === 'LandingPage') {
       iconName = focused ? 'ios-egg' : 'ios-egg-outline';
+    } else if (route.name === 'Country') {
+      iconName = focused ? 'ios-map' : 'ios-map-outline';
     }
 
     // You can return any component that you like here!

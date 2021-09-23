@@ -12,9 +12,7 @@ const AddToTrips = () => {
     setSubmitTrip(false);
   }, []);
 
-
   if (!countryInfo.country) return null;
-
 
   return (
     <View>
@@ -36,7 +34,7 @@ const AddToTrips = () => {
             fontWeight: 'bold'
           }}
         >
-          Add To Trips
+          SELECT YOUR DATES
         </Text>
       </Pressable>
       {submitTrip && <AddDates />}
@@ -47,10 +45,12 @@ const AddToTrips = () => {
 const styles = StyleSheet.create({
   button: {
     elevation: 8,
-    backgroundColor: '#009688',
+    backgroundColor: '#5c98c0',
     borderRadius: 10,
     paddingVertical: 5,
-    paddingHorizontal: 2
+    paddingHorizontal: 2,
+    width: '80%',
+    alignSelf: 'center'
   },
   input: {
     width: 300,
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center'
   }
-
 });
 
 export default AddToTrips;
