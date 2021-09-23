@@ -4,6 +4,7 @@ import { dataStore } from '../providers/Data';
 import { Pressable } from 'native-base';
 import AddDates from './AddDates';
 
+
 const AddToTrips = () => {
   const { countryInfo, user } = useContext(dataStore);
   const [submitTrip, setSubmitTrip] = useState(false);
