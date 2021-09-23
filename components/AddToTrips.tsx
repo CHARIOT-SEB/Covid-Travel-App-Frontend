@@ -5,22 +5,6 @@ import { Popover, Pressable } from 'native-base';
 import { patchTrips } from '../screens/api';
 import { Formik } from 'formik';
 
-// This button will add the country chosen, to the user's upcoming trips
-// construct a request to send to the back-end
-/* trip: {
-                    country: 'Ireland',
-                    trafficLight: 'amber',
-                    dateGoing: new Date(2022, 2, 28),     ---> These need to be sent in this format to the backend
-                    dateReturning: new Date(2022, 3, 10), ---^
-                    acceptingTourists: true, ---> Accepting Vaxxed or unvaxxed tourists?
-                    vaccineRequired: true,   ---> Only accepting Vaxxed tourists
-                    testRequired: true,      ---> Only if one box is ticked from with/without Vax
-                    extraDocsRequired: true, ---> if length of docsRequired > 0
-                    newInfo: false           ---> Not updated on the backend, can put in if you want
-                  } */
-
-// on press: extract info and build trip object, using information
-
 const AddToTrips = () => {
   const { countryInfo, user, setUser } = useContext(dataStore);
   const [submitTrip, setSubmitTrip] = useState(false);
@@ -68,15 +52,8 @@ const AddToTrips = () => {
   const email = user.email;
 
   const handlePress = (dates: any) => {
-<<<<<<< HEAD
     patchTrips(newTrip(dates), email).then((user) => {
-=======
-      console.log("Handle press")
-    patchTrips(newTrip(dates), email).then((user) => {
-        console.log(user, "USER!!!")
->>>>>>> 4fd7daa6842c6b66c68a888c1416ee421a2054b0
       setUser(user);
-      
     });
   };
 
