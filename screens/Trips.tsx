@@ -145,14 +145,24 @@ const Trips = (props: any) => {
               <View style={styles.dateContainer}>
                 <AntDesign name="calendar" size={30} color="grey" />
                 <Text style={[styles.listItem, styles.itemText]}>
-                  Date Going: {item.dateGoing}
+                  Date Going:{' '}
+                  {item.dateGoing.slice(8, 10) +
+                    '-' +
+                    item.dateGoing.slice(5, 7) +
+                    '-' +
+                    item.dateGoing.slice(0, 4)}
                 </Text>
               </View>
               <View style={styles.dateContainer}>
                 <AntDesign name="calendar" size={30} color="grey" />
                 <Text style={[styles.listItem, styles.itemText]}>
                   {' '}
-                  Date Returning: {item.dateReturning}
+                  Date Returning:{' '}
+                  {item.dateReturning.slice(8, 10) +
+                    '-' +
+                    item.dateReturning.slice(5, 7) +
+                    '-' +
+                    item.dateReturning.slice(0, 4)}
                 </Text>
               </View>
               {/* Accepting Tourists */}

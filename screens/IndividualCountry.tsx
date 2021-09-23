@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   map: {
     alignSelf: 'center',
     width: 370,
-    height: 500,
+    height: 370,
 
     alignItems: 'center',
     borderWidth: 3,

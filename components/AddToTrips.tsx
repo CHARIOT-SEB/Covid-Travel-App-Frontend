@@ -12,10 +12,6 @@ const AddToTrips = () => {
     setSubmitTrip(false);
   }, []);
 
-  useEffect(() => {
-    setSubmitTrip(submitTrip);
-  }, [submitTrip]);
-
   if (!countryInfo.country) return null;
 
   return (
