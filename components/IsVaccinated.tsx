@@ -11,6 +11,8 @@ import {
 const IsVaccinated = () => {
   const { countryInfo } = useContext(dataStore);
 
+    if(!countryInfo.country) return null;
+
   return (
     <View style={styles.infoContainer}>
       <View>

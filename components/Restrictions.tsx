@@ -10,7 +10,8 @@ import {
 
 const Restrictions = () => {
   const { countryInfo } = useContext(dataStore);
-  console.log(countryInfo);
+
+    if (!countryInfo.country) return null;
 
   return (
     <View style={styles.infoContainer}>
