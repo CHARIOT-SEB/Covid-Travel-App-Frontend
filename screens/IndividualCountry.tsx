@@ -38,8 +38,8 @@ const IndividualCountry = () => {
       });
   }, [countryName]);
 
-  if (!countryInfo.country) return null;
   if (!isLoggedIn) return null;
+  if (!countryInfo.country) return null;
 
   if(!countryInfo) return null;
 
@@ -67,8 +67,9 @@ const IndividualCountry = () => {
             // user location will be available to see, if location services are enabled
           />
           <View>
-            <IsVaccinated />
+            <Text />
             <AddToTrips />
+            <IsVaccinated />
             <IsntVaccinated />
             <Restrictions />
             <Returning />
