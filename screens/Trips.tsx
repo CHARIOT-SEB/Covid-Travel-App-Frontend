@@ -21,7 +21,7 @@ import {
 	Oxygen_400Regular,
 	Oxygen_700Bold,
 } from '@expo-google-fonts/oxygen';
-import { patchTrips } from './api';
+import { removeTrips } from './api';
 import { Spinner } from 'native-base';
 
 const Trips = (props: any) => {
@@ -50,25 +50,16 @@ const Trips = (props: any) => {
 			</Pressable>
 
 
-			<View style={styles.myTripsContainer}>
-				<Text style={styles.myTripsTitle}>My Trips</Text>
+  const editTrip = (tripInfo: object, email: string) => {
+    setIsLoading(true);
+    removeTrips(tripInfo, email).then((data: any) => {
+      setUser(data);
+      setIsLoading(false);
+    });
+  };
 
-				<FlatList
-					keyExtractor={item => item.country}
-					data={trips}
-					renderItem={({ item }) => (
-						<View style={styles.singleTrip}>
-							<View style={styles.countryNameContainer}>
-								<View
-									style={[
-										item.trafficLight === 'green'
-											? { backgroundColor: '#0aa33a' }
-											: item.trafficLight === 'amber'
-											? { backgroundColor: '#eb8407' }
-											: { backgroundColor: '#ba1f11' },
-										styles.trafficLight,
-									]}
-								></View>
+  if (isLoading || !fontsLoaded) return <Spinner color="#0aa33a" />;
+
 
 
 								<Text style={[styles.listItem, styles.countryName]}>
@@ -77,61 +68,27 @@ const Trips = (props: any) => {
 							</View>
 
 
-							{/* date going and returning */}
-							<View style={styles.dateContainer}>
-								<AntDesign name='calendar' size={30} color='grey' />
-								<Text style={[styles.listItem, styles.itemText]}>
-									Date Going: {item.dateGoing}
-								</Text>
-							</View>
-							<View style={styles.dateContainer}>
-								<AntDesign name='calendar' size={30} color='grey' />
-								<Text style={[styles.listItem, styles.itemText]}>
-									{' '}
-									Date Returning: {item.dateReturning}
-								</Text>
-							</View>
-							{/* Accepting Tourists */}
-							<View style={styles.listItem}>
-								<Ionicons name={'person-sharp'} size={30} color={'grey'} />
-								<Text style={styles.itemText}> Accepting Tourists </Text>
-								<Ionicons
-									name={
-										item.acceptingTourists
-											? 'md-checkmark-circle'
-											: 'md-close-circle'
-									}
-									size={25}
-									color={item.acceptingTourists ? '#1D7253' : '#ba1f11'}
-								/>
-							</View>
-							{/* test required? */}
-							<View style={styles.listItem}>
-								<MaterialCommunityIcons
-									name='test-tube'
-									size={30}
-									color='grey'
-								/>
-								<Text style={styles.itemText}> Test Required </Text>
-								<Ionicons
-									name={
-										item.testRequired
-											? 'md-checkmark-circle'
-											: 'md-close-circle'
-									}
-									size={25}
-									color={item.testRequired ? '#1D7253' : '#ba1f11'}
-								/>
-							</View>
 
-							{/* Vaccine Required */}
-							<View style={styles.listItem}>
-								<MaterialCommunityIcons
-									name={'needle'}
-									size={30}
-									color={'grey'}
-								/>
-								<Text style={styles.itemText}> Vaccine Required </Text>
+          <TouchableOpacity
+            style={styles.countryButton}
+            onPress={() => nav.navigate('Home')}
+          >
+            <Text style={styles.countryButtonText}>Start planning...</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <Logo />
+      <TouchableOpacity
+        style={styles.countryButton}
+        onPress={() => nav.navigate('Home')}
+      >
+        <Text style={styles.countryButtonText}>Check Country</Text>
+      </TouchableOpacity>
+
 
 								<Ionicons
 									name={
@@ -144,26 +101,145 @@ const Trips = (props: any) => {
 								/>
 							</View>
 
-							{/* Docs required? */}
-							<View style={styles.listItem}>
-								<AntDesign name='filetext1' size={30} color='grey' />
-								<Text style={styles.itemText}> Docs Required </Text>
-								<Ionicons
-									name={
-										item.extraDocsRequired
-											? 'md-checkmark-circle'
-											: 'md-close-circle'
-									}
-									size={25}
-									color={item.extraDocsRequired ? '#1D7253' : '#ba1f11'}
-								/>
-							</View>
-						</View>
-					)}
-				></FlatList>
-			</View>
-		</SafeAreaView>
-	);
+
+        <FlatList
+          keyExtractor={(item) => item.country}
+          data={trips}
+          renderItem={({ item }) => (
+            <View style={styles.singleTrip}>
+              <View style={styles.countryNameContainer}>
+                <View
+                  style={[
+                    item.trafficLight === 'green'
+                      ? { backgroundColor: '#0aa33a' }
+                      : item.trafficLight === 'amber'
+                      ? { backgroundColor: '#eb8407' }
+                      : { backgroundColor: '#ba1f11' },
+                    styles.trafficLight
+                  ]}
+                ></View>
+
+                <Text style={[styles.listItem, styles.countryName]}>
+                  {item.country}
+                </Text>
+
+                <TouchableOpacity
+                  style={styles.smlBtn}
+                  onPress={() => {
+                    handleDelete(item.country);
+                  }}
+                >
+                  <Ionicons name="trash-outline" size={30} color="grey" />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.smlBtn}
+                  onPress={() => {
+                    handleArchive(item.country);
+                  }}
+                >
+                  <MaterialIcons name="file-present" size={30} color="grey" />
+                </TouchableOpacity>
+              </View>
+
+              {/* date going and returning */}
+              <View style={styles.dateContainer}>
+                <AntDesign name="calendar" size={30} color="grey" />
+                <Text style={[styles.listItem, styles.itemText]}>
+                  Date Going:{' '}
+                  {item.dateGoing.slice(8, 10) +
+                    '-' +
+                    item.dateGoing.slice(5, 7) +
+                    '-' +
+                    item.dateGoing.slice(0, 4)}
+                </Text>
+              </View>
+              <View style={styles.dateContainer}>
+                <AntDesign name="calendar" size={30} color="grey" />
+                <Text style={[styles.listItem, styles.itemText]}>
+                  {' '}
+                  Date Returning:{' '}
+                  {item.dateReturning.slice(8, 10) +
+                    '-' +
+                    item.dateReturning.slice(5, 7) +
+                    '-' +
+                    item.dateReturning.slice(0, 4)}
+                </Text>
+              </View>
+              {/* Accepting Tourists */}
+              <View style={styles.listItem}>
+                <Ionicons name={'person-sharp'} size={30} color={'grey'} />
+                <Text style={styles.itemText}> Accepting Tourists </Text>
+                <Ionicons
+                  name={
+                    item.acceptingTourists
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={25}
+                  color={item.acceptingTourists ? '#1D7253' : '#ba1f11'}
+                />
+              </View>
+              {/* test required? */}
+              <View style={styles.listItem}>
+                <MaterialCommunityIcons
+                  name="test-tube"
+                  size={30}
+                  color="grey"
+                />
+                <Text style={styles.itemText}> Test Required </Text>
+                <Ionicons
+                  name={
+                    item.testRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={25}
+                  color={item.testRequired ? '#1D7253' : '#ba1f11'}
+                />
+              </View>
+
+              {/* Vaccine Required */}
+              <View style={styles.listItem}>
+                <MaterialCommunityIcons
+                  name={'needle'}
+                  size={30}
+                  color={'grey'}
+                />
+                <Text style={styles.itemText}> Vaccine Required </Text>
+
+                <Ionicons
+                  name={
+                    item.vaccineRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={25}
+                  color={item.vaccineRequired ? '#1D7253' : '#ba1f11'}
+                />
+              </View>
+
+              {/* Docs required? */}
+              <View style={styles.listItem}>
+                <AntDesign name="filetext1" size={30} color="grey" />
+                <Text style={styles.itemText}> Docs Required </Text>
+                <Ionicons
+                  name={
+                    item.extraDocsRequired
+                      ? 'md-checkmark-circle'
+                      : 'md-close-circle'
+                  }
+                  size={25}
+                  color={item.extraDocsRequired ? '#1D7253' : '#ba1f11'}
+                />
+              </View>
+            </View>
+          )}
+        ></FlatList>
+      </View>
+    </SafeAreaView>
+  );
+
 };
 
 const styles = StyleSheet.create({
