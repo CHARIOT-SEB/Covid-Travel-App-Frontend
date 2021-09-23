@@ -12,9 +12,7 @@ const AddToTrips = () => {
     setSubmitTrip(false);
   }, []);
 
-
   if (!countryInfo.country) return null;
-
 
   return (
     <View>
@@ -50,7 +48,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#009688',
     borderRadius: 10,
     paddingVertical: 5,
-    paddingHorizontal: 2
+    paddingHorizontal: 2,
+    width: '80%',
+    alignSelf: 'center'
   },
   input: {
     width: 300,
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center'
   }
-
 });
 
 export default AddToTrips;
