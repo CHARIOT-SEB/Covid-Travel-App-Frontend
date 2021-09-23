@@ -88,7 +88,7 @@ const IndividualCountry = (props) => {
             <IsVaccinated />
             <IsntVaccinated />
             <Restrictions />
-            <Returning />
+            {/* <Returning /> */}
           </View>
         </View>
       </ScrollView>
