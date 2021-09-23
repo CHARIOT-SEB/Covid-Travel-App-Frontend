@@ -20,10 +20,11 @@ import SignUpForm from '../screens/SignUpForm';
 import { Spinner } from 'native-base';
 const logo = require('../logo.png');
 
-const LandingPage = () => {
+const LandingPage = (props: any) => {
 
 	const [signUp, setSignUp] = useState(false);
 	const { isLoggedIn, setIsLoggedIn, setUser } = useContext(dataStore);
+    const nav: any = props.navigation;
 
 	const loginUser = (loginDetails: any) => {
 		loginDetails.email = loginDetails.email.toLowerCase();
@@ -31,17 +32,19 @@ const LandingPage = () => {
 		axios
 			.post(URL, { password: loginDetails.password })
 			.then((user: any) => {
+                console.log(user.data)
 				setUser(user.data.user);
 				setIsLoggedIn(true);
+                nav.navigate('Home')
 			})
 			.catch((error: object) => {});
 	};
-
-	if (isLoggedIn) return null;
-
+    
 	const [fontsLoaded] = useFonts({
-		Oxygen_400Regular,
+        Oxygen_400Regular,
 	});
+
+    if (isLoggedIn) {return null};
 
 	if (!fontsLoaded) {
 		return (
