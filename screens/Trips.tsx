@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  Pressable
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {
@@ -66,12 +67,12 @@ const Trips = (props: any) => {
     return (
       <SafeAreaView style={styles.container}>
         <Logo />
-        <TouchableOpacity
+        <Pressable
           style={styles.countryButton}
           onPress={() => nav.navigate('Home')}
         >
           <Text style={styles.countryButtonText}>Check Country</Text>
-        </TouchableOpacity>
+        </Pressable>
 
         <View style={styles.myTripsContainer}>
           <Text style={styles.myTripsTitle}>My Trips</Text>
@@ -323,17 +324,17 @@ const styles = StyleSheet.create({
   },
   countryButtonText: {
     fontFamily: 'Oxygen_700Bold',
-    color: 'white',
+    fontSize: 17.5,
+    margin: 10,
+    color: '#F0F0F0',
     textTransform: 'uppercase'
   },
   countryButton: {
-    backgroundColor: '#1D7253',
-    height: 15,
-    margin: 20,
-    padding: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 8
+    elevation: 8,
+    backgroundColor: '#009688',
+    borderRadius: 10,
+    paddingVertical: 1,
+    paddingHorizontal: 12
   },
   smlBtn: {
     paddingHorizontal: 10,
