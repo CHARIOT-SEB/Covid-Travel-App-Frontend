@@ -19,6 +19,7 @@ import SignUpForm from '../screens/SignUpForm';
 const logo = require('../logo.png');
 
 const LandingPage = () => {
+
 	const [signUp, setSignUp] = useState(false);
 	const { isLoggedIn, setIsLoggedIn, setUser } = useContext(dataStore);
 
