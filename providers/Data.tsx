@@ -21,7 +21,9 @@ const dataProvider = ({ children }) => {
     isLoggedIn,
     setIsLoggedIn,
     signUp,
-    setSignUp: any;
+    setSignUp,
+    submitTrip,
+    setSubmitTrip: any;
 
   [countryName, setCountryName] = useState('');
   [countries, setCountries] = useState([]);
@@ -30,11 +32,14 @@ const dataProvider = ({ children }) => {
   [isLoggedIn, setIsLoggedIn] = useState(false);
   [signUp, setSignUp] = useState(false);
   [user, setUser] = useState({});
+  [submitTrip, setSubmitTrip] = useState(false);
 
   // pass everything into 'value', so .Provider can provide everywhere in App
   return (
     <dataStore.Provider
       value={{
+        submitTrip,
+        setSubmitTrip,
         countries,
         setCountries,
         countryName,

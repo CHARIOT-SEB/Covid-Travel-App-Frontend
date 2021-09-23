@@ -21,7 +21,7 @@ import {
   Oxygen_400Regular,
   Oxygen_700Bold
 } from '@expo-google-fonts/oxygen';
-import { patchTrips } from './api';
+import { removeTrips } from './api';
 import { Spinner } from 'native-base';
 
 const Trips = (props: any) => {
@@ -54,15 +54,13 @@ const Trips = (props: any) => {
 
   const editTrip = (tripInfo: object, email: string) => {
     setIsLoading(true);
-
-    patchTrips(tripInfo, email).then((data: any) => {
+    removeTrips(tripInfo, email).then((data: any) => {
       setUser(data);
-      console.log(user, 'new user');
       setIsLoading(false);
     });
   };
 
-  if (isLoading || !fontsLoaded) return <Spinner color='#0aa33a' />;
+  if (isLoading || !fontsLoaded) return <Spinner color="#0aa33a" />;
 
   if (trips && trips.length === 0) {
     return (
@@ -79,7 +77,6 @@ const Trips = (props: any) => {
           <Text style={styles.myTripsTitle}>My Trips</Text>
 
           <Text style={styles.noTrips}>You haven't planned any trips yet</Text>
-
 
           <TouchableOpacity
             style={styles.countryButton}
@@ -131,7 +128,7 @@ const Trips = (props: any) => {
                     handleDelete(item.country);
                   }}
                 >
-                  <Ionicons name='trash-outline' size={30} color='grey' />
+                  <Ionicons name="trash-outline" size={30} color="grey" />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -140,7 +137,7 @@ const Trips = (props: any) => {
                     handleArchive(item.country);
                   }}
                 >
-                  <MaterialIcons name='file-present' size={30} color='grey' />
+                  <MaterialIcons name="file-present" size={30} color="grey" />
                 </TouchableOpacity>
               </View>
 
@@ -148,14 +145,24 @@ const Trips = (props: any) => {
               <View style={styles.dateContainer}>
                 <AntDesign name="calendar" size={30} color="grey" />
                 <Text style={[styles.listItem, styles.itemText]}>
-                  Date Going: {item.dateGoing}
+                  Date Going:{' '}
+                  {item.dateGoing.slice(8, 10) +
+                    '-' +
+                    item.dateGoing.slice(5, 7) +
+                    '-' +
+                    item.dateGoing.slice(0, 4)}
                 </Text>
               </View>
               <View style={styles.dateContainer}>
                 <AntDesign name="calendar" size={30} color="grey" />
                 <Text style={[styles.listItem, styles.itemText]}>
                   {' '}
-                  Date Returning: {item.dateReturning}
+                  Date Returning:{' '}
+                  {item.dateReturning.slice(8, 10) +
+                    '-' +
+                    item.dateReturning.slice(5, 7) +
+                    '-' +
+                    item.dateReturning.slice(0, 4)}
                 </Text>
               </View>
               {/* Accepting Tourists */}
