@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useRef, useReducer } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,15 +13,18 @@ import { Spinner } from 'native-base';
 import { dataStore } from '../providers/Data';
 import { useFonts, Oxygen_700Bold } from '@expo-google-fonts/oxygen';
 
-const IndividualCountry = () => {
+const IndividualCountry = (props) => {
   const {
     countryName,
     countryInfo,
     setCountryInfo,
     isLoading,
     setIsLoading,
-    isLoggedIn
+    isLoggedIn,
+    user
   } = useContext(dataStore);
+
+  const nav = props.navigation;
 
   let [fontsLoaded] = useFonts({
     Oxygen_700Bold
@@ -36,12 +39,16 @@ const IndividualCountry = () => {
       .then(() => {
         setIsLoading(false);
       });
-  }, [countryName]);
+  }, [countryName, user]);
+
+  useEffect(() => {
+    nav.navigate('Trips');
+  }, [user]);
 
   if (!isLoggedIn) return null;
   if (!countryInfo.country) return null;
 
-  if(!countryInfo) return null;
+  if (!countryInfo) return null;
 
   if (isLoading) {
     return (
