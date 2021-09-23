@@ -1,5 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import {
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity,
+	ScrollView,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MyTrips from '../components/PastTrips';
 import Logo from '../components/Logo';
@@ -13,10 +19,11 @@ import {
 	Oxygen_700Bold,
 } from '@expo-google-fonts/oxygen';
 
-const Account = (props) => {
+const Account = props => {
 	// const [popoverOpen, setPopoverOpen] = useState(false);
 	const nav = props.navigation;
-	const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading } = useContext(dataStore);
+	const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading } =
+		useContext(dataStore);
 
 	const [fontsLoaded] = useFonts({
 		Oxygen_300Light,
@@ -37,14 +44,14 @@ const Account = (props) => {
 				<View style={styles.background}>
 					<Text style={styles.myAccount}>My Account</Text>
 					<AccountInfo />
-                    {/* <Button style={styles.button} onPress={editUserDetails}>Edit Account</Button> */}
+					{/* <Button style={styles.button} onPress={editUserDetails}>Edit Account</Button> */}
 					<MyTrips />
 				</View>
 
 				{/* {LOG OUT POPOVER} */}
 				<View style={styles.background}>
 					<Popover
-						trigger={(triggerProps) => {
+						trigger={triggerProps => {
 							return (
 								<Button style={styles.button} {...triggerProps}>
 									Log Out
@@ -52,7 +59,10 @@ const Account = (props) => {
 							);
 						}}
 					>
-						<Popover.Content accessibilityLabel='hello world' borderRadius={'xl'}>
+						<Popover.Content
+							accessibilityLabel='hello world'
+							borderRadius={'xl'}
+						>
 							<Popover.Arrow />
 							<Popover.CloseButton />
 							<Popover.Header>Log out of this account</Popover.Header>
@@ -78,7 +88,7 @@ const Account = (props) => {
 					</Popover>
 					{/* {DELETE ACCOUNT POPOVER} */}
 					<Popover
-						trigger={(triggerProps) => {
+						trigger={triggerProps => {
 							return (
 								<Button style={styles.deleteButton} {...triggerProps}>
 									Delete Account
@@ -86,7 +96,10 @@ const Account = (props) => {
 							);
 						}}
 					>
-						<Popover.Content accessibilityLabel='hello world' borderRadius={'xl'}>
+						<Popover.Content
+							accessibilityLabel='hello world'
+							borderRadius={'xl'}
+						>
 							<Popover.Arrow />
 							<Popover.CloseButton />
 							<Popover.Header>WARNING</Popover.Header>
@@ -136,7 +149,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	button: {
-		backgroundColor: '#1D7253',
+		backgroundColor: '#009688',
 		alignSelf: 'center',
 		margin: 20,
 		padding: 15,

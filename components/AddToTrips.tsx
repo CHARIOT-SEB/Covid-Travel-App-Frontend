@@ -12,7 +12,9 @@ const AddToTrips = () => {
     setSubmitTrip(false);
   }, []);
 
+
   if (!countryInfo.country) return null;
+
 
   return (
     <View>
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center'
   }
+
 });
 
 export default AddToTrips;
