@@ -78,8 +78,8 @@ const PastTrips = () => {
 const styles = StyleSheet.create({
   container: {
     width: 350,
-    margin: 20,
-    padding: 20
+    margin: 5,
+    padding: 5
   },
   text: {
     fontFamily: 'Oxygen_700Bold',
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   pastTrips: {
     fontFamily: 'Oxygen_700Bold',
-    margin: 15
+    margin: 5
   }
 });
 

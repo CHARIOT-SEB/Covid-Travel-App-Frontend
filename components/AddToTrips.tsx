@@ -34,7 +34,7 @@ const AddToTrips = () => {
             fontWeight: 'bold'
           }}
         >
-          Add To Trips
+          SELECT YOUR DATES
         </Text>
       </Pressable>
       {submitTrip && <AddDates />}
@@ -45,7 +45,7 @@ const AddToTrips = () => {
 const styles = StyleSheet.create({
   button: {
     elevation: 8,
-    backgroundColor: '#009688',
+    backgroundColor: '#5c98c0',
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 2,

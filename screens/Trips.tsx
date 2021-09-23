@@ -80,7 +80,7 @@ const Trips = (props: any) => {
           <Text style={styles.noTrips}>You haven't planned any trips yet</Text>
 
           <TouchableOpacity
-            style={styles.countryButton}
+            style={styles.countryButton1}
             onPress={() => nav.navigate('Home')}
           >
             <Text style={styles.countryButtonText}>Start planning...</Text>
@@ -329,9 +329,17 @@ const styles = StyleSheet.create({
     color: '#F0F0F0',
     textTransform: 'uppercase'
   },
+  countryButton1: {
+    elevation: 8,
+    backgroundColor: '#5c98c0',
+    borderRadius: 10,
+    paddingVertical: 1,
+    paddingHorizontal: 12,
+    marginTop: 100
+  },
   countryButton: {
     elevation: 8,
-    backgroundColor: '#009688',
+    backgroundColor: '#5c98c0',
     borderRadius: 10,
     paddingVertical: 1,
     paddingHorizontal: 12

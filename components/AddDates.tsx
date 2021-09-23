@@ -62,7 +62,6 @@ const AddDates = (props: any) => {
   };
 
   const handlePress = (dates: any) => {
-    console.log(submitTrip, '<<<<<<<<<<<<<<<<');
     setSubmitTrip(false);
     patchTrips(newTrip(dates), email).then((user) => {
       setUser(user);
@@ -102,7 +101,7 @@ const AddDates = (props: any) => {
               props.handleSubmit;
             }}
           >
-            <Text style={styles.add}>Add Trip</Text>
+            <Text style={styles.add}>ADD TRIP</Text>
           </Pressable>
         </View>
       )}
@@ -129,7 +128,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   button: {
-    backgroundColor: '#1D7253',
+    backgroundColor: '#5c98c0',
     alignSelf: 'center',
     margin: 20,
     padding: 15,
