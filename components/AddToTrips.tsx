@@ -68,7 +68,13 @@ const AddToTrips = () => {
   const email = user.email;
 
   const handlePress = (dates: any) => {
+<<<<<<< HEAD
     patchTrips(newTrip(dates), email).then((user) => {
+=======
+      console.log("Handle press")
+    patchTrips(newTrip(dates), email).then((user) => {
+        console.log(user, "USER!!!")
+>>>>>>> 4fd7daa6842c6b66c68a888c1416ee421a2054b0
       setUser(user);
       
     });

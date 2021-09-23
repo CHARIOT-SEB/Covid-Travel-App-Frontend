@@ -38,7 +38,7 @@ const IndividualCountry = () => {
       });
   }, [countryName]);
 
-  // if (!countryInfo.country) return null;
+  if (!countryInfo.country) return null;
   if (!isLoggedIn) return null;
 
   if(!countryInfo) return null;

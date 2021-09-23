@@ -13,12 +13,15 @@ import {
 	Image,
 	ScrollView,
 } from 'react-native';
+import { useFonts, Oxygen_400Regular, Oxygen_700Bold } from '@expo-google-fonts/oxygen';
 // screen imports
 import { dataStore } from '../providers/Data';
 import SignUpForm from '../screens/SignUpForm';
+import { Spinner } from 'native-base';
 const logo = require('../logo.png');
 
 const LandingPage = () => {
+
 	const [signUp, setSignUp] = useState(false);
 	const { isLoggedIn, setIsLoggedIn, setUser } = useContext(dataStore);
 
@@ -36,6 +39,18 @@ const LandingPage = () => {
 
 	if (isLoggedIn) return null;
 
+	const [fontsLoaded] = useFonts({
+		Oxygen_400Regular,
+	});
+
+	if (!fontsLoaded) {
+		return (
+			<View style={{ flex: 1, justifyContent: 'center' }}>
+				<Spinner />
+			</View>
+		);
+	}
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<ScrollView>
@@ -46,6 +61,10 @@ const LandingPage = () => {
 
 					<View style={styles.logo}>
 						<Image source={logo} style={{ width: 350, height: 150 }} />
+					</View>
+
+					<View>
+						<Text style={styles.text}>Travel Safe</Text>
 					</View>
 
 					<Formik initialValues={{ email: '', password: '' }} onSubmit={(values) => {}}>
@@ -101,7 +120,7 @@ const styles = StyleSheet.create({
 	},
 	logo: {
 		alignItems: 'center',
-		marginBottom: 100,
+		marginBottom: 20,
 	},
 	input: {
 		margin: 10,
@@ -112,6 +131,7 @@ const styles = StyleSheet.create({
 		borderColor: '#ddd',
 		fontSize: 18,
 		borderRadius: 10,
+		paddingHorizontal: 10,
 	},
 	btn: {
 		borderRadius: 10,
@@ -121,6 +141,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#5c98c0',
 	},
 	btnText: {
+		fontFamily: 'Oxygen_400Regular',
 		color: 'white',
 		fontWeight: 'bold',
 		textTransform: 'uppercase',
@@ -129,6 +150,14 @@ const styles = StyleSheet.create({
 	},
 	loginBtn: {
 		marginBottom: 100,
+	},
+	text: {
+		textAlign: 'center',
+		fontFamily: 'Oxygen_400Regular',
+		fontSize: 18,
+		marginBottom: 80,
+		textTransform: 'uppercase',
+		color: '#5c98c0',
 	},
 });
 
