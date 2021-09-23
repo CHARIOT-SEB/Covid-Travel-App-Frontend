@@ -5,7 +5,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  FlatList
+  FlatList,
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {
